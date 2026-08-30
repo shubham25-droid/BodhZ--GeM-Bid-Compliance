@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  bodhz-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bodhz-sih26100-app
+    ports:
+      - "8000:8000"
+    environment:
+      - PROJECT_NAME=BodhZ
+      - ENVIRONMENT=production
+      - API_V1_STR=/api/v1
+    restart: unless-stopped
