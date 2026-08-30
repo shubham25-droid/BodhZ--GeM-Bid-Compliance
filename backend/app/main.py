@@ -113,7 +113,44 @@ def root_web_application():
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
     /* ================================================== */
-    /* 1. PUBLIC LANDING PAGE STYLES                      */
+    /* 1. 3D LOGO & ASHOKA CHAKRA KEYFRAME ANIMATIONS     */
+    /* ================================================== */
+    .logo-3d-animated {
+      transform-style: preserve-3d;
+      animation: float3D 4.5s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite alternate;
+      transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      will-change: transform, filter;
+    }
+
+    .logo-3d-animated:hover {
+      transform: perspective(900px) rotateY(18deg) rotateX(-8deg) scale(1.08) translateY(-4px);
+      filter: drop-shadow(0 20px 35px rgba(245, 158, 11, 0.6)) drop-shadow(0 0 25px rgba(59, 130, 246, 0.4));
+    }
+
+    @keyframes float3D {
+      0% { transform: perspective(900px) rotateY(-10deg) rotateX(6deg) translateY(0px); }
+      50% { transform: perspective(900px) rotateY(12deg) rotateX(-5deg) translateY(-8px); }
+      100% { transform: perspective(900px) rotateY(-8deg) rotateX(8deg) translateY(-3px); }
+    }
+
+    @keyframes glowPulse {
+      0% { filter: drop-shadow(0 8px 16px rgba(245, 158, 11, 0.35)); }
+      100% { filter: drop-shadow(0 16px 30px rgba(245, 158, 11, 0.65)) drop-shadow(0 0 18px rgba(30, 58, 138, 0.35)); }
+    }
+
+    .chakra-rotate-slow {
+      animation: rotateAshokaChakra 75s linear infinite;
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    @keyframes rotateAshokaChakra {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ================================================== */
+    /* 2. PUBLIC LANDING PAGE STYLES                      */
     /* ================================================== */
     .public-nav {
       background: var(--primary-dark);
@@ -151,7 +188,7 @@ def root_web_application():
     .landing-hero {
       background: linear-gradient(145deg, #0A192F 0%, #061226 60%, #030A16 100%);
       color: #FFFFFF;
-      padding: 64px 36px 54px 36px;
+      padding: 68px 36px 58px 36px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -169,16 +206,17 @@ def root_web_application():
       z-index: 2;
     }
 
-    .landing-hero::before {
-      content: "";
+    /* Background Watermark Chakra */
+    .hero-chakra-watermark {
       position: absolute;
-      top: -120px;
-      right: 5%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(30, 58, 138, 0.06) 60%, transparent 80%);
-      border-radius: 50%;
+      top: -140px;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      opacity: 0.07;
+      color: #F59E0B;
       pointer-events: none;
+      z-index: 1;
     }
 
     .landing-badge {
@@ -264,12 +302,12 @@ def root_web_application():
 
     /* 3D Visual Pipeline Card */
     .hero-pipeline-card {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.75);
+      border: 1.5px solid rgba(245, 158, 11, 0.25);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
       padding: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.35);
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -284,12 +322,13 @@ def root_web_application():
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 10px 14px;
       border-radius: 10px;
-      transition: all 0.2s;
+      transition: all 0.25s;
     }
 
     .pipeline-step:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: rgba(245, 158, 11, 0.5);
+      transform: translateX(4px);
     }
 
     .pipeline-step-icon {
@@ -331,12 +370,12 @@ def root_web_application():
       font-size: 14px;
     }
 
-    /* Landing Section Generic */
     .landing-section {
       max-width: 1140px;
       margin: 48px auto;
       padding: 0 24px;
       width: 100%;
+      position: relative;
     }
 
     .section-header {
@@ -474,6 +513,8 @@ def root_web_application():
       grid-template-columns: 1fr 1fr;
       gap: 24px;
       box-shadow: 0 4px 14px rgba(10,25,47,0.04);
+      position: relative;
+      overflow: hidden;
     }
 
     .demo-preview-widget {
@@ -514,6 +555,8 @@ def root_web_application():
       gap: 14px;
       border: 1px solid rgba(245, 158, 11, 0.3);
       box-shadow: 0 12px 30px rgba(10,25,47,0.15);
+      position: relative;
+      overflow: hidden;
     }
 
     .public-footer {
@@ -526,44 +569,61 @@ def root_web_application():
     }
 
     /* ================================================== */
-    /* 2. AUTHENTICATION SPLIT MODAL / VIEW               */
+    /* 3. ULTRA-PREMIUM AUTHENTICATION SPLIT SCREEN       */
     /* ================================================== */
     .auth-page-wrapper {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
-      background: radial-gradient(circle at 10% 20%, #F1F5F9 0%, #E2E8F0 90%);
+      padding: 32px 20px;
+      background: radial-gradient(circle at 10% 20%, #0A192F 0%, #030814 100%);
       min-height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
 
     .auth-card {
       width: 100%;
-      max-width: 1040px;
-      min-height: 620px;
+      max-width: 1080px;
+      min-height: 640px;
       background: #FFFFFF;
-      border-radius: 20px;
-      border: 1px solid rgba(226, 232, 240, 0.8);
-      box-shadow: 0 25px 50px -12px rgba(10, 25, 47, 0.12);
+      border-radius: 24px;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.15);
       display: grid;
-      grid-template-columns: 45% 55%;
+      grid-template-columns: 46% 54%;
       overflow: hidden;
+      position: relative;
+      z-index: 2;
     }
 
     .auth-left-brand {
-      background: linear-gradient(145deg, #0A192F 0%, #061122 60%, #030A16 100%);
+      background: linear-gradient(150deg, #0A192F 0%, #071325 50%, #020710 100%);
       color: #FFFFFF;
-      padding: 40px 36px;
+      padding: 44px 38px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       position: relative;
       overflow: hidden;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .auth-left-chakra-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 440px;
+      height: 440px;
+      opacity: 0.08;
+      color: #F59E0B;
+      pointer-events: none;
     }
 
     .auth-right-form-pane {
-      padding: 40px 44px;
+      padding: 42px 46px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -572,28 +632,28 @@ def root_web_application():
 
     .auth-field {
       width: 100%;
-      padding: 10px 14px 10px 36px;
+      padding: 11px 14px 11px 38px;
       font-size: 13px;
       font-family: inherit;
       color: var(--text);
       background-color: #F8FAFC;
-      border: 1.5px solid #E2E8F0;
+      border: 1.5px solid #CBD5E1;
       border-radius: 8px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
 
     .auth-field:focus {
       outline: none;
       background-color: #FFFFFF;
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(10, 25, 47, 0.06);
+      box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.12);
     }
 
     .btn-auth-primary {
       width: 100%;
-      background: var(--primary);
+      background: linear-gradient(135deg, #0A192F 0%, #1E3A8A 100%);
       color: #FFFFFF;
-      padding: 11px 18px;
+      padding: 12px 18px;
       font-size: 13px;
       font-weight: 800;
       border: none;
@@ -603,16 +663,48 @@ def root_web_application():
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(10, 25, 47, 0.25);
+      transition: all 0.25s ease;
     }
 
     .btn-auth-primary:hover {
-      background: #1E293B;
+      background: linear-gradient(135deg, #1E3A8A 0%, #0A192F 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(10, 25, 47, 0.35);
+    }
+
+    /* Role Demo Quick Chip Bar */
+    .role-quick-chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .role-quick-chip {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+    }
+
+    .role-quick-chip:hover {
+      background: #0A192F;
+      color: #FFFFFF;
+      border-color: #0A192F;
       transform: translateY(-1px);
     }
 
     /* ================================================== */
-    /* 3. APPLICATION WORKSPACE & BIDDER PORTAL STYLES    */
+    /* 4. WORKSPACE STYLES                                */
     /* ================================================== */
     .top-bar { background-color: var(--primary-dark); color: #CBD5E1; padding: 6px 24px; font-size: 11px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #1E293B; }
     .gov-header { background-color: var(--primary); color: #FFFFFF; padding: 12px 24px; border-bottom: 3.5px solid var(--accent-orange); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
@@ -658,98 +750,18 @@ def root_web_application():
     .preset-pill { background: #E2E8F0; color: #0A192F; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid #CBD5E1; transition: all 0.2s; }
     .preset-pill:hover { background: var(--primary); color: #FFFFFF; }
 
-    /* Bidder Tenders Catalog Styles */
-    .tender-catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 16px;
-      margin-top: 10px;
-    }
+    .tender-catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 10px; }
+    .tender-card-item { background: #FFFFFF; border: 1.5px solid #E2E8F0; border-top: 4px solid var(--primary); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.25s ease; }
+    .tender-card-item:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(10,25,47,0.08); border-color: #94A3B8; }
+    .tender-card-item.selected { border: 2px solid var(--accent); border-top: 4px solid var(--accent); background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%); box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
 
-    .tender-card-item {
-      background: #FFFFFF;
-      border: 1.5px solid #E2E8F0;
-      border-top: 4px solid var(--primary);
-      border-radius: 12px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-      transition: all 0.25s ease;
-    }
+    .badge-open-bid { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; padding: 3px 8px; border-radius: 20px; font-size: 10.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
+    .badge-open-bid::before { content: ""; width: 6px; height: 6px; background: #10B981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10B981; }
 
-    .tender-card-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 22px rgba(10,25,47,0.08);
-      border-color: #94A3B8;
-    }
+    #toastContainer { position: fixed; top: 24px; right: 24px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast-msg { background: #0A192F; color: #FFFFFF; border-left: 4px solid var(--accent); padding: 12px 18px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); font-size: 12.5px; font-weight: 700; display: flex; align-items: center; gap: 10px; animation: slideInRight 0.3s forwards; pointer-events: auto; }
+    @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-    .tender-card-item.selected {
-      border: 2px solid var(--accent);
-      border-top: 4px solid var(--accent);
-      background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%);
-      box-shadow: 0 0 0 3px rgba(245,158,11,0.2);
-    }
-
-    .badge-open-bid {
-      background: #ECFDF5;
-      color: #047857;
-      border: 1px solid #A7F3D0;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 10.5px;
-      font-weight: 800;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge-open-bid::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background: #10B981;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 6px #10B981;
-    }
-
-    /* Toast Container */
-    #toastContainer {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      pointer-events: none;
-    }
-
-    .toast-msg {
-      background: #0A192F;
-      color: #FFFFFF;
-      border-left: 4px solid var(--accent);
-      padding: 12px 18px;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-      font-size: 12.5px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      animation: slideInRight 0.3s forwards;
-      pointer-events: auto;
-    }
-
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    /* Chatbot Styles */
     .chatbot-fab-clean { position: fixed; bottom: 24px; right: 24px; background: linear-gradient(135deg, #0A192F 0%, #030F22 100%); color: #FFFFFF; border: 1.5px solid #F59E0B; border-radius: 30px; padding: 8px 18px; font-size: 12.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 10px; z-index: 1000; box-shadow: 0 4px 14px rgba(0,0,0,0.25); }
     .chat-modal-clean { position: fixed; bottom: 80px; right: 24px; width: 440px; height: 580px; background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 14px; box-shadow: 0 16px 45px rgba(10,25,47,0.25); display: none; flex-direction: column; overflow: hidden; z-index: 1000; }
     .chat-header-clean { background: linear-gradient(135deg, #0A192F 0%, #030F22 100%); color: #FFFFFF; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid var(--accent-orange); }
@@ -763,6 +775,9 @@ def root_web_application():
 
     @media (max-width: 900px) {
       .landing-hero-container { grid-template-columns: 1fr; gap: 28px; }
+      .auth-card { grid-template-columns: 1fr; }
+      .auth-left-brand { padding: 28px; }
+      .auth-right-form-pane { padding: 28px; }
       .split-authority-card { grid-template-columns: 1fr; }
       .solve-grid { grid-template-columns: 1fr; }
     }
@@ -783,7 +798,7 @@ def root_web_application():
     <!-- Public Navigation Bar -->
     <nav class="public-nav">
       <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="scrollToSection('hero')">
-        <img src="/static/bodhz_logo.png" style="width: 36px; height: 36px; background: #FFF; border-radius: 8px; padding: 2px;" alt="BodhZ">
+        <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 38px; height: 38px; background: #FFF; border-radius: 8px; padding: 2px; border: 1.5px solid var(--accent);" alt="BodhZ">
         <div>
           <div style="font-size: 17px; font-weight: 900; letter-spacing: -0.5px;">BodhZ</div>
           <div style="font-size: 9.5px; color: var(--accent); font-weight: 700; text-transform: uppercase;">Bid Compliance AI</div>
@@ -805,8 +820,43 @@ def root_web_application():
       </div>
     </nav>
 
-    <!-- Hero Section (Two Columns) -->
+    <!-- Hero Section (Two Columns with 3D Logo & Ashoka Chakra Motif) -->
     <header class="landing-hero" id="hero">
+      <!-- 24-Spoke Rotating Ashoka Chakra Watermark -->
+      <svg class="hero-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+        <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="14" fill="currentColor"/>
+        <circle cx="100" cy="100" r="8" fill="#0A192F"/>
+        <!-- 24 Spokes -->
+        <g stroke="currentColor" stroke-width="1.8">
+          <line x1="100" y1="100" x2="100" y2="18"/>
+          <line x1="100" y1="100" x2="121.2" y2="20.8"/>
+          <line x1="100" y1="100" x2="141" y2="29"/>
+          <line x1="100" y1="100" x2="158" y2="42"/>
+          <line x1="100" y1="100" x2="171" y2="59"/>
+          <line x1="100" y1="100" x2="179.2" y2="78.8"/>
+          <line x1="100" y1="100" x2="182" y2="100"/>
+          <line x1="100" y1="100" x2="179.2" y2="121.2"/>
+          <line x1="100" y1="100" x2="171" y2="141"/>
+          <line x1="100" y1="100" x2="158" y2="158"/>
+          <line x1="100" y1="100" x2="141" y2="171"/>
+          <line x1="100" y1="100" x2="121.2" y2="179.2"/>
+          <line x1="100" y1="100" x2="100" y2="182"/>
+          <line x1="100" y1="100" x2="78.8" y2="179.2"/>
+          <line x1="100" y1="100" x2="59" y2="171"/>
+          <line x1="100" y1="100" x2="42" y2="158"/>
+          <line x1="100" y1="100" x2="29" y2="141"/>
+          <line x1="100" y1="100" x2="20.8" y2="121.2"/>
+          <line x1="100" y1="100" x2="18" y2="100"/>
+          <line x1="100" y1="100" x2="20.8" y2="78.8"/>
+          <line x1="100" y1="100" x2="29" y2="59"/>
+          <line x1="100" y1="100" x2="42" y2="42"/>
+          <line x1="100" y1="100" x2="59" y2="29"/>
+          <line x1="100" y1="100" x2="78.8" y2="20.8"/>
+        </g>
+      </svg>
+
       <div class="landing-hero-container">
         <!-- Left: Value Proposition & CTAs -->
         <div>
@@ -836,14 +886,17 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- Right: Digital Pipeline Visual Card -->
+        <!-- Right: 3D Digital Pipeline Visual Card -->
         <div class="hero-pipeline-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
-            <div style="font-size: 12px; font-weight: 800; color: #FFFFFF; display: flex; align-items: center; gap: 8px;">
-              <img src="/static/bodhz_logo.png" style="width: 22px; height: 22px; background: #FFF; border-radius: 4px; padding: 1px;" alt="BodhZ">
-              <span>BodhZ Verification Flow</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 32px; height: 32px; background: #FFF; border-radius: 8px; padding: 2px; border: 1.5px solid var(--accent);" alt="BodhZ">
+              <div>
+                <div style="font-size: 13px; font-weight: 800; color: #FFFFFF;">BodhZ Verification Flow</div>
+                <div style="font-size: 10px; color: var(--accent);">AI + 13 Statutory Gateways</div>
+              </div>
             </div>
-            <span style="font-size: 9.5px; background: rgba(16,185,129,0.2); color: #34D399; padding: 2px 8px; border-radius: 4px; font-weight: 800;">ACTIVE ARCHITECTURE</span>
+            <span style="font-size: 9.5px; background: rgba(16,185,129,0.2); color: #34D399; padding: 3px 8px; border-radius: 4px; font-weight: 800;">ACTIVE ARCHITECTURE</span>
           </div>
 
           <div class="pipeline-step">
@@ -889,8 +942,19 @@ def root_web_application():
       </div>
     </header>
 
-    <!-- Critical Trust Message Strip -->
+    <!-- Critical Trust Message Strip with Ashoka Chakra Motif -->
     <div class="trust-strip">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg style="width: 20px; height: 20px; color: #1E3A8A;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="6"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <span style="font-size: 11px; font-weight: 900; color: #1E3A8A; letter-spacing: 0.5px;">STATUTORY COMPLIANCE</span>
+      </div>
       <div class="trust-item"><i class="fa-solid fa-microchip"></i> AI-ASSISTED</div>
       <div class="trust-item"><i class="fa-solid fa-file-shield"></i> EVIDENCE-BASED</div>
       <div class="trust-item"><i class="fa-solid fa-fingerprint"></i> AUDITABLE</div>
@@ -1055,6 +1119,16 @@ def root_web_application():
     <!-- Section: AI Assists. Officer Decides. -->
     <section class="landing-section">
       <div class="split-authority-card">
+        <!-- Subtle Ashoka Chakra in Split card background -->
+        <svg style="position: absolute; right: -60px; bottom: -60px; width: 260px; height: 260px; opacity: 0.05; color: #0A192F;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="2"/>
+        </svg>
+
         <div>
           <div style="font-size: 12px; font-weight: 800; color: #2563EB; text-transform: uppercase;">DECISION SUPPORT ROLE</div>
           <div style="font-size: 20px; font-weight: 900; color: var(--primary); margin-top: 2px;">AI ASSISTS</div>
@@ -1245,36 +1319,76 @@ def root_web_application():
   </div>
 
   <!-- ================================================== -->
-  <!-- 2. AUTHENTICATION SPLIT SCREEN (LOGIN / REGISTER)  -->
+  <!-- 2. ULTRA-PREMIUM AUTHENTICATION SPLIT SCREEN       -->
   <!-- ================================================== -->
   <div id="view-auth" class="auth-page-wrapper" style="display: none;">
     <div class="auth-card">
-      <!-- Left Brand & SVG Flow -->
+      <!-- Left Brand & 3D Animated Showcase -->
       <div class="auth-left-brand">
+        <!-- Rotating 24-Spoke Ashoka Chakra Watermark -->
+        <svg class="auth-left-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+          <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <circle cx="100" cy="100" r="8" fill="#0A192F"/>
+          <g stroke="currentColor" stroke-width="1.8">
+            <line x1="100" y1="100" x2="100" y2="18"/>
+            <line x1="100" y1="100" x2="121.2" y2="20.8"/>
+            <line x1="100" y1="100" x2="141" y2="29"/>
+            <line x1="100" y1="100" x2="158" y2="42"/>
+            <line x1="100" y1="100" x2="171" y2="59"/>
+            <line x1="100" y1="100" x2="179.2" y2="78.8"/>
+            <line x1="100" y1="100" x2="182" y2="100"/>
+            <line x1="100" y1="100" x2="179.2" y2="121.2"/>
+            <line x1="100" y1="100" x2="171" y2="141"/>
+            <line x1="100" y1="100" x2="158" y2="158"/>
+            <line x1="100" y1="100" x2="141" y2="171"/>
+            <line x1="100" y1="100" x2="121.2" y2="179.2"/>
+            <line x1="100" y1="100" x2="100" y2="182"/>
+            <line x1="100" y1="100" x2="78.8" y2="179.2"/>
+            <line x1="100" y1="100" x2="59" y2="171"/>
+            <line x1="100" y1="100" x2="42" y2="158"/>
+            <line x1="100" y1="100" x2="29" y2="141"/>
+            <line x1="100" y1="100" x2="20.8" y2="121.2"/>
+            <line x1="100" y1="100" x2="18" y2="100"/>
+            <line x1="100" y1="100" x2="20.8" y2="78.8"/>
+            <line x1="100" y1="100" x2="29" y2="59"/>
+            <line x1="100" y1="100" x2="42" y2="42"/>
+            <line x1="100" y1="100" x2="59" y2="29"/>
+            <line x1="100" y1="100" x2="78.8" y2="20.8"/>
+          </g>
+        </svg>
+
         <div>
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="/static/bodhz_logo.png" style="width: 44px; height: 44px; background: #FFF; border-radius: 10px; padding: 2px;" alt="BodhZ">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 50px; height: 50px; background: #FFF; border-radius: 12px; padding: 3px; border: 2px solid var(--accent);" alt="BodhZ">
             <div>
-              <div style="font-size: 20px; font-weight: 900; letter-spacing: -0.5px;">BodhZ</div>
-              <div style="font-size: 10.5px; font-weight: 700; color: var(--accent); text-transform: uppercase;">Public Procurement Decision Support</div>
+              <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px;">BodhZ</div>
+              <div style="font-size: 11px; font-weight: 800; color: var(--accent); text-transform: uppercase;">Public Procurement Decision Support</div>
             </div>
           </div>
-          <p style="font-size: 12.5px; color: #94A3B8; margin-top: 14px; line-height: 1.5;">
-            Evidence-based compliance verification and statutory gateway screening for GeM procurement.
+          <p style="font-size: 13px; color: #94A3B8; margin-top: 16px; line-height: 1.55;">
+            Automated statutory compliance verification and evidence-backed decision intelligence for GeM procurement.
           </p>
         </div>
 
-        <div style="text-align: center; margin: 20px 0;">
-          <i class="fa-solid fa-shield-check" style="font-size: 56px; color: #34D399; opacity: 0.9;"></i>
-          <div style="font-size: 12.5px; font-weight: 800; color: #FFFFFF; margin-top: 10px;">Role-Aware Authenticated Session</div>
-          <div style="font-size: 11px; color: #94A3B8;">Procurement Officer • Bid Uploader • DTE Department</div>
+        <!-- 3D Holographic Verification Badge -->
+        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 18px; text-align: center; backdrop-filter: blur(8px); margin: 20px 0;">
+          <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 10px;">
+            <span style="background: rgba(16,185,129,0.2); color: #34D399; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● GSTN</span>
+            <span style="background: rgba(59,130,246,0.2); color: #60A5FA; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● UDYAM</span>
+            <span style="background: rgba(245,158,11,0.2); color: #FBBF24; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● MCA21</span>
+            <span style="background: rgba(168,85,247,0.2); color: #C084FC; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● DIGILOCKER</span>
+          </div>
+          <div style="font-size: 13.5px; font-weight: 800; color: #FFFFFF;">Role-Aware Authenticated Session</div>
+          <div style="font-size: 11.5px; color: #94A3B8; margin-top: 4px;">Procurement Officer • Bid Uploader • DTE Department</div>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <button onclick="returnToPublicLanding()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #CBD5E1; padding: 6px 12px; border-radius: 6px; font-size: 11px; cursor: pointer;">
+          <button onclick="returnToPublicLanding()" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #CBD5E1; padding: 7px 14px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
             ← Back to Public Portal
           </button>
-          <span style="font-size: 10.5px; color: #64748B;">SIH26100 Prototype</span>
+          <span style="font-size: 11px; color: #64748B; font-weight: 700;">SIH26100 Prototype</span>
         </div>
       </div>
 
@@ -1282,9 +1396,16 @@ def root_web_application():
       <div class="auth-right-form-pane">
         <!-- Sign In Form -->
         <div id="authPaneSignIn" style="display: flex; flex-direction: column;">
-          <div style="margin-bottom: 20px;">
-            <div style="font-size: 22px; font-weight: 800; color: var(--primary);">Secure Sign In</div>
-            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">Enter your credentials to access your authorized workspace.</div>
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px;">Sign In to Workspace</div>
+            <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;">Enter your credentials or click a demo persona below to evaluate:</div>
+            
+            <!-- 1-Click Role Persona Quick Chips -->
+            <div class="role-quick-chip-row">
+              <span class="role-quick-chip" onclick="launchDemoPersona('shubham')"><i class="fa-solid fa-user-shield" style="color:#0052CC;"></i> Officer Shubham</span>
+              <span class="role-quick-chip" onclick="launchDemoPersona('bidder_tata')"><i class="fa-solid fa-building" style="color:#059669;"></i> Bidder (Tata)</span>
+              <span class="role-quick-chip" onclick="launchDemoPersona('officer_dte')"><i class="fa-solid fa-landmark" style="color:#D97706;"></i> DTE Officer</span>
+            </div>
           </div>
 
           <div id="loginAlertBox" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; font-size: 11.5px; font-weight: 600; padding: 8px 12px; border-radius: 6px; margin-bottom: 12px;">
@@ -1294,29 +1415,33 @@ def root_web_application():
           <form onsubmit="handleAuthLogin(event)">
             <div class="form-group" style="margin-bottom: 12px;">
               <label class="form-label">Official Email or Username</label>
-              <input type="text" id="authLoginUser" class="auth-field" placeholder="username or official email" required>
+              <div style="position: relative;">
+                <i class="fa-solid fa-user" style="position: absolute; left: 14px; top: 12px; color: #94A3B8; font-size: 12px;"></i>
+                <input type="text" id="authLoginUser" class="auth-field" placeholder="username or official email" required>
+              </div>
             </div>
 
             <div class="form-group" style="margin-bottom: 12px;">
               <label class="form-label">Password</label>
               <div style="position: relative;">
+                <i class="fa-solid fa-lock" style="position: absolute; left: 14px; top: 12px; color: #94A3B8; font-size: 12px;"></i>
                 <input type="password" id="authLoginPass" class="auth-field" placeholder="Enter password" required>
-                <button type="button" onclick="togglePasswordVisibility('authLoginPass', this)" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: #94A3B8; cursor: pointer;">
+                <button type="button" onclick="togglePasswordVisibility('authLoginPass', this)" style="position: absolute; right: 12px; top: 11px; background: none; border: none; color: #94A3B8; cursor: pointer;">
                   <i class="fa-regular fa-eye"></i>
                 </button>
               </div>
             </div>
 
-            <div class="form-group" style="margin-bottom: 12px;">
+            <div class="form-group" style="margin-bottom: 14px;">
               <label class="form-label">Security Verification</label>
               <div style="display: flex; gap: 8px; align-items: center;">
-                <span id="serverCaptchaDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; letter-spacing: 3px; background: #F1F5F9; border: 1px solid #CBD5E1; padding: 6px 12px; border-radius: 6px;">8K9X2</span>
-                <button type="button" onclick="refreshServerCaptcha()" class="btn-action" style="padding: 6px 10px; font-size: 11px;"><i class="fa-solid fa-rotate-right"></i></button>
-                <input type="text" id="authCaptchaInput" class="auth-field" placeholder="Enter code" style="text-transform: uppercase;" required>
+                <span id="serverCaptchaDisplay" style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 800; letter-spacing: 3px; background: #F1F5F9; border: 1px solid #CBD5E1; padding: 8px 14px; border-radius: 6px; color: var(--primary);">8K9X2</span>
+                <button type="button" onclick="refreshServerCaptcha()" class="btn-action" style="padding: 8px 12px; font-size: 11px;"><i class="fa-solid fa-rotate-right"></i></button>
+                <input type="text" id="authCaptchaInput" class="auth-field" placeholder="Enter code" style="text-transform: uppercase; padding-left: 14px;" required>
               </div>
             </div>
 
-            <button type="submit" id="btnLoginSubmit" class="btn-auth-primary" style="margin-top: 8px;">
+            <button type="submit" id="btnLoginSubmit" class="btn-auth-primary" style="margin-top: 4px;">
               <span>SIGN IN TO WORKSPACE</span>
               <i class="fa-solid fa-arrow-right"></i>
             </button>
@@ -1325,18 +1450,12 @@ def root_web_application():
           <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 14px;">
             New official or bidder? <span onclick="switchAuthMode('REGISTER')" style="color: var(--primary); font-weight: 800; cursor: pointer; text-decoration: underline;">Create Account</span>
           </div>
-
-          <div style="display: flex; justify-content: center; margin-top: 12px;">
-            <button type="button" onclick="openDemoModeModal()" class="preset-pill" style="background: #F1F5F9; border: 1px solid #CBD5E1; color: #475569;">
-              <i class="fa-solid fa-bolt" style="color: var(--accent);"></i> Demo Mode Launcher (SIH Evaluators)
-            </button>
-          </div>
         </div>
 
         <!-- Registration Form -->
         <div id="authPaneRegister" style="display: none; flex-direction: column;">
           <div style="margin-bottom: 14px;">
-            <div style="font-size: 20px; font-weight: 800; color: var(--primary);">Create Official Account</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--primary);">Create Official Account</div>
             <div style="font-size: 12px; color: var(--text-muted);">Register for institutional or bidder procurement workspace access.</div>
           </div>
 
@@ -1348,18 +1467,18 @@ def root_web_application():
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
               <div class="form-group">
                 <label class="form-label">Full Legal Name</label>
-                <input type="text" id="regFullName" class="auth-field" placeholder="Dr. Ramesh Gupta" required>
+                <input type="text" id="regFullName" class="auth-field" placeholder="Dr. Ramesh Gupta" style="padding-left: 12px;" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Official Work Email</label>
-                <input type="email" id="regEmail" class="auth-field" placeholder="ramesh@nic.in" required>
+                <input type="email" id="regEmail" class="auth-field" placeholder="ramesh@nic.in" style="padding-left: 12px;" required>
               </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 8px; margin-bottom: 8px;">
               <div class="form-group">
                 <label class="form-label">Organization / Department</label>
-                <input type="text" id="regOrg" class="auth-field" placeholder="e.g. National Informatics Centre" required>
+                <input type="text" id="regOrg" class="auth-field" placeholder="e.g. National Informatics Centre" style="padding-left: 12px;" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Role Category</label>
@@ -1374,21 +1493,21 @@ def root_web_application():
 
             <div class="form-group" style="margin-bottom: 8px;">
               <label class="form-label">Username</label>
-              <input type="text" id="regUsername" class="auth-field" placeholder="choose unique username" required>
+              <input type="text" id="regUsername" class="auth-field" placeholder="choose unique username" style="padding-left: 12px;" required>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
               <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" id="regPassword" class="auth-field" placeholder="Min. 8 characters" required>
+                <input type="password" id="regPassword" class="auth-field" placeholder="Min. 8 characters" style="padding-left: 12px;" required>
               </div>
               <div class="form-group">
                 <label class="form-label">Confirm Password</label>
-                <input type="password" id="regConfirmPassword" class="auth-field" placeholder="Re-enter password" required>
+                <input type="password" id="regConfirmPassword" class="auth-field" placeholder="Re-enter password" style="padding-left: 12px;" required>
               </div>
             </div>
 
-            <button type="submit" id="btnRegisterSubmit" class="btn-auth-primary" style="background: var(--success-dark);">
+            <button type="submit" id="btnRegisterSubmit" class="btn-auth-primary" style="background: linear-gradient(135deg, #047857 0%, #065F46 100%);">
               <span>CREATE ACCOUNT</span>
               <i class="fa-solid fa-check"></i>
             </button>
@@ -1469,7 +1588,7 @@ def root_web_application():
     <!-- Header Banner -->
     <header class="gov-header">
       <div class="header-brand" style="display: flex; align-items: center; gap: 12px;">
-        <img src="/static/bodhz_logo.png" class="brand-logo-img" alt="BodhZ Logo">
+        <img src="/static/bodhz_logo.png" class="brand-logo-img logo-3d-animated" alt="BodhZ Logo">
         <div>
           <div style="font-size: 18px; font-weight: 900; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;">
             BodhZ
