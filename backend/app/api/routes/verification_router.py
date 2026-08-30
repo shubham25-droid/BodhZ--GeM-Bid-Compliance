@@ -252,10 +252,10 @@ def record_officer_decision(
     Records the human Procurement Officer's final qualification decision (QUALIFIED, DISQUALIFIED, NEEDS_CLARIFICATION, REJECTED)
     with audit justification notes. Updates bid status, lifecycle status to FINALIZED, and generates an immutable audit record.
     """
-    if current_user and current_user.role == "BID_UPLOADER":
+    if current_user and current_user.role not in ("PROCUREMENT_OFFICER", "ADMIN"):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Access Denied: Bid Uploaders are not authorized to make or record official procurement qualification decisions."
+            detail=f"Access Denied: Role '{current_user.role}' is not authorized to make or record official procurement qualification decisions. Under GFR 2017 Rule 144, final decision authority is legally reserved for the Procurement Officer."
         )
 
     bid = db.query(BidModel).filter(BidModel.id == decision_in.bid_id).first()

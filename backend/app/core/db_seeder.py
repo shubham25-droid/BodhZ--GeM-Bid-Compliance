@@ -159,11 +159,12 @@ def seed_initial_database(db: Session):
     ]
 
     for t_info in tenders_data:
+        org_id = "ORG_DTE_MAHARASHTRA" if "DTE" in t_info["number"] else ("ORG_NFL_CENTRAL" if "NFL" in t_info["number"] else "ORG_ICAR_CENTRAL")
         existing_t = db.query(TenderModel).filter(TenderModel.tender_number == t_info["number"]).first()
         if not existing_t:
             tender_obj = TenderModel(
                 user_id=primary_user.id if primary_user else None,
-                organization_id="ORG_GEM_CENTRAL",
+                organization_id=org_id,
                 tender_number=t_info["number"],
                 title=t_info["title"],
                 description=t_info["desc"],

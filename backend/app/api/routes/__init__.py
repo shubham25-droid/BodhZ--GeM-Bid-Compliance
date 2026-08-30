@@ -6,3 +6,4 @@ from . import documents_router
 from . import verification_router
 from . import audit_router
 from . import reports_router
+from . import dte_router
