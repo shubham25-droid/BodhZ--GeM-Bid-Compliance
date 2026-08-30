@@ -1753,6 +1753,10 @@ def root_web_application():
             <span class="filter-pill" onclick="sendChatSuggestion('How many tenders are currently active?')">📊 Active Tenders</span>
             <span class="filter-pill" onclick="sendChatSuggestion('Which bidders are high risk?')">⚠️ High-Risk Bidders</span>
             <span class="filter-pill" onclick="sendChatSuggestion('Explain GFR 2017 Rule 144 compliance')">📜 GFR Rule 144</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('What do you remember about me?')">🧠 My Memories</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('Maine pehle kya pucha tha?')">❓ Previous Question</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('Summarize our conversation')">📜 Chat Summary</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('Clear my memory')" style="background:#FFF1F2; color:#BE123C; border-color:#FECDD3;">🧹 Clear Memory</span>
           </div>
         </div>
       </div>
@@ -3093,8 +3097,10 @@ def root_web_application():
     }
 
     // --------------------------------------------------
-    // AI CHATBOT CONTROLLER (ROLE-AWARE)
+    // AI CHATBOT CONTROLLER (ROLE-AWARE & ADAPTIVE MEMORY)
     // --------------------------------------------------
+    let chatConversationHistory = [];
+
     function toggleChatbot() {
       const m = document.getElementById('chatModalWindow');
       m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
@@ -3115,6 +3121,9 @@ def root_web_application():
       area.innerHTML += `<div class="chat-msg-user">${text}</div>`;
       area.scrollTop = area.scrollHeight;
 
+      // Track in active conversational memory
+      chatConversationHistory.push({ sender: 'user', text: text });
+
       try {
         let endpoint = '/api/v1/bids/ai-chat';
         let bodyPayload = {
@@ -3122,14 +3131,16 @@ def root_web_application():
           user_name: activeUser ? activeUser.username : 'visitor',
           user_role: activeUser ? activeUser.role : 'PROCUREMENT_OFFICER',
           tender_id: activeTender ? activeTender.id : null,
-          bidder_id: activeBidder ? activeBidder.bid_id : null
+          bidder_id: activeBidder ? activeBidder.bid_id : null,
+          history: chatConversationHistory.slice(-10)
         };
 
         if (activeUser && activeUser.role === 'BID_UPLOADER') {
           endpoint = '/api/v1/bidder/chat';
           bodyPayload = {
             message: text,
-            tender_id: activeBidderSelectedTenderId
+            tender_id: activeBidderSelectedTenderId,
+            history: chatConversationHistory.slice(-10)
           };
         }
 
@@ -3140,9 +3151,19 @@ def root_web_application():
         });
         if (resp.ok) {
           const res = await resp.json();
+          chatConversationHistory.push({ sender: 'assistant', text: res.reply });
+
+          let memoryBadge = '';
+          if (res.source === 'ADAPTIVE_MEMORY_ENGINE' || (res.model && res.model.includes('Memory'))) {
+            memoryBadge = `<span style="font-size:9.5px; background:#EFF6FF; color:#1D4ED8; padding:2px 6px; border-radius:4px; font-weight:800; margin-left:6px; border:1px solid #BFDBFE;">🧠 Recalled from Memory</span>`;
+          }
+
           area.innerHTML += `
             <div class="chat-msg-bot">
-              <div style="font-weight: 800; color: #0A192F; margin-bottom: 4px;">BodhZ AI Assistant</div>
+              <div style="font-weight: 800; color: #0A192F; margin-bottom: 4px; display:flex; align-items:center;">
+                <span>BodhZ AI Assistant</span>
+                ${memoryBadge}
+              </div>
               <div>${marked.parse(res.reply)}</div>
             </div>
           `;

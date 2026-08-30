@@ -345,3 +345,44 @@ class BidderClarificationModel(Base):
 
     bid = relationship("BidModel")
 
+
+# --------------------------------------------------
+# 16. USER MEMORY FACT MODEL (PERSISTENT AI MEMORY)
+# --------------------------------------------------
+class UserMemoryFactModel(Base):
+    """
+    Stores persistent learned facts, custom notes, user preferences, and financial/technical
+    parameters declared by users across conversational turns and sessions.
+    """
+    __tablename__ = "user_memory_facts"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_key = Column(String(100), nullable=False, index=True)  # username, role, or user_id
+    fact_key = Column(String(100), nullable=False, index=True)  # e.g. "turnover", "preferred_tender", "company_pan"
+    fact_value = Column(Text, nullable=False)
+    category = Column(String(50), default="GENERAL")  # FINANCIAL, PROFILE, TENDER_NOTE, PREFERENCE, GENERAL
+    source_query = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+
+
+# --------------------------------------------------
+# 17. CHAT MESSAGE HISTORY MODEL (SESSION PERSISTENCE)
+# --------------------------------------------------
+class ChatMessageHistoryModel(Base):
+    """
+    Stores multi-turn chat interactions per user/session for historical recall,
+    conversation summarization, and contextual grounding.
+    """
+    __tablename__ = "chat_message_history"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    session_id = Column(String(100), nullable=False, index=True)
+    user_key = Column(String(100), nullable=False, index=True)
+    sender = Column(String(20), nullable=False)  # "user" or "assistant"
+    message_text = Column(Text, nullable=False)
+    intent = Column(String(50), nullable=True)
+    source = Column(String(50), default="BodhZ-AI")
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+

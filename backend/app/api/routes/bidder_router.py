@@ -16,10 +16,13 @@ from app.models.models import (
     UserModel, TenderModel, RequirementModel, BidderModel, BidModel,
     DocumentModel, ExtractionModel, AuditEventModel, BidderClarificationModel
 )
+from app.ai.chatbot_service import BodhZChatbotService
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/bidder", tags=["Bid Uploader & Vendor Workspace"])
+chatbot_service = BodhZChatbotService()
+
 
 
 # --------------------------------------------------
@@ -856,6 +859,21 @@ def bidder_chat(
     """
     bidder = resolve_authenticated_bidder(current_user, db)
     msg = req.message.lower().strip()
+
+    # 0. Check Adaptive Memory Operations (Remembering facts, Recalling, Summarizing, Clearing)
+    mem_intent, mem_meta = chatbot_service.learning_memory.detect_memory_intent(req.message)
+    if mem_intent:
+        mem_reply = chatbot_service.learning_memory.process_memory_operation(
+            intent=mem_intent,
+            meta=mem_meta,
+            user_key=current_user.username,
+            user_name=current_user.full_name or bidder.legal_name,
+            user_role="BID_UPLOADER",
+            conversation_history=None,
+            db=db
+        )
+        if mem_reply:
+            return {"reply": mem_reply}
 
     # Load bidder's active submission context
     my_bids = db.query(BidModel).filter(BidModel.bidder_id == bidder.id).all()

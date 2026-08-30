@@ -1,0 +1,27 @@
+{
+  "shubham": {
+    "annual_turnover": {
+      "fact_key": "annual_turnover",
+      "fact_value": "INR 22 Crores",
+      "category": "CUSTOM_FACT",
+      "source_query": "annual turnover is INR 22 Crores",
+      "updated_at": "2026-08-30T10:52:00.923569+00:00"
+    },
+    "custom_note": {
+      "fact_key": "custom_note",
+      "fact_value": "meri company name Bharat Defense Labs",
+      "category": "CUSTOM_FACT",
+      "source_query": "meri company name Bharat Defense Labs hai",
+      "updated_at": "2026-08-30T10:52:01.684458+00:00"
+    }
+  },
+  "bidder_tata": {
+    "our_branch_office": {
+      "fact_key": "our_branch_office",
+      "fact_value": "in Pune Hinjewadi",
+      "category": "CUSTOM_FACT",
+      "source_query": "our branch office is in Pune Hinjewadi",
+      "updated_at": "2026-08-30T10:52:45.191465+00:00"
+    }
+  }
+}

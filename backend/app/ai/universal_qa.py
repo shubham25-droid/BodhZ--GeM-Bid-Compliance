@@ -25,12 +25,20 @@ class UniversalQAEngine:
         user_role: Optional[str] = None,
         active_tender: Optional[Dict[str, Any]] = None,
         all_tenders: Optional[List[Dict[str, Any]]] = None,
-        all_bidders: Optional[List[Dict[str, Any]]] = None
+        all_bidders: Optional[List[Dict[str, Any]]] = None,
+        user_facts: Optional[Dict[str, str]] = None
     ) -> str:
         raw_q = query.strip().lower()
         q_lower = BodhZQueryNormalizer.normalize(raw_q)
         officer = user_name.strip() if user_name else "Senior Procurement Officer"
         role_label = "Senior Procurement Officer" if (not user_role or "PROCUREMENT" in user_role.upper()) else "Compliance Auditor"
+
+        # Check in user_facts for direct factual memory recall
+        if user_facts:
+            for k, v in user_facts.items():
+                clean_k = k.replace("_", " ")
+                if (clean_k in q_lower or k in q_lower) and any(w in q_lower for w in ["what", "kya", "tell", "kitna", "show", "is"]):
+                    return f"🧠 **According to my memory:**\nYour **{clean_k.title()}** is `{v}`."
 
         # Government Encyclopedia Direct Lookup
         gov_match = GovernmentProcurementEncyclopedia.lookup(q_lower)

@@ -54,7 +54,35 @@ class BodhZChatbotService:
         # Step 1: Detect User Language
         detected_lang = BodhZMultilingualEngine.detect_language(user_msg)
 
-        # Step 2: High-Precision Intent Classification with Multi-Turn Context
+        # Step 2: Adaptive Memory & Multi-Turn Context Processing
+        mem_intent, mem_meta = self.learning_memory.detect_memory_intent(user_msg)
+        if mem_intent:
+            mem_reply = self.learning_memory.process_memory_operation(
+                intent=mem_intent,
+                meta=mem_meta,
+                user_key=officer,
+                user_name=officer,
+                user_role=role_label,
+                conversation_history=conversation_history,
+                db=db
+            )
+            if mem_reply:
+                self._record_chat_interaction(user_msg, mem_reply, officer, db, intent=mem_intent, source="ADAPTIVE_MEMORY")
+                return self._build_response(
+                    mem_reply,
+                    "ADAPTIVE_MEMORY_ENGINE",
+                    "BodhZ-Memory-v2.0",
+                    intent_type="MEMORY_OPERATION",
+                    data={},
+                    detected_lang=detected_lang,
+                    officer=officer
+                )
+
+        # Retrieve all stored user facts for dynamic prompt context
+        user_facts = self.learning_memory.get_user_facts(officer, db=db)
+        user_mem_context = self.learning_memory.get_user_memory_context(officer, db=db)
+
+        # Step 3: High-Precision Intent Classification with Multi-Turn Context
         intent = BodhZIntentClassifier.classify(user_msg, conversation_history)
         intent_type = intent["type"]
         logger.info(f"Chatbot Intent Classified: {intent_type} (Language: {detected_lang})")
@@ -106,6 +134,7 @@ class BodhZChatbotService:
                     )
                     reply = "\n\n".join(lines)
                 
+                self._record_chat_interaction(user_msg, reply, officer, db, intent=intent_type, source="DB_TOOL_TENDERS")
                 return self._build_response(reply, "DB_TOOL_TENDERS", "BodhZ-DatabaseTool-v1.0", intent_type=intent_type, data=db_tool_result, detected_lang=detected_lang, officer=officer, typo_prompt=typo_prompt)
 
             elif intent_type == BodhZIntentType.APP_CURRENT_TENDER:
@@ -394,6 +423,8 @@ class BodhZChatbotService:
 
         retrieved_knowledge = self.knowledge_retriever.retrieve_relevant_knowledge(user_msg)
         domain_context = BodhZContextBuilder.build_system_context(active_tender, active_bidder, user_name, user_role)
+        if user_mem_context:
+            domain_context += f"\n\n{user_mem_context}"
         if gov_encyclopedia_knowledge:
             domain_context += f"\n\nGOVERNMENT PROCUREMENT REGULATION:\n{gov_encyclopedia_knowledge}"
         if retrieved_knowledge:
@@ -420,6 +451,7 @@ class BodhZChatbotService:
                 evidence = self._extract_evidence_metadata(user_msg, active_bidder)
                 if typo_prompt and detected_lang == "en":
                     sanitized_reply = f"Did you mean: '{typo_prompt}'?\n\n{sanitized_reply}"
+                self._record_chat_interaction(user_msg, sanitized_reply, officer, db, intent=intent_type, source="OPENAI_API")
                 return {
                     "reply": sanitized_reply,
                     "source": "OPENAI_API",
@@ -436,8 +468,10 @@ class BodhZChatbotService:
             user_role=user_role,
             active_tender=active_tender,
             all_tenders=all_tenders,
-            all_bidders=all_bidders
+            all_bidders=all_bidders,
+            user_facts=user_facts
         )
+        self._record_chat_interaction(user_msg, universal_reply, officer, db, intent=intent_type, source="UNIVERSAL_QA_ENGINE")
         return self._build_response(universal_reply, "UNIVERSAL_QA_ENGINE", "BodhZ-UniversalQA-v1.0", intent_type=intent_type, data={}, detected_lang=detected_lang, officer=officer, typo_prompt=typo_prompt)
 
     def _build_response(
@@ -496,3 +530,51 @@ class BodhZChatbotService:
                 "view": "vercenter"
             }
         return None
+
+    def _record_chat_interaction(
+        self,
+        question: str,
+        answer: str,
+        user_key: str,
+        db: Optional[Session] = None,
+        intent: Optional[str] = None,
+        source: str = "BodhZ-AI"
+    ):
+        """Persists chat turns in learning memory and ChatMessageHistoryModel in SQLite."""
+        if not question or not answer:
+            return
+
+        # 1. Update in-memory / JSON learning memory
+        self.learning_memory.save_learned_interaction(question, answer, source=source)
+
+        # 2. Persist to DB if session provided
+        if db:
+            try:
+                from app.models.models import ChatMessageHistoryModel
+                sess_id = f"sess_{user_key.lower().replace(' ', '_')}"
+                
+                # Record user query
+                msg_u = ChatMessageHistoryModel(
+                    session_id=sess_id,
+                    user_key=user_key,
+                    sender="user",
+                    message_text=question,
+                    intent=intent,
+                    source=source
+                )
+                db.add(msg_u)
+
+                # Record assistant answer
+                msg_a = ChatMessageHistoryModel(
+                    session_id=sess_id,
+                    user_key=user_key,
+                    sender="assistant",
+                    message_text=answer,
+                    intent=intent,
+                    source=source
+                )
+                db.add(msg_a)
+                db.commit()
+            except Exception as e:
+                logger.warning(f"Could not persist ChatMessageHistoryModel to DB: {e}")
+

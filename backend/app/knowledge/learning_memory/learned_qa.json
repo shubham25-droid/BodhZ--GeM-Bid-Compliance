@@ -292,5 +292,53 @@
     "question": "list all tenders",
     "answer": "You have 2 total tender(s) in your Officer workspace:\n\nTender ID: GEM/2026/B/994810\n   Title: Supply of High-Performance Computing Server Cluster\n   Configured Statutory Rules: 4 (GSTN, Udyam MSME, PAN, OEM MAF)\n   Status: ACTIVE\n\nTender ID: GEM/2026/B/882109\n   Title: Procurement of Enterprise SAN Storage Arrays & Backup Appliance\n   Configured Statutory Rules: 4 (GSTN, Udyam MSME, PAN, OEM MAF)\n   Status: ACTIVE\n\nActive Selected Tender: GEM/2026/B/994810",
     "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-30T10:51:35.671981+00:00",
+    "question": "Remember that my annual turnover is INR 22 Crores",
+    "answer": "🧠 **Memory Updated!**\n\nI have remembered this fact for your profile:\n• **Annual Turnover**: `inr 22 crores`\n\nI will remember this across our conversations. You can ask me anytime or tell me to update/forget it!",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:51:36.296097+00:00",
+    "question": "Yaad rakhna meri company name Bharat Defense Labs hai",
+    "answer": "🧠 **Memory Updated!**\n\nI have remembered this fact for your profile:\n• **Custom Note**: `meri company name bharat defense labs hai`\n\nI will remember this across our conversations. You can ask me anytime or tell me to update/forget it!",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:02.439298+00:00",
+    "question": "What do you remember about me?",
+    "answer": "🧠 **Here is everything I remember about you (Shubham):**\n\n1. **Annual Turnover**: `INR 22 Crores`\n2. **Custom Note**: `meri company name Bharat Defense Labs`\n\n💡 *You can tell me to remember new details, update any item, or say 'Clear my memory' anytime.*",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:03.185828+00:00",
+    "question": "Mera turnover kitna hai?",
+    "answer": "I don't have a recorded memory for `turnover kitna hai` yet.\nYou can tell me: *\"Remember that my turnover kitna hai is [value]\"* and I will save it!",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:43.662978+00:00",
+    "question": "Explain GFR 2017 Rule 144 for procurement compliance",
+    "answer": "GFR 2017 Rule 144 - Fundamental Principles of Public Procurement\n\nGFR 2017 Rule 144 lays down the Fundamental Principles of Public Procurement for all Ministries, Departments, and CPSEs:\n\n1. Efficiency, Economy, and Transparency: Procurements must be made in a transparent, competitive, and cost-effective manner.\n2. Fair & Equal Treatment: All eligible suppliers must receive equal opportunity without restrictive or customized tender specifications.\n3. Clear Technical Specifications: Descriptions of goods/services must be generic, functional, and performance-based without mentioning brand names or trademarks.\n4. Adequate Lead Time: Minimum reasonable bidding time must be allowed to ensure genuine market competition.\n5. Public Availability: Tender notices must be published on Central Public Procurement Portal (CPPP) and Government e-Marketplace (GeM).",
+    "source": "UNIVERSAL_QA_ENGINE"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:43.976848+00:00",
+    "question": "Maine pehle kya pucha tha?",
+    "answer": "🧠 **Conversation History Memory:**\n\n• **Your Previous Question Was:**\n> \"Explain GFR 2017 Rule 144 for procurement compliance\"\n\n• **Earlier Questions in This Session (4):**\n  1. \"Mera turnover kitna hai?\"\n  2. \"What do you remember about me?\"\n  3. \"Yaad rakhna meri company name Bharat Defense Labs hai\"\n  4. \"Remember that my annual turnover is INR 22 Crores\"",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:44.279807+00:00",
+    "question": "Summarize our conversation so far",
+    "answer": "📜 **Executive Conversation Summary (12 total messages):**\n\n• **Active Participant**: Shubham (Senior Procurement Officer)\n• **Topics Discussed (6 user queries):**\n  1. Remember that my annual turnover is INR 22 Crores\n  2. Yaad rakhna meri company name Bharat Defense Labs hai\n  3. What do you remember about me?\n  4. Mera turnover kitna hai?\n  5. Explain GFR 2017 Rule 144 for procurement compliance\n  6. Maine pehle kya pucha tha?\n\n• **Evaluation Focus**: Statutory compliance verification, 13-node gateway checks, document intelligence, and GFR 2017 rules.",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T10:52:44.562249+00:00",
+    "question": "Clear my memory",
+    "answer": "🧹 **Memory Cleared!** All personalized facts and preferences for Shubham have been removed from my memory.",
+    "source": "ADAPTIVE_MEMORY"
   }
 ]
