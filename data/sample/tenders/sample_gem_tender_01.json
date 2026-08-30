@@ -1,0 +1,50 @@
+{
+  "tender_number": "GEM/2026/B/882109",
+  "title": "Procurement of Server Infrastructure & Enterprise Storage Systems",
+  "description": "GeM procurement tender for supply, installation, and commissioning of enterprise server infrastructure for Ministry CPSE data centers.",
+  "category": "IT Hardware",
+  "requirements": [
+    {
+      "module": "GST",
+      "title": "Valid GSTIN Registration & Active Status",
+      "mandatory": true,
+      "weight": 25,
+      "rule_type": "REGISTRATION_AND_CONSISTENCY",
+      "rule_config": {
+        "check_status": "ACTIVE",
+        "verify_cross_document": true
+      }
+    },
+    {
+      "module": "Udyam",
+      "title": "Valid Udyam MSME Registration Certificate",
+      "mandatory": true,
+      "weight": 20,
+      "rule_type": "REGISTRATION_VALIDATION",
+      "rule_config": {
+        "check_enterprise_class": ["MICRO", "SMALL", "MEDIUM"]
+      }
+    },
+    {
+      "module": "PAN",
+      "title": "PAN Card Registration & Legal Name Match",
+      "mandatory": true,
+      "weight": 20,
+      "rule_type": "IDENTITY_CONSISTENCY",
+      "rule_config": {
+        "match_field": "legal_name"
+      }
+    },
+    {
+      "module": "OEM",
+      "title": "OEM Manufacturer Authorization Letter",
+      "mandatory": true,
+      "weight": 35,
+      "rule_type": "AUTHORIZATION_VALIDATION",
+      "rule_config": {
+        "check_validity_date": true,
+        "check_product_category": "Server Infrastructure"
+      }
+    }
+  ]
+}

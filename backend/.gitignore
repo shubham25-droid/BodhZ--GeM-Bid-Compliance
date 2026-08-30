@@ -1,0 +1,19 @@
+# Environment Variables (Secrets)
+.env
+.env.local
+*.env
+
+# SQLite Database
+*.db
+*.sqlite3
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+
+# Uploads & Temp Data
+uploads/*
+!uploads/.gitkeep

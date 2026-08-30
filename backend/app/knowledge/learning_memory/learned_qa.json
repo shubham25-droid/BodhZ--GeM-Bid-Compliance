@@ -1,0 +1,296 @@
+[
+  {
+    "timestamp": "2026-08-28T23:38:43.401029",
+    "question": "what is bid",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:38:45.649577",
+    "question": "explain OEM authorization",
+    "answer": "An OEM Authorization Letter (MAF) is a formal document issued by the Original Equipment Manufacturer confirming that the bidder is authorized to supply, install, and support their products for the tender duration.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:38:47.373089",
+    "question": "what is EMD exemption",
+    "answer": "EMD (Earnest Money Deposit) is a bid security deposit submitted by bidders. Under GFR 2017 Rule 170, registered MSMEs and DPIIT Recognized Startups are exempt from submitting EMD.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:38:49.334074",
+    "question": "why do we need OCR",
+    "answer": "OCR (Optical Character Recognition) is an automated document processing technology used by BodhZ to extract text, tables, dates, and certificate numbers from scanned PDF bidder documents.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:38:49.341304",
+    "question": "kaha h ye kya bol raha h",
+    "answer": "Main BodhZ AI Assistant hoon. Aap mujhse tender specifications, bidder compliance score, GST, Udyam MSME, OEM authorization, ya document evidence ke baare mein pooch sakte hain. Main kaise madad karoon?",
+    "source": "HINGLISH"
+  },
+  {
+    "timestamp": "2026-08-28T23:44:50.340139",
+    "question": "hello",
+    "answer": "Hello! How can I help you with your procurement evaluation today?",
+    "source": "GREETING"
+  },
+  {
+    "timestamp": "2026-08-28T23:44:53.773542",
+    "question": "gm",
+    "answer": "Good morning! How can I help you with your procurement evaluation today?",
+    "source": "GREETING"
+  },
+  {
+    "timestamp": "2026-08-28T23:45:04.134047",
+    "question": "byy",
+    "answer": "Regarding 'byy': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:45:16.714064",
+    "question": "gem means",
+    "answer": "Regarding 'gem means': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:45:42.518552",
+    "question": "GeM kya hot h",
+    "answer": "Main BodhZ AI Assistant hoon. Aap mujhse tender eligibility, GST/Udyam status, OEM letters, compliance score, ya document evidence ke baare mein pooch sakte hain.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:46:00.161360",
+    "question": "gst means",
+    "answer": "GST (Goods and Services Tax) is a mandatory indirect tax registration in India. In GeM tender evaluations, active GSTIN status and regular GSTR-3B return filings are required for eligibility.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:46:54.612272",
+    "question": "bid",
+    "answer": "Regarding 'bid': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:50:02.722609",
+    "question": "what is bid",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:50:05.481961",
+    "question": "what documents are included",
+    "answer": "Documents Normally Included in a Bid Submission:\n\nTechnical Qualification Documents: Specification compliance matrix, experience certificates, audited turnover certificates.\nStatutory Eligibility Certificates: Active GST Registration Certificate, PAN Card, Udyam MSME Certificate.\nManufacturer Authorization: OEM Authorization Letter (MAF) confirming official supply authorization.\nFinancial Proposal: BOQ rate breakdown and price schedule.\nBid Security Instrument: EMD receipt or Udyam MSME Exemption Undertaking under GFR Rule 170.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:50:07.842492",
+    "question": "who checks them",
+    "answer": "Evaluation and Verification Roles:\n\nAutomated AI Verification Engine (BodhZ): Performs document OCR parsing, extracts structured data, and queries 13 statutory gateway nodes.\nTender Evaluation Committee (TEC): Senior Procurement Officers review extracted evidence, risk findings, and compliance scores.\nProcurement Officer (Final Authority): Holds 100% decision authority to qualify or disqualify the bidder.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:50:09.540655",
+    "question": "difference between bid and tender",
+    "answer": "Key Differences Between Tender and Bid:\n\nOrigin:\nA Tender is an official notice issued by a Government Department inviting commercial proposals.\nA Bid is the formal offer submitted by a vendor in response to that tender.\n\nAuthor:\nTenders are created by Procurement Officers.\nBids are prepared and submitted by Suppliers or OEMs.\n\nContents:\nTenders contain eligibility criteria and technical specifications.\nBids contain pricing schedules, statutory certificates, and compliance declarations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:54:25.270701",
+    "question": "tender",
+    "answer": "A Tender is an official public invitation issued by a Ministry, Government Department, or CPSE under GFR 2017 Rule 144, inviting competitive proposals from qualified vendors for goods, services, or infrastructure works.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:55:32.881089",
+    "question": "pan link",
+    "answer": "Regarding 'pan link': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:56:14.632231",
+    "question": "give pan card official link",
+    "answer": "Regarding 'give pan card official link': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-28T23:56:24.465745",
+    "question": "pan means",
+    "answer": "Regarding 'pan means': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T18:57:44.125473",
+    "question": "shubham",
+    "answer": "I don’t have sufficient evidence in the uploaded documents or current workspace context to determine anything specific about “shubham.”\n\nIf you want, I can help you assess a bidder named Shubham against the active tender rules for GST Registration, Udyam MSME, PAN identity match, and OEM authorization, but I will need the relevant documents or verification outputs.",
+    "source": "OPENAI_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T18:58:02.964111",
+    "question": "how may documents i had uploaded",
+    "answer": "I don’t have sufficient evidence in the current workspace context to determine how many documents you uploaded.\n\nIf you want, I can help you count them if you share the upload list, file names, or the document bundle details.",
+    "source": "OPENAI_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T18:58:28.957412",
+    "question": "how many bids were qualified",
+    "answer": "Regarding 'how many bids were qualified': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T18:58:46.366116",
+    "question": "bid",
+    "answer": "Regarding 'bid': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. You can ask about bid definitions, tender rules, GST/Udyam verification, OEM letters, compliance scores, or inspect active bidder evidence citations.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T18:58:59.678209",
+    "question": "bid definitions",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:05:58.455145",
+    "question": "who am i",
+    "answer": "You are authenticated as Officer Shubham (Senior Procurement Officer).\n\nYou hold full administrative access and 100% final qualification/disqualification decision authority over GeM procurement bids in the BodhZ platform.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:06:00.527323",
+    "question": "what is my name",
+    "answer": "You are authenticated as Officer Shubham (Senior Procurement Officer).\n\nYou hold full administrative access and 100% final qualification/disqualification decision authority over GeM procurement bids in the BodhZ platform.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:06:02.623523",
+    "question": "what is my active tender",
+    "answer": "Active Tender Details:\n\nTender ID: GEM/2026/B/994810\nTender Title: Supply of High-Performance Computing Server Cluster\nStatutory Rules Configured: 4 (GSTN Active Status, Udyam MSME Verification, PAN Identity Match, OEM Authorization Letter)\nStatus: ACTIVE\n\nYou can review submitted bids and OCR extraction findings in the Tender Management or Bidder Evaluation tabs.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:06:05.251280",
+    "question": "which bidder is selected",
+    "answer": "Active Bidder Profile:\n\nLegal Name: Acme Solutions & Technologies Pvt Ltd\nGSTIN: 27AAACA1098F1Z5\nCompliance Score: 100/100\nRisk Tier: LOW RISK\nCurrent Review Status: QUALIFIED\n\nGrounded AI Analysis:\nBidder satisfies 100% of mandatory tender criteria across all 13 statutory gateway nodes.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:06:07.846250",
+    "question": "why is CyberTech high risk",
+    "answer": "Evaluation Findings for Acme Solutions & Technologies Pvt Ltd\n\nCompliance Score: 100/100\nRisk Tier: LOW RISK\nVerification Status: QUALIFIED\n\nAnalysis and Recommendation:\nBidder satisfies 100% of mandatory tender criteria across all 13 statutory gateway nodes.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:06:09.906621",
+    "question": "what is score of Acme Solutions",
+    "answer": "Evaluation Findings for Acme Solutions & Technologies Pvt Ltd\n\nCompliance Score: 100/100\nRisk Tier: LOW RISK\nVerification Status: QUALIFIED\n\nAnalysis and Recommendation:\nBidder satisfies 100% of mandatory tender criteria across all 13 statutory gateway nodes.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:12:16.561749",
+    "question": "hii",
+    "answer": "Regarding 'hii': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer shubham99, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:14:04.277569",
+    "question": "what is a bid",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:14:56.348106",
+    "question": "sorry",
+    "answer": "Regarding 'sorry': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer shubham99, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:15:05.989168",
+    "question": "bid",
+    "answer": "Regarding 'bid': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer shubham99, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:15:16.781710",
+    "question": "definitions",
+    "answer": "Regarding 'definitions': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer shubham99, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:14.342703",
+    "question": "who am i",
+    "answer": "You are authenticated as Officer Shubham (Senior Procurement Officer).\n\nYou hold full administrative access and 100% final qualification/disqualification decision authority over GeM procurement bids in the BodhZ platform.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:18.736123",
+    "question": "what about CyberTech",
+    "answer": "CyberTech Global Systems Evaluation Summary:\n\nCompliance Score: 40/100 (CRITICAL RISK)\nStatus: DISQUALIFIED / HIGH RISK\nPrimary Critical Finding: Expired OEM Authorization Letter (Validity expired on 31/12/2023, Page 1 of submission).\nGateway Results: GSTN Active, PAN Matched, but mandatory OEM MAF compliance failed.\nRecommendation: Disqualification under Clause 4.2 of tender specification.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:21.810466",
+    "question": "what are the 13 gateways",
+    "answer": "BodhZ 13 Statutory Verification Gateway Nodes:\n\nGSTN Portal: Active GSTIN status and GSTR-3B filing check\nIncome Tax Department: PAN validity and Section 206AB tax compliance\nUdyam MSME Register: Micro/Small/Medium enterprise verification for EMD exemption\nOEM Authorization Gateway: Manufacturer Authorization Form validation\nGeM Incident Management: Debarment and blacklisting status\nMCA21 Corporate Affairs: Company Master Data & Director DIN check\nStartup India / DPIIT: Recognized startup benefits validation\nNSIC Portal: Single point registration verification\nEPFO Portal: Employee Provident Fund registration and compliance\nESIC Portal: Employee State Insurance compliance\nDigiLocker: Direct cryptographically verified document fetch\nMake in India (MII): Local content percentage declaration audit\nBIS Portal: Bureau of Indian Standards product certification check",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:24.060437",
+    "question": "what action should I take as officer",
+    "answer": "Regarding 'what action should I take as officer': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer Shubham, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:26.415029",
+    "question": "explain GFR 170",
+    "answer": "Regarding 'explain GFR 170': BodhZ provides evidence-grounded decision support for GeM Procurement Tenders. As Officer Shubham, you can ask about tender eligibility rules, bidder compliance scores, statutory gateway verifications across 13 government portals, or inspect uploaded PDF document evidence.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:17:54.408444",
+    "question": "what is my active tender",
+    "answer": "Active Tender Details:\n\nTender ID: GEM/2026/B/994810\nTender Title: Supply of High-Performance Computing Server Cluster\nStatutory Rules Configured: 4 (GSTN Active Status, Udyam MSME Verification, PAN Identity Match, OEM Authorization Letter)\nStatus: ACTIVE\n\nYou can review submitted bids and OCR extraction findings in the Tender Management or Bidder Evaluation tabs.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:18:27.453079",
+    "question": "hii",
+    "answer": "Hello, Officer shubham99! How can I help you with your procurement evaluation today?",
+    "source": "GREETING"
+  },
+  {
+    "timestamp": "2026-08-29T19:18:50.996413",
+    "question": "bid means",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:19:15.473891",
+    "question": "how many tenders i had uploaded",
+    "answer": "A Tender is an official public invitation issued by a Ministry, Government Department, or CPSE under GFR 2017 Rule 144, inviting competitive proposals from qualified vendors for goods, services, or infrastructure works.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:23:10.783996",
+    "question": "how many bids evaluated",
+    "answer": "You have 3 total bidder submission(s) across your active tenders:\n\nAcme Solutions & Technologies Pvt Ltd\n   Compliance Score: 100/100\n   Risk Tier: LOW RISK\n   Status: QUALIFIED\n\nCyberTech Global Systems\n   Compliance Score: 40/100\n   Risk Tier: CRITICAL RISK\n   Status: DISQUALIFIED\n\nBharat InfoTech Pvt Ltd\n   Compliance Score: 75/100\n   Risk Tier: MEDIUM RISK\n   Status: NEEDSCLARIFICATION\n\nCurrently Selected Bidder: Acme Solutions & Technologies Pvt Ltd",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:23:12.629989",
+    "question": "what is a tender",
+    "answer": "A Tender is an official public invitation issued by a Ministry, Government Department, or CPSE under GFR 2017 Rule 144, inviting competitive proposals from qualified vendors for goods, services, or infrastructure works.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:23:15.417026",
+    "question": "what is a bid",
+    "answer": "A Bid is a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to a public procurement tender.\n\nIt typically contains the technical compliance sheet, financial price schedule, GST and PAN certificates, Udyam MSME certificate, and OEM authorization letter.",
+    "source": "UNIVERSAL_QA_LEARNED"
+  },
+  {
+    "timestamp": "2026-08-29T19:23:17.857953",
+    "question": "list all tenders",
+    "answer": "You have 2 total tender(s) in your Officer workspace:\n\nTender ID: GEM/2026/B/994810\n   Title: Supply of High-Performance Computing Server Cluster\n   Configured Statutory Rules: 4 (GSTN, Udyam MSME, PAN, OEM MAF)\n   Status: ACTIVE\n\nTender ID: GEM/2026/B/882109\n   Title: Procurement of Enterprise SAN Storage Arrays & Backup Appliance\n   Configured Statutory Rules: 4 (GSTN, Udyam MSME, PAN, OEM MAF)\n   Status: ACTIVE\n\nActive Selected Tender: GEM/2026/B/994810",
+    "source": "UNIVERSAL_QA_LEARNED"
+  }
+]

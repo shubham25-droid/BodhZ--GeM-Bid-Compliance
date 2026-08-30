@@ -1,0 +1,17 @@
+Compliance Score and Risk Tier Rules
+
+A Compliance Score is an automated metric ranging from 0 to 100 that indicates how thoroughly a bidder satisfies tender eligibility criteria, statutory rules, and document verifications.
+
+Scoring Factors:
+1. Active statutory registrations (GSTN, Udyam MSME, PAN)
+2. Valid OEM Authorization Letters
+3. Document consistency and OCR extraction accuracy
+4. Absence of debarment or blacklisting records
+
+Risk Tiers:
+LOW RISK (80-100): Fully compliant with zero critical mismatches.
+MEDIUM RISK (60-79): Minor discrepancies like spelling variations. Officer review recommended.
+CRITICAL RISK (<60): Major non-compliance such as expired OEM letter or blacklisting.
+
+Human Decision Authority:
+The Compliance Score and Risk Tier are strictly decision-support metrics. The 100% final qualification or disqualification decision remains with the Procurement Officer.

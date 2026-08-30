@@ -1,0 +1,15 @@
+BodhZ Architecture and SIH26100 Workflow
+
+Problem Statement ID: SIH26100
+Title: AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement
+
+Core Workflow:
+1. Procurement Officer authenticates and accesses portal.
+2. Officer creates or selects an active GeM Tender workspace.
+3. Tender specification PDF uploaded; requirements and weights extracted.
+4. Bidder submission files ingested and processed via OCR.
+5. 13 Verification Gateway Nodes queried for cross-document consistency.
+6. Compliance score (0-100) and Risk Tier computed.
+7. Grounded findings and recommendations generated with evidence page citations.
+8. Procurement Officer reviews findings and records final qualification/disqualification decision.
+9. Immutable audit trail hash generated and official PDF audit report stored.

@@ -1,0 +1,23 @@
+Verification Modes and Gateway Network (SIH26100)
+
+Verification Modes:
+1. LIVE API: Direct live query to government portal database.
+2. SANDBOX CONNECTOR: Simulated sandbox gateway mimicking live API schema.
+3. DOCUMENT CONSISTENCY: Cross-document OCR comparison (e.g. GST Cert vs Bid Form name match).
+4. MANUAL REVIEW: External source unavailable; requires officer inspection.
+5. UNAVAILABLE: Government endpoint currently unreachable.
+
+Statutory Nodes Evaluated:
+1. GSTN Portal
+2. Udyam MSME Register
+3. Income Tax / PAN Gateway
+4. OEM Authorization Verification
+5. MCA21 Corporate Affairs Register
+6. Startup India / DPIIT
+7. NSIC Register
+8. EPFO Register
+9. ESIC Register
+10. DigiLocker Repository
+11. Debarment and Blacklisting Registers
+12. Income Tax Sec 206AB Compliance
+13. Make in India Local Content Preference

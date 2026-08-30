@@ -1,0 +1,15 @@
+{
+  "scenario": "FULLY_COMPLIANT",
+  "bidder": {
+    "legal_name": "Acme Solutions Pvt Ltd",
+    "gstin": "27ABCDE1234F1Z5",
+    "pan_number": "ABCDE1234F",
+    "udyam_number": "UDYAM-MH-12-0098234",
+    "email": "bids@acmesolutions.in"
+  },
+  "expected_results": {
+    "compliance_score": 100,
+    "risk_level": "LOW",
+    "status": "PASS"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scenario": "GST_INCONSISTENCY_MISMATCH",
+  "bidder": {
+    "legal_name": "Acme Solutions & Technologies Pvt Ltd",
+    "gstin_in_bid_form": "27ABCDE1234F1Z5",
+    "gstin_in_certificate": "27ABCDE9999X1Z5",
+    "pan_number": "ABCDE1234F",
+    "udyam_number": "UDYAM-MH-12-0098234",
+    "email": "info@acmetech.in"
+  },
+  "expected_results": {
+    "compliance_score": 75,
+    "risk_level": "MEDIUM",
+    "status": "REVIEW_REQUIRED",
+    "finding": "GSTIN mismatch detected across bid form and GST certificate"
+  }
+}

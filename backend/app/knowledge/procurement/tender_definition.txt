@@ -1,0 +1,8 @@
+Public Tender Definition
+
+A Tender is an official public invitation issued by a Ministry, Government Department, or CPSE under GFR 2017 Rule 144, inviting competitive proposals from qualified vendors for the supply of goods, services, or execution of infrastructure works.
+
+Key Procurement Types:
+1. Open Tender Enquiry: Advertised public tender open to all eligible vendors.
+2. Limited Tender Enquiry: Issued directly to registered or empanelled vendors for urgent/niche items.
+3. Single Tender Enquiry: Proprietary purchase under strict justification rules.

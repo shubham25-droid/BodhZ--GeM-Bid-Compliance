@@ -1,0 +1,12 @@
+Public Procurement Bid Definition
+
+In public procurement under GeM and Central Public Procurement Portal guidelines, a Bid represents a formal, legally binding technical and commercial offer submitted by an eligible supplier or OEM in response to an official tender.
+
+Core Components of a Bid Submission:
+1. Technical Bid: Specification compliance sheets, experience certificates, and OEM Manufacturer Authorization Forms.
+2. Financial Bid: Price schedule and BOQ rate breakdowns.
+3. Statutory Eligibility Instruments: GST Registration, PAN, Udyam MSME Certificate, and EMD or exemption undertakings under GFR 2017 Rule 170.
+
+Difference between Bid and Tender:
+A Tender is the public invitation issued by a government department inviting offers.
+A Bid is the actual offer submitted by a vendor in response to that tender.
