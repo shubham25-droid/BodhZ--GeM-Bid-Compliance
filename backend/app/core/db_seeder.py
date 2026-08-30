@@ -8,7 +8,8 @@ from app.core.security import hash_password
 from app.models.models import (
     UserModel, TenderModel, RequirementModel, BidderModel, BidModel,
     DocumentModel, ExtractionModel, VerificationResultModel, FindingModel,
-    AssessmentModel, AuditEventModel, HistoricalBidderMatchModel
+    AssessmentModel, AuditEventModel, HistoricalBidderMatchModel,
+    BidderClarificationModel
 )
 
 logger = logging.getLogger(__name__)
@@ -354,6 +355,33 @@ def seed_initial_database(db: Session):
                     sha256_hash="f5a9c8b74123..."
                 )
                 db.add(audit_obj)
+
+                # Seed sample clarification for demonstration
+                clar_existing = db.query(BidderClarificationModel).filter(BidderClarificationModel.bid_id == bid_obj.id).first()
+                if not clar_existing:
+                    if "Tata" in bidder_obj.legal_name:
+                        clar_obj = BidderClarificationModel(
+                            bid_id=bid_obj.id,
+                            request_type="DOCUMENT_QUERY",
+                            requested_by="DTE Officer (Dr. Rajesh Kumar)",
+                            question_text="Please confirm validity of OEM Manufacturer Authorization Form (MAF) Annexure-8 for 3D Simulation Software modules.",
+                            due_date=datetime(2026, 9, 15, 18, 0, tzinfo=timezone.utc),
+                            status="RESPONDED",
+                            response_text="Confirmed valid with OEM Principal OEM/DTE/2026/8892 valid through March 2028. Letter re-attached.",
+                            response_doc_name="Tata_OEM_MAF_Clarification_Confirmation.pdf",
+                            responded_at=datetime(2026, 8, 29, 14, 20, tzinfo=timezone.utc)
+                        )
+                        db.add(clar_obj)
+                    elif "EduTech" in bidder_obj.legal_name:
+                        clar_obj = BidderClarificationModel(
+                            bid_id=bid_obj.id,
+                            request_type="TURNOVER_CLARIFICATION",
+                            requested_by="Procurement Officer (Officer Shubham)",
+                            question_text="CA Turnover certificate shows average of INR 8.2 Cr. Please clarify if MSME exemption is claimed for the INR 10 Cr turnover threshold.",
+                            due_date=datetime(2026, 9, 10, 18, 0, tzinfo=timezone.utc),
+                            status="PENDING"
+                        )
+                        db.add(clar_obj)
 
             # Historical memory for Tata Advanced Training (Evaluated in 2023 for Central IT Tender)
             if bidder_obj.legal_name == "Tata Advanced Training & Systems Ltd":

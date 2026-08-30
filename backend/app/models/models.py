@@ -319,3 +319,29 @@ class HistoricalBidderMatchModel(Base):
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     bidder = relationship("BidderModel", back_populates="historical_records")
+
+
+# --------------------------------------------------
+# 15. BIDDER CLARIFICATION & QUERY MODEL
+# --------------------------------------------------
+class BidderClarificationModel(Base):
+    """
+    Maintains clarification requests sent by procurement/department officers
+    and formal responses uploaded by the bidder.
+    """
+    __tablename__ = "bidder_clarifications"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    bid_id = Column(String(36), ForeignKey("bids.id"), nullable=False, index=True)
+    request_type = Column(String(50), default="REQUEST_CLARIFICATION")
+    requested_by = Column(String(100), default="PROCUREMENT_OFFICER")
+    question_text = Column(Text, nullable=False)
+    due_date = Column(DateTime, nullable=True)
+    status = Column(String(30), default="PENDING")  # PENDING, RESPONDED, CLOSED
+    response_text = Column(Text, nullable=True)
+    response_doc_name = Column(String(255), nullable=True)
+    responded_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    bid = relationship("BidModel")
+

@@ -1,7 +1,7 @@
 import json
 import logging
 from typing import List, Optional, Dict, Any
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy import func
@@ -11,7 +11,7 @@ from app.core.security import get_current_user, require_role
 from app.models.models import (
     UserModel, TenderModel, RequirementModel, BidModel, BidderModel,
     DocumentModel, ExtractionModel, VerificationResultModel, FindingModel,
-    AssessmentModel, OfficerDecisionModel, AuditEventModel
+    AssessmentModel, OfficerDecisionModel, AuditEventModel, BidderClarificationModel
 )
 from app.schemas.schemas import ChatRequestSchema, ChatResponseSchema
 from app.ai.chatbot_service import BodhZChatbotService
@@ -637,6 +637,18 @@ def request_dte_clarification(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access Denied: Bid belongs to an unauthorized tender."
         )
+
+    # If official clarification is requested, lodge query for the Bidder
+    if action_type == "REQUEST_CLARIFICATION":
+        clar = BidderClarificationModel(
+            bid_id=bid.id,
+            request_type="COMMITTEE_QUERY",
+            requested_by=f"DTE Maharashtra ({current_user.full_name})",
+            question_text=clarification_notes,
+            due_date=datetime.now(timezone.utc) + timedelta(days=5),
+            status="PENDING"
+        )
+        db.add(clar)
 
     # Record Audit Event
     audit = AuditEventModel(

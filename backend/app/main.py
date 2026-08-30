@@ -14,7 +14,7 @@ from app.core.security import SecurityHeadersMiddleware
 from app.api.routes import (
     health_router, auth_router, tenders_router, bids_router,
     documents_router, verification_router, audit_router, reports_router,
-    dte_router
+    dte_router, bidder_router
 )
 
 # Initialize database tables
@@ -72,6 +72,7 @@ app.include_router(verification_router.router, prefix=settings.API_V1_STR)
 app.include_router(audit_router.router, prefix=settings.API_V1_STR)
 app.include_router(reports_router.router, prefix=settings.API_V1_STR)
 app.include_router(dte_router.router, prefix=settings.API_V1_STR)
+app.include_router(bidder_router.router, prefix=settings.API_V1_STR)
 
 
 # --------------------------------------------------
@@ -678,6 +679,41 @@ def root_web_application():
     </div>
   </div>
 
+  <!-- BIDDER CLARIFICATION RESPONSE MODAL -->
+  <div id="bidderClarificationModal" style="display: none; position: fixed; inset: 0; background: rgba(10,25,47,0.75); z-index: 2100; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #FFFFFF; width: 100%; max-width: 540px; border-radius: 14px; border: 1px solid var(--border); padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #F1F5F9; padding-bottom: 10px;">
+        <div style="font-size: 15px; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-reply-all" style="color: #059669;"></i>
+          <span>Respond to Committee Clarification Request</span>
+        </div>
+        <button onclick="closeBidderClarificationModal()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: #64748B;">✕</button>
+      </div>
+
+      <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px 14px; border-radius: 8px;">
+        <div style="font-size: 11px; font-weight: 700; color: #92400E;">OFFICIAL COMMITTEE QUERY:</div>
+        <div id="bidderClarifyQueryText" style="font-size: 13px; font-weight: 700; color: #78350F; margin-top: 3px;">Please clarify...</div>
+      </div>
+
+      <input type="hidden" id="bidderClarifyQueryId">
+
+      <div class="form-group">
+        <label class="form-label">Bidder Official Response Statement:</label>
+        <textarea id="bidderClarifyResponseText" class="form-input" rows="4" placeholder="Enter your detailed technical/statutory clarification response..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Supporting Document Name / Reference:</label>
+        <input type="text" id="bidderClarifyDocName" class="form-input" placeholder="e.g. Tata_OEM_MAF_Clarification_Confirmation.pdf">
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button onclick="closeBidderClarificationModal()" class="btn-action" style="background: #E2E8F0; color: #334155;">Cancel</button>
+        <button onclick="submitBidderClarificationResponse()" class="btn-success"><i class="fa-solid fa-paper-plane"></i> Submit Response</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ================================================== -->
   <!-- 3. ROLE-AWARE AUTHENTICATED WORKSPACE CONTAINER    -->
   <!-- ================================================== -->
@@ -868,31 +904,474 @@ def root_web_application():
         </div>
 
         <!-- ============================================================== -->
-        <!-- WORKSPACE 2: BID UPLOADER & TENDERS CATALOG PORTAL             -->
+        <!-- WORKSPACE 2: DEDICATED BID UPLOADER & VENDOR WORKSPACE (11 VIEWS) -->
         <!-- ============================================================== -->
-        <div id="view-bidder-portal" style="display: none; flex-direction: column; gap: 20px;">
-          <div class="card-panel" style="border-left: 5px solid #059669;">
-            <div class="card-title"><span><i class="fa-solid fa-briefcase" style="color: #059669;"></i> Bidder & Vendor Self-Service Workspace</span><span class="badge-open-bid">VENDOR AUTHORIZED</span></div>
-            <p style="font-size: 13px; color: #475569;">Welcome, <strong id="bidderPortalOrgName" style="color: var(--primary);">Tata Advanced Training & Systems Ltd</strong>.</p>
-          </div>
 
-          <div class="card-panel" id="bidderCatalogSection">
-            <div class="card-title"><span><i class="fa-solid fa-folder-open" style="color: #0052CC;"></i> Published Open Tenders Catalog</span></div>
-            <div id="bidderTendersCatalogGrid" class="tender-catalog-grid"></div>
-          </div>
-
-          <div class="card-panel" id="bidderSubmissionFormSection">
-            <div class="card-title"><span><i class="fa-solid fa-cloud-arrow-up" style="color: #059669;"></i> Submit Bid Proposal Bundle</span></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-              <div class="form-group"><label class="form-label">Target Procurement Tender:</label><select id="bidderOpenTendersDropdown" class="form-input"><option value="">Loading Tenders...</option></select></div>
-              <div class="form-group"><label class="form-label">Bidder Legal Name:</label><input type="text" id="bidderPortalNameInput" class="form-input" value="Tata Advanced Training & Systems Ltd"></div>
+        <!-- 2.1 BIDDER DASHBOARD -->
+        <div id="view-bidder-dashboard" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel" style="background: linear-gradient(135deg, #FFFFFF 0%, #F0FDF4 100%); border-left: 5px solid #059669;">
+            <div class="card-title">
+              <span><i class="fa-solid fa-briefcase" style="color: #059669;"></i> Bid Uploader / Vendor Workspace</span>
+              <span class="badge-open-bid" style="font-size: 10.5px;"><i class="fa-solid fa-building-circle-check"></i> VERIFIED VENDOR PORTAL</span>
             </div>
-            <button onclick="submitBidderPortalProposal()" id="btnSubmitBidderProposal" class="btn-success" style="align-self: flex-end;"><i class="fa-solid fa-paper-plane"></i> SUBMIT PROPOSAL →</button>
+            <p style="font-size: 13px; color: #475569;">
+              Welcome, <strong id="bidderDashWelcomeName" style="color: var(--primary);">Rajiv Mehta</strong> • Organization: <strong id="bidderDashCompanyName" style="color: #047857;">Tata Advanced Training & Systems Ltd</strong>
+            </p>
+
+            <!-- 5 Dedicated Bidder KPI Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 10px;">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; cursor: pointer;" onclick="switchBidderView('bidder-tenders')">
+                <div style="font-size: 10.5px; font-weight: 700; color: #64748B;">ACTIVE TENDERS</div>
+                <div style="font-size: 22px; font-weight: 900; color: #0052CC;" id="bidderStatActiveTenders">3</div>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; cursor: pointer;" onclick="switchBidderView('bidder-mybids')">
+                <div style="font-size: 10.5px; font-weight: 700; color: #64748B;">MY BIDS</div>
+                <div style="font-size: 22px; font-weight: 900; color: var(--primary);" id="bidderStatMyBids">2</div>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; cursor: pointer;" onclick="switchBidderView('bidder-mybids')">
+                <div style="font-size: 10.5px; font-weight: 700; color: #B45309;">DRAFT SUBMISSIONS</div>
+                <div style="font-size: 22px; font-weight: 900; color: #B45309;" id="bidderStatDraftBids">0</div>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; cursor: pointer;" onclick="switchBidderView('bidder-mybids')">
+                <div style="font-size: 10.5px; font-weight: 700; color: #047857;">SUBMITTED BIDS</div>
+                <div style="font-size: 22px; font-weight: 900; color: #047857;" id="bidderStatSubmittedBids">2</div>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; cursor: pointer;" onclick="switchBidderView('bidder-clarifications')">
+                <div style="font-size: 10.5px; font-weight: 700; color: #DC2626;">PENDING CLARIFICATIONS</div>
+                <div style="font-size: 22px; font-weight: 900; color: #DC2626;" id="bidderStatPendingClarifications">0</div>
+              </div>
+            </div>
           </div>
 
-          <div class="card-panel" id="bidderSubmissionsSection">
-            <div class="card-title">My Bid Submissions</div>
-            <table class="clean-table"><thead><tr><th>Tender Number</th><th>Tender Title</th><th>Date</th><th>Score</th><th>Status</th><th>Gateways</th><th>Dossier</th></tr></thead><tbody id="bidderSubmissionsTableBody"></tbody></table>
+          <!-- Quick Action Buttons -->
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button onclick="switchBidderView('bidder-tenders')" class="btn-action" style="padding: 10px 16px;"><i class="fa-solid fa-folder-open"></i> Browse Open Tenders</button>
+            <button onclick="switchBidderView('bidder-start')" class="btn-success" style="padding: 10px 16px;"><i class="fa-solid fa-file-circle-plus"></i> + Start New Bid Proposal</button>
+            <button onclick="switchBidderView('bidder-checklist')" class="btn-warning" style="padding: 10px 16px;"><i class="fa-solid fa-list-check"></i> Check Submission Completeness</button>
+          </div>
+
+          <!-- Recent Submissions Activity -->
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-clock-rotate-left" style="color: #0052CC;"></i> Recent Submission Activity</span>
+              <span class="badge-pass">MY COMPANY RECORDS</span>
+            </div>
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Tender Reference</th>
+                  <th>Tender Title</th>
+                  <th>Submission Timestamp</th>
+                  <th>Submission Status</th>
+                  <th>Lifecycle</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bidderRecentActivityTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.2 AVAILABLE TENDERS CATALOG -->
+        <div id="view-bidder-tenders" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-folder-open" style="color: #0052CC;"></i> Available Procurement Tenders</span>
+              <span class="badge-pass">PUBLIC GeM RFPs</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;">
+              <input type="text" id="bidderTendersSearchInput" placeholder="🔍 Search tender title, number or department..." class="form-input" style="max-width: 320px;" oninput="filterBidderTendersCatalog()">
+              <button onclick="switchBidderView('bidder-start')" class="btn-success" style="font-size: 11.5px; padding: 6px 14px;"><i class="fa-solid fa-plus"></i> Start Bid</button>
+            </div>
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Tender ID</th>
+                  <th>Tender Title</th>
+                  <th>Procuring Organization</th>
+                  <th>Closing Date</th>
+                  <th>Requirements</th>
+                  <th>My Submission</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bidderAvailableTendersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.3 TENDER DETAILS & SPECIFICATIONS -->
+        <div id="view-bidder-tender-detail" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-file-contract" style="color: #0052CC;"></i> RFP Specifications & Submission Guidelines</span>
+              <button onclick="switchBidderView('bidder-tenders')" class="btn-action" style="font-size: 11px; padding: 4px 10px;">← Back to Tenders</button>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 14px; border-radius: 8px; margin-bottom: 12px;">
+              <div style="font-size: 11px; font-weight: 700; color: #64748B;">RFP REFERENCE:</div>
+              <div style="font-size: 16px; font-weight: 900; color: var(--primary); font-family: 'JetBrains Mono';" id="bidderDetailTenderNumber">DTE/2026/RFP/COE/4901</div>
+              <div style="font-size: 14px; font-weight: 700; color: #1E293B; margin-top: 4px;" id="bidderDetailTenderTitle">Establishment, Operationalization & Maintenance of Center of Excellence (COE)</div>
+              <div style="font-size: 12px; color: #475569; margin-top: 6px;" id="bidderDetailTenderOrg">Directorate of Technical Education, Maharashtra</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+              <div>
+                <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-bottom: 4px;">Tender Scope & Description:</div>
+                <p style="font-size: 12.5px; color: #334155; line-height: 1.6;" id="bidderDetailTenderDesc">
+                  RFP for selection of agency for setting up Center of Excellence & technical training facilities across State Government engineering institutes under DTE Maharashtra.
+                </p>
+
+                <div style="font-size: 12px; font-weight: 800; color: var(--primary); margin-top: 12px; margin-bottom: 4px;">Submission Instructions:</div>
+                <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px; border-radius: 6px; font-size: 12px; color: #92400E; line-height: 1.5;" id="bidderDetailInstructions">
+                  1. Upload clear, non-password-protected PDF copies of all statutory certificates.<br>
+                  2. Ensure CA Turnover certificate includes UDIN.<br>
+                  3. Manufacturer Authorization Form (MAF) must be on OEM official letterhead.<br>
+                  4. Complete submission checklist before 17:00 IST on closing date.
+                </div>
+              </div>
+
+              <div style="background: #F1F5F9; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
+                <div style="font-size: 11px; font-weight: 800; color: var(--primary); text-transform: uppercase; margin-bottom: 8px;">Important Dates</div>
+                <div style="font-size: 11.5px; color: #334155; display: flex; flex-direction: column; gap: 6px;">
+                  <div><strong>Published:</strong> <span id="bidderDatePublished">15 Aug 2026</span></div>
+                  <div><strong>Pre-Bid Meet:</strong> <span id="bidderDatePrebid">25 Aug 2026</span></div>
+                  <div><strong>Closing Date:</strong> <span id="bidderDateClosing" style="color: #DC2626; font-weight: 800;">30 Sep 2026, 17:00 IST</span></div>
+                  <div><strong>Tech Opening:</strong> <span id="bidderDateOpening">01 Oct 2026, 11:00 IST</span></div>
+                </div>
+                <button onclick="startBidderWizard(activeBidderSelectedTenderId)" class="btn-success" style="width: 100%; margin-top: 14px; padding: 8px 12px; font-size: 11px;">
+                  <i class="fa-solid fa-file-circle-plus"></i> Start Bid for this Tender
+                </button>
+              </div>
+            </div>
+
+            <div class="card-title" style="margin-top: 16px;"><span>Required Statutory & Technical Clauses</span></div>
+            <table class="clean-table">
+              <thead>
+                <tr><th>Module</th><th>Statutory Requirement Title</th><th>Mandatory?</th><th>Weight</th><th>Rule Type</th></tr>
+              </thead>
+              <tbody id="bidderDetailRequirementsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.4 REQUIREMENT CHECKLIST -->
+        <div id="view-bidder-checklist" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-list-check" style="color: #059669;"></i> Submission Requirement Checklist & Completeness Assistant</span>
+              <span class="badge-review">TECHNICAL PRE-CHECK</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px 16px; border-radius: 8px;">
+              <div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748B;">TARGET RFP:</div>
+                <div style="font-size: 15px; font-weight: 900; color: var(--primary);" id="bidderChecklistTenderTitle">DTE/2026/RFP/COE/4901 — Center of Excellence</div>
+              </div>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="badge-pass" id="bidderChecklistStatusBadge">10 Uploaded / 0 Missing</span>
+                <button onclick="switchBidderView('bidder-upload')" class="btn-action" style="font-size: 11px; padding: 6px 12px;"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Document</button>
+              </div>
+            </div>
+
+            <div style="background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF; font-size: 12px; padding: 10px 14px; border-radius: 6px; margin-top: 4px;">
+              <i class="fa-solid fa-circle-info"></i> <strong>Submission Completeness Assistant:</strong> This checklist performs preliminary technical format & document presence verification. It does not declare official government qualification.
+            </div>
+
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Statutory Clause</th>
+                  <th>Title</th>
+                  <th>Mandatory?</th>
+                  <th>Upload Status</th>
+                  <th>Uploaded Document</th>
+                  <th>Technical Validation Note</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bidderChecklistTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.5 START NEW BID (WIZARD) -->
+        <div id="view-bidder-start" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-file-circle-plus" style="color: #059669;"></i> Prepare & Submit New Bid Proposal</span>
+              <span class="badge-pass">6-STEP SUBMISSION WIZARD</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 14px;">
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">1. Select Tender</div>
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">2. Bidder Profile</div>
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">3. Upload Documents</div>
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">4. Completeness Check</div>
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">5. Declaration</div>
+              <div class="filter-pill active" style="text-align: center; font-size: 11px;">6. Submit</div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group">
+                <label class="form-label">Select Target Tender:</label>
+                <select id="bidderWizardTenderSelect" class="form-input" onchange="onBidderWizardTenderChange(this.value)">
+                  <option value="DTE/2026/RFP/COE/4901">DTE/2026/RFP/COE/4901 — Center of Excellence (DTE Maharashtra)</option>
+                  <option value="NFL/CO/IT/VAPT/2026/08">NFL/CO/IT/VAPT/2026/08 — VAPT & Cyber Security Audit (NFL CPSE)</option>
+                  <option value="GEM/2026/B/IIMR/6641">GEM/2026/B/IIMR/6641 — Agricultural Machinery (ICAR-IIMR)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Authorized Submitting Entity:</label>
+                <input type="text" id="bidderWizardCompanyName" class="form-input" readonly value="Tata Advanced Training & Systems Ltd">
+              </div>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; padding: 14px; border-radius: 8px; margin-top: 8px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Entity GSTIN & PAN Verification:</div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-size: 12px;">
+                <div><strong>GSTIN:</strong> <span style="font-family: 'JetBrains Mono';" id="bidderWizardGSTIN">27AAACT1098F1Z5</span></div>
+                <div><strong>PAN:</strong> <span style="font-family: 'JetBrains Mono';" id="bidderWizardPAN">AAACT1098F</span></div>
+                <div><strong>Udyam / MSME:</strong> <span style="font-family: 'JetBrains Mono';" id="bidderWizardUdyam">UDYAM-MH-01-0089241</span></div>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+              <button onclick="switchBidderView('bidder-upload')" class="btn-success" style="padding: 9px 18px;">
+                Proceed to Document Upload (Step 3) →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.6 DOCUMENT UPLOAD CENTER -->
+        <div id="view-bidder-upload" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-cloud-arrow-up" style="color: #059669;"></i> Bid Document Upload & Pre-Validation</span>
+              <span class="badge-pass">MULTI-DOCUMENT UPLOAD</span>
+            </div>
+
+            <div style="border: 2px dashed #CBD5E1; border-radius: 10px; padding: 24px; text-align: center; background: #F8FAFC;" id="bidderDragDropZone">
+              <i class="fa-solid fa-file-pdf" style="font-size: 36px; color: #0052CC; margin-bottom: 8px;"></i>
+              <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Drag & Drop Document Bundle (PDF)</div>
+              <div style="font-size: 12px; color: #64748B; margin-top: 3px;">or browse files from your computer</div>
+
+              <div style="display: flex; justify-content: center; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
+                <select id="bidderUploadDocType" class="form-input" style="max-width: 240px; font-size: 11.5px;">
+                  <option value="GST_CERT">GST Registration Certificate</option>
+                  <option value="PAN_CARD">Income Tax PAN / TAN Card</option>
+                  <option value="UDYAM_CERT">Udyam MSME Certificate</option>
+                  <option value="OEM_MAF">Manufacturer Authorization (MAF)</option>
+                  <option value="FINANCIAL">Audited CA Balance Sheets</option>
+                  <option value="EXPERIENCE">Past Experience Certificates</option>
+                  <option value="ISO_CERT">ISO 9001:2015 Certificate</option>
+                  <option value="NON_BLACKLISTING">Non-Debarment Affidavit</option>
+                </select>
+                <input type="file" id="bidderFileInput" style="display: none;" onchange="handleBidderFileChosen(this)">
+                <button type="button" onclick="document.getElementById('bidderFileInput').click()" class="btn-action" style="padding: 8px 14px; font-size: 11px;">
+                  <i class="fa-solid fa-folder-open"></i> Browse PDF
+                </button>
+                <button type="button" onclick="uploadSimulatedBidderDoc()" class="btn-success" style="padding: 8px 14px; font-size: 11px;">
+                  <i class="fa-solid fa-upload"></i> Upload & Validate
+                </button>
+              </div>
+            </div>
+
+            <div class="card-title" style="margin-top: 12px;"><span>Uploaded Documents for Active Bid</span></div>
+            <table class="clean-table">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Document Type</th>
+                  <th>Upload Date</th>
+                  <th>Processing Status</th>
+                  <th>Validation Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bidderUploadedDocsTableBody"></tbody>
+            </table>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+              <button onclick="switchBidderView('bidder-checklist')" class="btn-action" style="font-size: 11px; padding: 7px 14px;">← View Checklist</button>
+              <button onclick="switchBidderView('bidder-check')" class="btn-success" style="font-size: 11.5px; padding: 8px 18px;">Proceed to Completeness Check →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.7 PRE-SUBMISSION COMPLETENESS CHECK -->
+        <div id="view-bidder-check" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-clipboard-check" style="color: #0052CC;"></i> Bid Submission Completeness Check</span>
+              <span class="badge-review">PRE-SUBMISSION VERIFICATION</span>
+            </div>
+
+            <!-- BID SUBMISSION CHECK BANNER -->
+            <div style="background: linear-gradient(135deg, #ECFDF5 0%, #E0F2FE 100%); border: 1.5px solid #059669; border-radius: 10px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+              <div>
+                <div style="font-size: 13px; font-weight: 800; color: #047857;">BID SUBMISSION CHECK SUMMARY</div>
+                <div style="font-size: 22px; font-weight: 900; color: var(--primary); margin-top: 4px;" id="bidderCheckReadyText">
+                  READY TO SUBMIT: <span style="color: #059669;">YES</span>
+                </div>
+                <div style="font-size: 12px; color: #334155; margin-top: 4px;">
+                  Required Documents: <strong id="bidderCheckReqCount">10</strong> • Uploaded: <strong id="bidderCheckUploadCount" style="color: #059669;">10</strong> • Missing: <strong id="bidderCheckMissingCount" style="color: #059669;">0</strong>
+                </div>
+              </div>
+              <div>
+                <span class="badge-pass" style="font-size: 13px; padding: 6px 14px;" id="bidderCompletenessScoreBadge">100% COMPLETE</span>
+              </div>
+            </div>
+
+            <div id="bidderMissingDocsAlert" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; padding: 12px 16px; border-radius: 8px; font-size: 12px;">
+              <strong>Missing Mandatory Documents:</strong>
+              <div id="bidderMissingDocsList" style="margin-top: 4px;"></div>
+              <button onclick="switchBidderView('bidder-upload')" class="btn-action" style="margin-top: 8px; font-size: 10.5px; padding: 4px 10px;">Upload Missing Document</button>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #CBD5E1; padding: 14px; border-radius: 8px; margin-top: 8px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">Statutory Undertaking & Declaration:</div>
+              <label style="display: flex; gap: 10px; align-items: flex-start; cursor: pointer; font-size: 12px; color: #334155;">
+                <input type="checkbox" id="bidderDeclarationCheckbox" checked style="margin-top: 3px;">
+                <span>
+                  I hereby declare that all uploaded certificates, financial statements, and technology authorization letters are genuine, true, and issued by competent statutory authorities. I agree to abide by the provisions of GFR 2017 and GeM procurement rules.
+                </span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+              <button onclick="switchBidderView('bidder-upload')" class="btn-action" style="font-size: 11px; padding: 7px 14px;">← Back to Uploads</button>
+              <button onclick="submitBidderOfficialProposal()" id="btnBidderFinalSubmit" class="btn-success" style="font-size: 13px; padding: 10px 24px; font-weight: 800;">
+                <i class="fa-solid fa-paper-plane"></i> SUBMIT BID PROPOSAL
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.8 MY BIDS -->
+        <div id="view-bidder-mybids" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-layer-group" style="color: #0052CC;"></i> My Bids & Submission Tracking</span>
+              <span class="badge-pass">AUTHENTICATED BIDDER</span>
+            </div>
+            <p style="font-size: 12px; color: #64748B;">
+              Track all submitted and draft proposals under your company account. Status updates in real-time as the procurement committee progresses with verification.
+            </p>
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Bid ID</th>
+                  <th>Tender Reference</th>
+                  <th>Submitted Date</th>
+                  <th>Status</th>
+                  <th>Document Completion</th>
+                  <th>Last Updated</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bidderMyBidsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.9 CLARIFICATIONS & QUERIES -->
+        <div id="view-bidder-clarifications" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-comments" style="color: #B45309;"></i> Clarification Requests & Committee Queries</span>
+              <span class="badge-review">OVERSIGHT COMMUNICATION</span>
+            </div>
+            <p style="font-size: 12px; color: #64748B;">
+              Respond to official clarification inquiries raised by Procurement Officers or State Directorate reviewers before the specified cutoff date.
+            </p>
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Query ID</th>
+                  <th>Target Tender</th>
+                  <th>Requested By</th>
+                  <th>Question / Request</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bidderClarificationsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.10 SUBMISSION HISTORY -->
+        <div id="view-bidder-history" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-clock-rotate-left" style="color: #0052CC;"></i> Submission History & Integrity Receipts</span>
+              <span class="badge-pass">IMMUTABLE LEDGER</span>
+            </div>
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Submission Date</th>
+                  <th>Tender Number</th>
+                  <th>Generated Bid ID</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="bidderHistoryTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2.11 COMPANY PROFILE -->
+        <div id="view-bidder-profile" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-id-card" style="color: #059669;"></i> Bidder Organization Profile</span>
+              <span class="badge-pass">VERIFIED ENTITY</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="form-group">
+                <label class="form-label">Authorized Representative:</label>
+                <input type="text" id="bidderProfileName" class="form-input" readonly value="Rajiv Mehta">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Company Legal Name:</label>
+                <input type="text" id="bidderProfileCompany" class="form-input" readonly value="Tata Advanced Training & Systems Ltd">
+              </div>
+              <div class="form-group">
+                <label class="form-label">GSTIN:</label>
+                <input type="text" id="bidderProfileGSTIN" class="form-input" readonly style="font-family: 'JetBrains Mono';" value="27AAACT1098F1Z5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">PAN Number:</label>
+                <input type="text" id="bidderProfilePAN" class="form-input" readonly style="font-family: 'JetBrains Mono';" value="AAACT1098F">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Udyam Registration:</label>
+                <input type="text" id="bidderProfileUdyam" class="form-input" readonly style="font-family: 'JetBrains Mono';" value="UDYAM-MH-01-0089241">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Email:</label>
+                <input type="email" id="bidderProfileEmail" class="form-input" value="rajiv.mehta@tatasystems.com">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Contact Phone:</label>
+                <input type="text" id="bidderProfilePhone" class="form-input" value="+91 98222 33445">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Registered Office Address:</label>
+                <input type="text" id="bidderProfileAddress" class="form-input" value="Tata Center, 24 Homi Mody Street, Fort, Mumbai, Maharashtra 400001">
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+              <button onclick="saveBidderProfile()" class="btn-success"><i class="fa-solid fa-floppy-disk"></i> Save Profile Changes</button>
+            </div>
           </div>
         </div>
 
@@ -1096,8 +1575,12 @@ def root_web_application():
         <div id="view-dte-compliance" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
-              <span><i class="fa-solid fa-magnifying-glass-chart"></i> Evidence-Driven Statutory Compliance Inspector</span>
-              <span id="dteComplianceBidderLabel" class="badge-pass">Tata Advanced Training</span>
+              <span><i class="fa-solid fa-magnifying-glass-chart" style="color: #0052CC;"></i> Evidence-Driven Statutory Compliance Inspector</span>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <label style="font-size: 11px; font-weight: 700; color: #475569;">Select Bidder:</label>
+                <select id="dteComplianceBidderSelect" class="form-input" style="width: 260px; font-size: 11px;" onchange="inspectDTEComplianceEvidence(this.value)"></select>
+                <span id="dteComplianceBidderLabel" class="badge-pass">Tata Advanced Training</span>
+              </div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 8px;">
@@ -1135,8 +1618,12 @@ def root_web_application():
         <div id="view-dte-gateways" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
-              <span><i class="fa-solid fa-network-wired"></i> 13 Statutory Verification Registries & Verification Modes</span>
-              <span class="badge-pass">13 / 13 CONNECTORS</span>
+              <span><i class="fa-solid fa-network-wired" style="color: #059669;"></i> 13 Statutory Verification Registries & Verification Modes</span>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <label style="font-size: 11px; font-weight: 700; color: #475569;">Select Bidder:</label>
+                <select id="dteGatewaysBidderSelect" class="form-input" style="width: 260px; font-size: 11px;" onchange="inspectDTEGateways(this.value)"></select>
+                <span class="badge-pass">13 / 13 CONNECTORS</span>
+              </div>
             </div>
             <table class="clean-table">
               <thead>
@@ -1476,19 +1963,24 @@ def root_web_application():
       navContainer.innerHTML = "";
 
       if (user.role === 'BID_UPLOADER') {
-        // BIDDER PORTAL ROUTING
+        // DEDICATED BIDDER / VENDOR WORKSPACE ROUTING
         document.getElementById('sidebarTenderWorkspaceSelectorBox').style.display = 'none';
         navContainer.innerHTML = `
-          <button onclick="focusBidderSection('bidderCatalogSection')" class="sidebar-btn active" id="snav-bidder-catalog"><span class="sidebar-num">01</span> <i class="fa-solid fa-folder-open"></i> Browse Open Tenders</button>
-          <button onclick="focusBidderSection('bidderSubmissionFormSection')" class="sidebar-btn" id="snav-bidder-submit"><span class="sidebar-num">02</span> <i class="fa-solid fa-cloud-arrow-up"></i> Submit Bid Proposal</button>
-          <button onclick="focusBidderSection('bidderSubmissionsSection')" class="sidebar-btn" id="snav-bidder-history"><span class="sidebar-num">03</span> <i class="fa-solid fa-clock-rotate-left"></i> My Submissions</button>
-          <button onclick="switchRoleView('vercenter')" class="sidebar-btn" id="snav-vercenter"><span class="sidebar-num">04</span> <i class="fa-solid fa-network-wired"></i> 13 Gateway Nodes</button>
+          <button onclick="switchBidderView('bidder-dashboard')" class="sidebar-btn active" id="snav-bidder-dashboard"><span class="sidebar-num">01</span> <i class="fa-solid fa-gauge-high"></i> Dashboard</button>
+          <button onclick="switchBidderView('bidder-tenders')" class="sidebar-btn" id="snav-bidder-tenders"><span class="sidebar-num">02</span> <i class="fa-solid fa-folder-open"></i> Available Tenders</button>
+          <button onclick="switchBidderView('bidder-tender-detail')" class="sidebar-btn" id="snav-bidder-tender-detail"><span class="sidebar-num">03</span> <i class="fa-solid fa-file-contract"></i> Tender Details</button>
+          <button onclick="switchBidderView('bidder-checklist')" class="sidebar-btn" id="snav-bidder-checklist"><span class="sidebar-num">04</span> <i class="fa-solid fa-list-check"></i> Requirement Checklist</button>
+          <button onclick="switchBidderView('bidder-start')" class="sidebar-btn" id="snav-bidder-start"><span class="sidebar-num">05</span> <i class="fa-solid fa-file-circle-plus"></i> + Start New Bid</button>
+          <button onclick="switchBidderView('bidder-upload')" class="sidebar-btn" id="snav-bidder-upload"><span class="sidebar-num">06</span> <i class="fa-solid fa-cloud-arrow-up"></i> Document Upload</button>
+          <button onclick="switchBidderView('bidder-check')" class="sidebar-btn" id="snav-bidder-check"><span class="sidebar-num">07</span> <i class="fa-solid fa-clipboard-check"></i> Completeness Check</button>
+          <button onclick="switchBidderView('bidder-mybids')" class="sidebar-btn" id="snav-bidder-mybids"><span class="sidebar-num">08</span> <i class="fa-solid fa-layer-group"></i> My Bids</button>
+          <button onclick="switchBidderView('bidder-clarifications')" class="sidebar-btn" id="snav-bidder-clarifications"><span class="sidebar-num">09</span> <i class="fa-solid fa-comments"></i> Clarifications</button>
+          <button onclick="switchBidderView('bidder-history')" class="sidebar-btn" id="snav-bidder-history"><span class="sidebar-num">10</span> <i class="fa-solid fa-clock-rotate-left"></i> Submission History</button>
+          <button onclick="switchBidderView('bidder-profile')" class="sidebar-btn" id="snav-bidder-profile"><span class="sidebar-num">11</span> <i class="fa-solid fa-id-card"></i> Company Profile</button>
         `;
-        document.getElementById('bidderPortalOrgName').innerText = user.organization;
-        document.getElementById('bidderPortalNameInput').value = user.organization;
         hideAllWorkspaceViews();
-        document.getElementById('view-bidder-portal').style.display = 'flex';
-        await loadBidderPortalData();
+        document.getElementById('view-bidder-dashboard').style.display = 'flex';
+        await loadBidderDashboard();
 
       } else if (user.role === 'DTE_OFFICER') {
         // DTE MAHARASHTRA DEDICATED WORKSPACE ROUTING
@@ -1533,9 +2025,13 @@ def root_web_application():
       const allViews = [
         'view-dashboard', 'view-tenders', 'view-bidders', 'view-docintel', 'view-vercenter',
         'view-consistency', 'view-matrix', 'view-decision', 'view-reports', 'view-audittrail',
-        'view-bidder-portal', 'view-dte-dashboard', 'view-dte-tenders', 'view-dte-tender-detail',
+        'view-dte-dashboard', 'view-dte-tenders', 'view-dte-tender-detail',
         'view-dte-bids', 'view-dte-compliance', 'view-dte-gateways', 'view-dte-shortlisted',
-        'view-dte-audit', 'view-dte-reports'
+        'view-dte-audit', 'view-dte-reports',
+        'view-bidder-dashboard', 'view-bidder-tenders', 'view-bidder-tender-detail',
+        'view-bidder-checklist', 'view-bidder-start', 'view-bidder-upload',
+        'view-bidder-check', 'view-bidder-mybids', 'view-bidder-clarifications',
+        'view-bidder-history', 'view-bidder-profile'
       ];
       allViews.forEach(v => {
         const el = document.getElementById(v);
@@ -1556,6 +2052,8 @@ def root_web_application():
       if (viewKey === 'dte-tenders') loadDTETendersMonitoring();
       if (viewKey === 'dte-tender-detail') loadDTETenderDetail('DTE/2026/RFP/COE/4901');
       if (viewKey === 'dte-bids') loadDTEBidsMonitoring('DTE/2026/RFP/COE/4901');
+      if (viewKey === 'dte-compliance') loadDTEComplianceDefault();
+      if (viewKey === 'dte-gateways') loadDTEGatewaysDefault();
       if (viewKey === 'dte-shortlisted') loadDTEShortlistedBids('DTE/2026/RFP/COE/4901');
       if (viewKey === 'dte-audit') loadDTEAuditTrail();
       if (viewKey === 'dte-reports') {
@@ -1563,6 +2061,28 @@ def root_web_application():
         document.getElementById('dteReportPreviewFrame').src = reportUrl;
         document.getElementById('btnDTEOpenReportTab').href = reportUrl;
       }
+    }
+
+    function switchBidderView(viewKey) {
+      hideAllWorkspaceViews();
+      const el = document.getElementById('view-' + viewKey);
+      if (el) el.style.display = 'flex';
+
+      document.querySelectorAll('#dynamicSidebarMenu .sidebar-btn').forEach(b => b.classList.remove('active'));
+      const actBtn = document.getElementById('snav-' + viewKey);
+      if (actBtn) actBtn.classList.add('active');
+
+      if (viewKey === 'bidder-dashboard') loadBidderDashboard();
+      if (viewKey === 'bidder-tenders') loadBidderAvailableTenders();
+      if (viewKey === 'bidder-tender-detail') loadBidderTenderDetails(activeBidderSelectedTenderId);
+      if (viewKey === 'bidder-checklist') loadBidderChecklist(activeBidderSelectedTenderId);
+      if (viewKey === 'bidder-start') loadBidderWizard();
+      if (viewKey === 'bidder-upload') loadBidderUploadDocs();
+      if (viewKey === 'bidder-check') runBidderCompletenessCheck();
+      if (viewKey === 'bidder-mybids') loadBidderMyBids();
+      if (viewKey === 'bidder-clarifications') loadBidderClarifications();
+      if (viewKey === 'bidder-history') loadBidderHistory();
+      if (viewKey === 'bidder-profile') loadBidderProfile();
     }
 
     // --------------------------------------------------
@@ -2109,54 +2629,472 @@ def root_web_application():
       } catch(e) {}
     }
 
-    function renderBidderTendersCatalogCards(tList) {
-      const grid = document.getElementById('bidderTendersCatalogGrid');
-      if (!grid) return;
-      grid.innerHTML = tList.map(t => `
-        <div class="tender-card-item" id="tender-card-${t.id}">
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-family:'JetBrains Mono'; font-weight:800; font-size:11px; background:#F1F5F9; padding:2px 8px; border-radius:4px;">${t.tender_number}</span>
-              <span class="badge-open-bid">OPEN FOR BIDDING</span>
+    // --------------------------------------------------
+    // DTE VERIFICATION GATEWAYS & COMPLIANCE DEFAULT LOADERS
+    // --------------------------------------------------
+    async function loadDTEGatewaysDefault() {
+      try {
+        const resp = await fetch('/api/v1/dte/active-tender/bids');
+        if (resp.ok) {
+          const data = await resp.json();
+          const bids = data.bids || [];
+          const sel = document.getElementById('dteGatewaysBidderSelect');
+          if (sel && bids.length > 0) {
+            sel.innerHTML = bids.map(b => `<option value="${b.bid_id}">${b.legal_name} (Score: ${b.compliance_score}/100)</option>`).join('');
+          }
+          if (bids.length > 0) {
+            await inspectDTEGateways(bids[0].bid_id);
+          }
+        }
+      } catch(e) {}
+    }
+
+    async function loadDTEComplianceDefault() {
+      try {
+        const resp = await fetch('/api/v1/dte/active-tender/bids');
+        if (resp.ok) {
+          const data = await resp.json();
+          const bids = data.bids || [];
+          const sel = document.getElementById('dteComplianceBidderSelect');
+          if (sel && bids.length > 0) {
+            sel.innerHTML = bids.map(b => `<option value="${b.bid_id}">${b.legal_name} (Score: ${b.compliance_score}/100)</option>`).join('');
+          }
+          if (bids.length > 0) {
+            await inspectDTEComplianceEvidence(bids[0].bid_id);
+          }
+        }
+      } catch(e) {}
+    }
+
+    // --------------------------------------------------
+    // DEDICATED BIDDER WORKSPACE CONTROLLERS
+    // --------------------------------------------------
+    let activeBidderSelectedTenderId = 'DTE/2026/RFP/COE/4901';
+    let activeBidderCurrentBidId = 'bid_tata_01';
+    let bidderAllTendersList = [];
+
+    async function loadBidderDashboard() {
+      try {
+        const resp = await fetch('/api/v1/bidder/dashboard');
+        if (resp.ok) {
+          const data = await resp.json();
+          document.getElementById('bidderDashWelcomeName').innerText = data.user.full_name;
+          document.getElementById('bidderDashCompanyName').innerText = data.user.company;
+          document.getElementById('bidderStatActiveTenders').innerText = data.kpi_cards.active_tenders;
+          document.getElementById('bidderStatMyBids').innerText = data.kpi_cards.my_bids;
+          document.getElementById('bidderStatDraftBids').innerText = data.kpi_cards.draft_submissions;
+          document.getElementById('bidderStatSubmittedBids').innerText = data.kpi_cards.submitted_bids;
+          document.getElementById('bidderStatPendingClarifications').innerText = data.kpi_cards.pending_clarifications;
+
+          const tbody = document.getElementById('bidderRecentActivityTableBody');
+          tbody.innerHTML = data.recent_activity.map(act => `
+            <tr>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${act.tender_id}</td>
+              <td style="font-weight:700;">${act.tender_title}</td>
+              <td style="font-size:11.5px; color:#475569;">${act.submitted_at}</td>
+              <td><span class="badge-${act.status==='SUBMITTED'||act.status==='PROCESSING'?'pass':'review'}">${act.status}</span></td>
+              <td><span class="badge-pass" style="font-size:10.5px;">${act.screening_status}</span></td>
+              <td>
+                <button onclick="viewBidderTenderDetails('${act.tender_id}')" class="btn-action" style="font-size:10.5px; padding:3px 8px;">View Details</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function loadBidderAvailableTenders() {
+      try {
+        const resp = await fetch('/api/v1/bidder/tenders');
+        if (resp.ok) {
+          bidderAllTendersList = await resp.json();
+          renderBidderAvailableTendersTable(bidderAllTendersList);
+        }
+      } catch(e) {}
+    }
+
+    function renderBidderAvailableTendersTable(tList) {
+      const tbody = document.getElementById('bidderAvailableTendersTableBody');
+      if (!tbody) return;
+      if (tList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:18px; color:#64748B;">No open tenders found.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = tList.map(t => `
+        <tr>
+          <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${t.tender_number}</td>
+          <td style="font-weight:700;">${t.title}</td>
+          <td style="font-size:11.5px; color:#475569;">${t.procuring_entity}</td>
+          <td style="font-size:11px; font-weight:700; color:#DC2626;">${t.closing_date}</td>
+          <td><span class="badge-pass">${t.requirements_count} Clauses</span></td>
+          <td><span class="badge-${t.my_submission_status==='SUBMITTED'?'pass':'review'}">${t.my_submission_status}</span></td>
+          <td>
+            <div style="display: flex; gap: 4px;">
+              <button onclick="viewBidderTenderDetails('${t.id}')" class="btn-action" style="font-size:10px; padding:3px 7px;">🔍 View Tender</button>
+              <button onclick="viewBidderTenderChecklist('${t.id}')" class="btn-warning" style="font-size:10px; padding:3px 7px;">📋 Checklist</button>
+              <button onclick="startBidderWizard('${t.id}')" class="btn-success" style="font-size:10px; padding:3px 7px;"><i class="fa-solid fa-plus"></i> Start Bid</button>
             </div>
-            <div style="font-size:13.5px; font-weight:800; color:var(--primary); margin-top:8px;">${t.title}</div>
-            <div style="font-size:11px; color:#64748B; margin-top:4px;"><i class="fa-solid fa-tag"></i> ${t.category || 'Procurement'}</div>
-          </div>
-          <div style="border-top:1px solid #F1F5F9; padding-top:10px; display:flex; justify-content:flex-end;">
-            <button onclick="selectTenderForBidSubmission('${t.id}')" class="btn-success" style="font-size:11px; padding:5px 12px;"><i class="fa-solid fa-paper-plane"></i> Apply / Submit Bid</button>
-          </div>
-        </div>
+          </td>
+        </tr>
       `).join('');
     }
 
-    function selectTenderForBidSubmission(tenderId) {
-      const sel = document.getElementById('bidderOpenTendersDropdown');
-      sel.value = tenderId;
-      const formSec = document.getElementById('bidderSubmissionFormSection');
-      if (formSec) formSec.scrollIntoView({ behavior: 'smooth' });
+    function filterBidderTendersCatalog() {
+      const q = document.getElementById('bidderTendersSearchInput').value.toLowerCase().trim();
+      const filtered = bidderAllTendersList.filter(t => 
+        t.tender_number.toLowerCase().includes(q) || 
+        t.title.toLowerCase().includes(q) || 
+        t.procuring_entity.toLowerCase().includes(q)
+      );
+      renderBidderAvailableTendersTable(filtered);
     }
 
-    async function submitBidderPortalProposal() {
-      const tenderId = document.getElementById('bidderOpenTendersDropdown').value;
-      const bName = document.getElementById('bidderPortalNameInput').value.trim() || 'Tata Advanced Training & Systems Ltd';
-      if (!tenderId) return alert("Select tender.");
-
+    async function viewBidderTenderDetails(tenderId) {
+      activeBidderSelectedTenderId = tenderId;
+      switchBidderView('bidder-tender-detail');
       try {
-        const respBid = await fetch('/api/v1/bids', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ tender_id: tenderId, bidder: { legal_name: bName, gstin: '27AAACT1098F1Z5', pan_number: 'AAACT1098F' } })
-        });
-        const bidData = await respBid.json();
-        await fetch(`/api/v1/bids/${bidData.id}/evaluate`, { method: 'POST' });
-        showToast("Bid Submitted", "Proposal submitted & 13 gateways checked!", "success");
-        await loadBidderPortalData();
-        focusBidderSection('bidderSubmissionsSection');
-      } catch(e) {
-        showToast("Error", "Submission failed.", "error");
+        const resp = await fetch(`/api/v1/bidder/tenders/${encodeURIComponent(tenderId)}`);
+        if (resp.ok) {
+          const t = await resp.json();
+          document.getElementById('bidderDetailTenderNumber').innerText = t.tender_number;
+          document.getElementById('bidderDetailTenderTitle').innerText = t.title;
+          document.getElementById('bidderDetailTenderOrg').innerText = t.procuring_entity;
+          document.getElementById('bidderDetailTenderDesc').innerText = t.description;
+
+          if (t.important_dates) {
+            document.getElementById('bidderDatePublished').innerText = t.important_dates.published_date;
+            document.getElementById('bidderDatePrebid').innerText = t.important_dates.pre_bid_meeting;
+            document.getElementById('bidderDateClosing').innerText = t.important_dates.closing_date;
+            document.getElementById('bidderDateOpening').innerText = t.important_dates.technical_opening;
+          }
+
+          const tbody = document.getElementById('bidderDetailRequirementsTableBody');
+          tbody.innerHTML = t.statutory_requirements.map(r => `
+            <tr>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary); font-size:11.5px;">${r.module}</td>
+              <td style="font-weight:600; color:#1E293B;">${r.title}</td>
+              <td>${r.mandatory ? '<span class="badge-pass">MANDATORY</span>' : '<span class="badge-review">OPTIONAL</span>'}</td>
+              <td><strong>${r.weight}%</strong></td>
+              <td style="font-family:'JetBrains Mono'; font-size:11px; color:#475569;">${r.rule_type}</td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function viewBidderTenderChecklist(tenderId) {
+      activeBidderSelectedTenderId = tenderId;
+      switchBidderView('bidder-checklist');
+      await loadBidderChecklist(tenderId);
+    }
+
+    async function loadBidderChecklist(tenderId) {
+      try {
+        const tId = tenderId || activeBidderSelectedTenderId;
+        const resp = await fetch(`/api/v1/bidder/tenders/${encodeURIComponent(tId)}/checklist`);
+        if (resp.ok) {
+          const data = await resp.json();
+          document.getElementById('bidderChecklistTenderTitle').innerText = `${data.tender_number} — ${data.tender_title}`;
+          document.getElementById('bidderChecklistStatusBadge').innerText = `${data.uploaded_count} Uploaded / ${data.missing_count} Missing`;
+
+          const tbody = document.getElementById('bidderChecklistTableBody');
+          tbody.innerHTML = data.checklist.map(item => `
+            <tr>
+              <td style="font-weight:800; color:var(--primary); font-family:'JetBrains Mono';">${item.module}</td>
+              <td style="font-weight:600;">${item.title}</td>
+              <td>${item.mandatory ? '<span class="badge-pass">REQUIRED</span>' : '<span class="badge-review">OPTIONAL</span>'}</td>
+              <td><span class="badge-${item.uploaded ? 'pass' : (item.mandatory ? 'fail' : 'review')}">${item.uploaded ? 'UPLOADED' : 'MISSING'}</span></td>
+              <td style="font-size:11px; font-family:'JetBrains Mono'; color:#334155;">${item.document_name || '—'}</td>
+              <td style="font-size:11.5px; color:#475569;">${item.technical_validation_note}</td>
+              <td>
+                <button onclick="switchBidderView('bidder-upload')" class="btn-action" style="font-size:10px; padding:3px 7px;">${item.uploaded ? 'Replace' : 'Upload'}</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    function startBidderWizard(tenderId) {
+      if (tenderId) activeBidderSelectedTenderId = tenderId;
+      switchBidderView('bidder-start');
+      loadBidderWizard();
+    }
+
+    function loadBidderWizard() {
+      const sel = document.getElementById('bidderWizardTenderSelect');
+      if (sel) sel.value = activeBidderSelectedTenderId;
+    }
+
+    function onBidderWizardTenderChange(val) {
+      activeBidderSelectedTenderId = val;
+    }
+
+    async function loadBidderUploadDocs() {
+      try {
+        const resp = await fetch('/api/v1/bidder/bids');
+        if (resp.ok) {
+          const bids = await resp.json();
+          if (bids.length > 0) {
+            activeBidderCurrentBidId = bids[0].bid_id;
+            const singleResp = await fetch(`/api/v1/bidder/bids/${activeBidderCurrentBidId}`);
+            if (singleResp.ok) {
+              const single = await singleResp.json();
+              const tbody = document.getElementById('bidderUploadedDocsTableBody');
+              tbody.innerHTML = single.documents.map(doc => `
+                <tr>
+                  <td style="font-weight:700; color:var(--primary);"><i class="fa-regular fa-file-pdf" style="color:#DC2626;"></i> ${doc.name}</td>
+                  <td style="font-size:11px; color:#475569;">${doc.type}</td>
+                  <td style="font-size:11px;">${doc.uploaded_at}</td>
+                  <td><span class="badge-pass">${doc.processing_status}</span></td>
+                  <td><span class="badge-pass">${doc.validation_status}</span></td>
+                  <td>
+                    <button onclick="deleteBidderDoc('${doc.id}')" class="btn-action" style="font-size:10px; padding:2px 7px; color:#BE123C;"><i class="fa-solid fa-trash"></i></button>
+                  </td>
+                </tr>
+              `).join('');
+            }
+          }
+        }
+      } catch(e) {}
+    }
+
+    function handleBidderFileChosen(input) {
+      if (input.files && input.files[0]) {
+        uploadSimulatedBidderDoc(input.files[0].name);
       }
     }
 
+    async function uploadSimulatedBidderDoc(fileName) {
+      const docType = document.getElementById('bidderUploadDocType').value;
+      const finalName = fileName || `Tata_${docType}_Document_${Date.now()}.pdf`;
+      try {
+        const resp = await fetch(`/api/v1/bidder/bids/${activeBidderCurrentBidId}/documents/upload`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ document_type: docType, document_name: finalName })
+        });
+        if (resp.ok) {
+          showToast("Document Uploaded", `${finalName} uploaded and pre-validated.`, "success");
+          await loadBidderUploadDocs();
+        }
+      } catch(e) {
+        showToast("Upload Error", "Could not upload document.", "error");
+      }
+    }
+
+    async function deleteBidderDoc(docId) {
+      try {
+        const resp = await fetch(`/api/v1/bidder/bids/${activeBidderCurrentBidId}/documents/${docId}`, { method: 'DELETE' });
+        if (resp.ok) {
+          showToast("Document Removed", "File removed from draft submission.", "success");
+          await loadBidderUploadDocs();
+        }
+      } catch(e) {}
+    }
+
+    async function runBidderCompletenessCheck() {
+      try {
+        const resp = await fetch(`/api/v1/bidder/bids/${activeBidderCurrentBidId}/completeness-check`);
+        if (resp.ok) {
+          const data = await resp.json();
+          document.getElementById('bidderCheckReadyText').innerHTML = `READY TO SUBMIT: <span style="color:${data.ready_to_submit ? '#059669' : '#DC2626'}">${data.ready_to_submit ? 'YES' : 'NO'}</span>`;
+          document.getElementById('bidderCheckReqCount').innerText = data.required_documents_count;
+          document.getElementById('bidderCheckUploadCount').innerText = data.uploaded_count;
+          document.getElementById('bidderCheckMissingCount').innerText = data.missing_count;
+          document.getElementById('bidderCompletenessScoreBadge').innerText = `${data.completeness_percentage}% COMPLETE`;
+
+          const alertBox = document.getElementById('bidderMissingDocsAlert');
+          if (data.missing_mandatory && data.missing_mandatory.length > 0) {
+            alertBox.style.display = 'block';
+            document.getElementById('bidderMissingDocsList').innerText = data.missing_mandatory.join(', ');
+          } else {
+            alertBox.style.display = 'none';
+          }
+        }
+      } catch(e) {}
+    }
+
+    async function submitBidderOfficialProposal() {
+      const chk = document.getElementById('bidderDeclarationCheckbox');
+      if (chk && !chk.checked) {
+        alert("Please confirm the statutory undertaking declaration checkbox before final submission.");
+        return;
+      }
+      const btn = document.getElementById('btnBidderFinalSubmit');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting & Generating SHA-256 Receipt...`;
+
+      try {
+        const resp = await fetch(`/api/v1/bidder/bids/${activeBidderCurrentBidId}/submit`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ declaration_confirmed: true })
+        });
+        if (resp.ok) {
+          const res = await resp.json();
+          showToast("Bid Submitted Successfully!", `Generated Bid Reference: ${res.bid_reference}`, "success");
+          alert(`Official Submission Confirmation\n\nBid Reference ID: ${res.bid_reference}\nTimestamp: ${res.submission_timestamp}\nSHA-256 Receipt: ${res.receipt_hash}\n\nYour proposal has been successfully lodged for procurement evaluation.`);
+          switchBidderView('bidder-mybids');
+        } else {
+          showToast("Submission Failed", "Completeness check failed.", "error");
+        }
+      } catch(e) {
+        showToast("Error", "Submission connection failure.", "error");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> SUBMIT BID PROPOSAL`;
+      }
+    }
+
+    async function loadBidderMyBids() {
+      try {
+        const resp = await fetch('/api/v1/bidder/bids');
+        if (resp.ok) {
+          const bids = await resp.json();
+          const tbody = document.getElementById('bidderMyBidsTableBody');
+          tbody.innerHTML = bids.map(b => `
+            <tr>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${b.bid_id}</td>
+              <td style="font-weight:700;">${b.tender_number}<br><span style="font-size:10.5px; color:#64748B;">${b.tender_title}</span></td>
+              <td style="font-size:11.5px;">${b.submitted_at}</td>
+              <td><span class="badge-${b.status==='SUBMITTED'||b.status==='PROCESSING'?'pass':'review'}">${b.status}</span></td>
+              <td><span class="badge-pass">${b.document_completion}</span></td>
+              <td style="font-size:11px; color:#64748B;">${b.last_updated}</td>
+              <td>
+                <a href="/api/v1/reports/bids/${b.bid_id}/html" target="_blank" class="btn-action" style="font-size:10px; padding:3px 8px;">🖨️ View Receipt</a>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function loadBidderClarifications() {
+      try {
+        const resp = await fetch('/api/v1/bidder/clarifications');
+        if (resp.ok) {
+          const clist = await resp.json();
+          const tbody = document.getElementById('bidderClarificationsTableBody');
+          if (clist.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:18px; color:#64748B;">No pending clarification queries.</td></tr>`;
+            return;
+          }
+          tbody.innerHTML = clist.map(c => `
+            <tr>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary); font-size:11.5px;">${c.query_id}</td>
+              <td style="font-weight:700; font-size:11.5px;">${c.tender_number}</td>
+              <td style="font-size:11.5px; color:#475569;">${c.requested_by}</td>
+              <td style="font-size:12px; color:#1E293B;">${c.question_text}</td>
+              <td style="font-size:11px; font-weight:700; color:#DC2626;">${c.due_date}</td>
+              <td><span class="badge-${c.status==='PENDING'?'review':'pass'}">${c.status}</span></td>
+              <td>
+                <button onclick="openBidderClarificationModal('${c.query_id}', '${c.question_text.replace(/'/g, "\\'")}')" class="btn-success" style="font-size:10.5px; padding:3px 8px;">Respond →</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    function openBidderClarificationModal(queryId, text) {
+      document.getElementById('bidderClarifyQueryId').value = queryId;
+      document.getElementById('bidderClarifyQueryText').innerText = text;
+      document.getElementById('bidderClarifyResponseText').value = "";
+      document.getElementById('bidderClarifyDocName').value = "";
+      document.getElementById('bidderClarificationModal').style.display = 'flex';
+    }
+
+    function closeBidderClarificationModal() {
+      document.getElementById('bidderClarificationModal').style.display = 'none';
+    }
+
+    async function submitBidderClarificationResponse() {
+      const qId = document.getElementById('bidderClarifyQueryId').value;
+      const respText = document.getElementById('bidderClarifyResponseText').value.trim();
+      const docName = document.getElementById('bidderClarifyDocName').value.trim();
+
+      if (!respText) {
+        alert("Please enter your clarification response text.");
+        return;
+      }
+
+      try {
+        const resp = await fetch(`/api/v1/bidder/clarifications/${qId}/respond`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ response_text: respText, response_doc_name: docName })
+        });
+        if (resp.ok) {
+          showToast("Clarification Submitted", "Response submitted to procurement committee.", "success");
+          closeBidderClarificationModal();
+          await loadBidderClarifications();
+        }
+      } catch(e) {
+        showToast("Error", "Could not submit response.", "error");
+      }
+    }
+
+    async function loadBidderHistory() {
+      try {
+        const resp = await fetch('/api/v1/bidder/bids');
+        if (resp.ok) {
+          const bids = await resp.json();
+          const tbody = document.getElementById('bidderHistoryTableBody');
+          tbody.innerHTML = bids.map(b => `
+            <tr>
+              <td style="font-family:'JetBrains Mono'; font-size:11px;">${b.submitted_at}</td>
+              <td style="font-weight:700;">${b.tender_number}</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${b.bid_id}</td>
+              <td><span class="badge-pass">${b.status}</span></td>
+              <td>
+                <a href="/api/v1/reports/bids/${b.bid_id}/html" target="_blank" class="btn-action" style="font-size:10px; padding:3px 8px;">View Official Receipt</a>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function loadBidderProfile() {
+      try {
+        const resp = await fetch('/api/v1/bidder/profile');
+        if (resp.ok) {
+          const p = await resp.json();
+          document.getElementById('bidderProfileName').value = p.representative_name;
+          document.getElementById('bidderProfileCompany').value = p.company_name;
+          document.getElementById('bidderProfileGSTIN').value = p.gstin;
+          document.getElementById('bidderProfilePAN').value = p.pan_number;
+          document.getElementById('bidderProfileUdyam').value = p.udyam_reg;
+          document.getElementById('bidderProfileEmail').value = p.email;
+          document.getElementById('bidderProfilePhone').value = p.phone;
+          document.getElementById('bidderProfileAddress').value = p.address;
+        }
+      } catch(e) {}
+    }
+
+    async function saveBidderProfile() {
+      const email = document.getElementById('bidderProfileEmail').value.trim();
+      const phone = document.getElementById('bidderProfilePhone').value.trim();
+      const address = document.getElementById('bidderProfileAddress').value.trim();
+
+      try {
+        const resp = await fetch('/api/v1/bidder/profile', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, phone: phone, address: address })
+        });
+        if (resp.ok) {
+          showToast("Profile Updated", "Entity contact details saved successfully.", "success");
+        }
+      } catch(e) {
+        showToast("Error", "Could not save profile.", "error");
+      }
+    }
+
+    // --------------------------------------------------
+    // AI CHATBOT CONTROLLER (ROLE-AWARE)
+    // --------------------------------------------------
     function toggleChatbot() {
       const m = document.getElementById('chatModalWindow');
       m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
@@ -2178,16 +3116,27 @@ def root_web_application():
       area.scrollTop = area.scrollHeight;
 
       try {
-        const resp = await fetch('/api/v1/bids/ai-chat', {
+        let endpoint = '/api/v1/bids/ai-chat';
+        let bodyPayload = {
+          message: text,
+          user_name: activeUser ? activeUser.username : 'visitor',
+          user_role: activeUser ? activeUser.role : 'PROCUREMENT_OFFICER',
+          tender_id: activeTender ? activeTender.id : null,
+          bidder_id: activeBidder ? activeBidder.bid_id : null
+        };
+
+        if (activeUser && activeUser.role === 'BID_UPLOADER') {
+          endpoint = '/api/v1/bidder/chat';
+          bodyPayload = {
+            message: text,
+            tender_id: activeBidderSelectedTenderId
+          };
+        }
+
+        const resp = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: text,
-            user_name: activeUser ? activeUser.username : 'visitor',
-            user_role: activeUser ? activeUser.role : 'DTE_OFFICER',
-            tender_id: activeTender ? activeTender.id : null,
-            bidder_id: activeBidder ? activeBidder.bid_id : null
-          })
+          body: JSON.stringify(bodyPayload)
         });
         if (resp.ok) {
           const res = await resp.json();
