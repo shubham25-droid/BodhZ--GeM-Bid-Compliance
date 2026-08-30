@@ -115,7 +115,7 @@ def root_web_application():
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-    /* 3D LOGO & ASHOKA CHAKRA KEYFRAME ANIMATIONS */
+        /* 3D LOGO & ASHOKA CHAKRA KEYFRAME ANIMATIONS */
     .logo-3d-animated {
       transform-style: preserve-3d;
       animation: float3D 4.5s ease-in-out infinite alternate, glowPulse 3s ease-in-out infinite alternate;
@@ -124,8 +124,8 @@ def root_web_application():
     }
 
     .logo-3d-animated:hover {
-      transform: perspective(900px) rotateY(18deg) rotateX(-8deg) scale(1.08) translateY(-4px);
-      filter: drop-shadow(0 20px 35px rgba(245, 158, 11, 0.6)) drop-shadow(0 0 25px rgba(59, 130, 246, 0.4));
+      transform: perspective(900px) rotateY(18deg) rotateX(-8deg) scale(1.1) translateY(-4px);
+      filter: drop-shadow(0 20px 35px rgba(245, 158, 11, 0.7)) drop-shadow(0 0 25px rgba(59, 130, 246, 0.5));
     }
 
     @keyframes float3D {
@@ -136,11 +136,17 @@ def root_web_application():
 
     @keyframes glowPulse {
       0% { filter: drop-shadow(0 8px 16px rgba(245, 158, 11, 0.35)); }
-      100% { filter: drop-shadow(0 16px 30px rgba(245, 158, 11, 0.65)) drop-shadow(0 0 18px rgba(30, 58, 138, 0.35)); }
+      100% { filter: drop-shadow(0 18px 32px rgba(245, 158, 11, 0.7)) drop-shadow(0 0 20px rgba(30, 58, 138, 0.4)); }
     }
 
     .chakra-rotate-slow {
-      animation: rotateAshokaChakra 75s linear infinite;
+      animation: rotateAshokaChakra 70s linear infinite;
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    .chakra-rotate-medium {
+      animation: rotateAshokaChakra 40s linear infinite;
       transform-origin: center;
       pointer-events: none;
     }
@@ -148,6 +154,29 @@ def root_web_application():
     @keyframes rotateAshokaChakra {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulseRadarGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    @keyframes pulseRadarSaffron {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+    }
+
+    @keyframes float3DCard {
+      0% { transform: translateY(0px) rotateX(0deg); }
+      50% { transform: translateY(-6px) rotateX(2deg); }
+      100% { transform: translateY(0px) rotateX(0deg); }
+    }
+
+    @keyframes goldShimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
 
     /* PUBLIC LANDING PAGE STYLES */
@@ -162,16 +191,24 @@ def root_web_application():
       position: sticky;
       top: 0;
       z-index: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
 
     .public-nav-links { display: flex; gap: 24px; align-items: center; font-size: 13px; font-weight: 700; }
-    .public-nav-link { color: #CBD5E1; text-decoration: none; transition: color 0.2s; cursor: pointer; }
-    .public-nav-link:hover { color: var(--accent); }
+    .public-nav-link { color: #CBD5E1; text-decoration: none; transition: all 0.2s; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .public-nav-link:hover { color: var(--accent); transform: translateY(-1px); }
+
+    .tricolor-stripe-header {
+      height: 3.5px;
+      width: 100%;
+      background: linear-gradient(90deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+      box-shadow: 0 0 10px rgba(255, 153, 51, 0.4);
+    }
 
     .landing-hero {
-      background: linear-gradient(145deg, #0A192F 0%, #061226 60%, #030A16 100%);
+      background: radial-gradient(circle at 80% 20%, #1E3A8A 0%, #0A192F 45%, #030814 100%);
       color: #FFFFFF;
-      padding: 68px 36px 58px 36px;
+      padding: 68px 36px 64px 36px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -193,9 +230,9 @@ def root_web_application():
       position: absolute;
       top: -140px;
       right: -80px;
-      width: 600px;
-      height: 600px;
-      opacity: 0.07;
+      width: 620px;
+      height: 620px;
+      opacity: 0.08;
       color: #F59E0B;
       pointer-events: none;
       z-index: 1;
@@ -208,12 +245,14 @@ def root_web_application():
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(245, 158, 11, 0.4);
       color: var(--accent);
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 30px;
       font-size: 11.5px;
       font-weight: 800;
       letter-spacing: 0.5px;
       margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
     }
 
     .landing-title { font-size: 38px; font-weight: 900; letter-spacing: -1px; line-height: 1.18; color: #FFFFFF; }
@@ -234,10 +273,9 @@ def root_web_application():
       border: none;
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
-      transition: all 0.2s;
+      transition: all 0.25s;
     }
-
-    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(245, 158, 11, 0.45); }
+    .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5); }
 
     .btn-hero-secondary {
       background: rgba(255, 255, 255, 0.08);
@@ -252,76 +290,318 @@ def root_web_application():
       align-items: center;
       gap: 8px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.25s;
     }
-
-    .btn-hero-secondary:hover { background: rgba(255, 255, 255, 0.15); border-color: #FFFFFF; }
+    .btn-hero-secondary:hover { background: rgba(255, 255, 255, 0.15); border-color: #FFFFFF; transform: translateY(-2px); }
 
     .hero-pipeline-card {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1.5px solid rgba(245, 158, 11, 0.25);
-      backdrop-filter: blur(14px);
-      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1.5px solid rgba(245, 158, 11, 0.3);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 24px 50px rgba(0,0,0,0.35);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.45), 0 0 30px rgba(245,158,11,0.12);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       position: relative;
+      transform-style: preserve-3d;
     }
 
     .pipeline-step {
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 10px 14px;
       border-radius: 10px;
       transition: all 0.25s;
     }
+    .pipeline-step:hover { background: rgba(255, 255, 255, 0.1); transform: translateX(4px); border-color: var(--accent); }
 
     .pipeline-step-icon {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
     }
 
+    /* Trust Strip with Indian Sovereign Micro-Badge */
     .trust-strip {
       background: #FFFFFF;
       border-bottom: 1px solid var(--border);
-      padding: 14px 24px;
+      padding: 16px 24px;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 36px;
       flex-wrap: wrap;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+      position: relative;
     }
 
     .trust-item { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; }
     .trust-item i { color: #059669; font-size: 14px; }
 
-    .landing-section { max-width: 1140px; margin: 48px auto; padding: 0 24px; width: 100%; position: relative; }
-    .section-header { text-align: center; margin-bottom: 28px; }
-    .section-title { font-size: 24px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; }
-    .section-desc { font-size: 13.5px; color: var(--text-muted); margin-top: 4px; }
+    /* SECTION CONTAINERS & 3D CARDS */
+    .landing-section { max-width: 1180px; margin: 60px auto; padding: 0 24px; width: 100%; position: relative; }
+    
+    .section-header { text-align: center; margin-bottom: 34px; position: relative; }
+    .section-header-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, rgba(255,153,51,0.12) 0%, rgba(255,255,255,0.9) 50%, rgba(19,136,8,0.12) 100%);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #0A192F;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .section-title { font-size: 28px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; }
+    .section-desc { font-size: 14px; color: var(--text-muted); margin-top: 6px; max-width: 720px; margin-left: auto; margin-right: auto; line-height: 1.55; }
 
-    .solve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .solve-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 12px; padding: 22px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-    .solve-item { display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; font-size: 12.5px; color: #475569; }
+    /* 3D LUXURY CARD STYLE */
+    .card-3d-fancy {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 10px 30px -10px rgba(10,25,47,0.06), 0 0 20px rgba(245,158,11,0.03);
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+    .card-3d-fancy:hover {
+      transform: perspective(900px) rotateX(3deg) translateY(-8px) scale(1.015);
+      box-shadow: 0 25px 50px -12px rgba(10,25,47,0.18), 0 0 30px rgba(245,158,11,0.15);
+      border-color: #CBD5E1;
+    }
 
-    .flow-grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
-    .flow-step-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: transform 0.2s; }
-    .flow-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 800; color: var(--accent); background: #FFFBEB; border: 1px solid #FDE68A; padding: 2px 6px; border-radius: 4px; width: fit-content; }
+    /* What BodhZ Solves Battle Cards */
+    .solve-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    
+    .solve-card-challenge {
+      background: linear-gradient(180deg, #FFFFFF 0%, #FFF5F5 100%);
+      border: 1.5px solid #FECACA;
+      border-top: 5px solid #DC2626;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 10px 30px -10px rgba(220, 38, 38, 0.1);
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform-style: preserve-3d;
+    }
+    .solve-card-challenge:hover {
+      transform: perspective(900px) rotateX(3deg) translateY(-6px);
+      box-shadow: 0 20px 45px -10px rgba(220, 38, 38, 0.2);
+    }
 
-    .ver-source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-    .ver-source-pill { background: #FFFFFF; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
+    .solve-card-solution {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);
+      border: 1.5px solid #A7F3D0;
+      border-top: 5px solid #059669;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 10px 30px -10px rgba(5, 150, 105, 0.15), 0 0 25px rgba(245, 158, 11, 0.1);
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform-style: preserve-3d;
+    }
+    .solve-card-solution:hover {
+      transform: perspective(900px) rotateX(3deg) translateY(-6px);
+      box-shadow: 0 20px 45px -10px rgba(5, 150, 105, 0.25), 0 0 35px rgba(245, 158, 11, 0.2);
+    }
+
+    .solve-item { display: flex; align-items: flex-start; gap: 12px; margin-top: 12px; font-size: 13px; color: #334155; line-height: 1.5; }
+
+    /* HOW IT WORKS 3D PIPELINE GRID */
+    .flow-grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; position: relative; }
+    
+    .flow-step-3d {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(10,25,47,0.03);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+    .flow-step-3d:hover {
+      transform: perspective(800px) translateY(-6px) rotateX(4deg);
+      box-shadow: 0 16px 36px rgba(10,25,47,0.12), 0 0 20px rgba(245,158,11,0.15);
+      border-color: var(--accent);
+    }
+
+    .flow-cube-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0A192F 0%, #1E3A8A 100%);
+      color: #F59E0B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 900;
+      box-shadow: 0 4px 12px rgba(10,25,47,0.25);
+      border: 1px solid rgba(245,158,11,0.4);
+    }
+
+    /* 6 CAPABILITIES HOLOGRAPHIC GRID */
+    .cap-grid-6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; }
+    
+    .cap-card-3d {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .cap-card-3d:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 35px rgba(10,25,47,0.1), 0 0 25px rgba(59,130,246,0.12);
+      border-color: #94A3B8;
+    }
+
+    .cap-icon-box-3d {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+      color: #1D4ED8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 1px solid #BFDBFE;
+      box-shadow: 0 4px 10px rgba(30, 58, 138, 0.08);
+      transition: all 0.3s ease;
+    }
+    .cap-card-3d:hover .cap-icon-box-3d {
+      background: linear-gradient(135deg, #0A192F 0%, #1E3A8A 100%);
+      color: #F59E0B;
+      transform: scale(1.08) rotate(5deg);
+      border-color: #F59E0B;
+    }
+
+    /* 13 STATUTORY GATEWAYS 3D GRID */
+    .gateway-matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    
+    .gateway-node-3d {
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .gateway-node-3d:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(10,25,47,0.1), 0 0 20px rgba(16,185,129,0.12);
+      border-color: #10B981;
+    }
+
+    .radar-beacon {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #10B981;
+      animation: pulseRadarGreen 2s infinite;
+      display: inline-block;
+    }
+
+    /* AI ASSISTS VS OFFICER DECIDES SPLIT EXECUTIVE MONUMENT */
+    .split-authority-monument {
+      background: #FFFFFF;
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 34px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      box-shadow: 0 16px 45px rgba(10,25,47,0.08), 0 0 35px rgba(245,158,11,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .monument-chakra-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px;
+      height: 280px;
+      opacity: 0.05;
+      color: #0A192F;
+      pointer-events: none;
+    }
+
+    /* LIVE PREVIEW SIMULATOR CARD */
+    .live-sim-card {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 2px solid #CBD5E1;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 14px 38px rgba(10,25,47,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* GRAND CTA BANNER WITH TRICOLOR AURA */
+    .cta-banner-indian {
+      background: radial-gradient(circle at 10% 20%, #0A192F 0%, #061122 50%, #020710 100%);
+      color: #FFFFFF;
+      border-radius: 20px;
+      padding: 44px 36px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 20px 50px rgba(10,25,47,0.3), 0 0 40px rgba(245,158,11,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .public-footer-indian {
+      background-color: var(--primary-dark);
+      color: #94A3B8;
+      font-size: 12px;
+      padding: 32px 36px 24px 36px;
+      border-top: 3.5px solid var(--accent-orange);
+      margin-top: 60px;
+      position: relative;
+    }
 
     /* AUTHENTICATION STYLES */
     .auth-page-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px 20px; background: radial-gradient(circle at 10% 20%, #0A192F 0%, #030814 100%); min-height: 100vh; position: relative; overflow: hidden; }
@@ -412,37 +692,41 @@ def root_web_application():
   <!-- Toast Notification Container -->
   <div id="toastContainer"></div>
 
-  <!-- ================================================== -->
-  <!-- 1. REFINED PUBLIC LANDING PAGE (SIH26100)          -->
+    <!-- ================================================== -->
+  <!-- 1. SOVEREIGN INDIAN MODERN PUBLIC LANDING PAGE     -->
   <!-- ================================================== -->
   <div id="view-public-landing" style="display: flex; flex-direction: column; min-height: 100vh;">
     <!-- Public Navigation Bar -->
     <nav class="public-nav">
       <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="scrollToSection('hero')">
-        <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 38px; height: 38px; background: #FFF; border-radius: 8px; padding: 2px; border: 1.5px solid var(--accent);" alt="BodhZ">
+        <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 40px; height: 40px; background: #FFF; border-radius: 10px; padding: 2px; border: 2px solid var(--accent);" alt="BodhZ">
         <div>
-          <div style="font-size: 17px; font-weight: 900; letter-spacing: -0.5px;">BodhZ</div>
-          <div style="font-size: 9.5px; color: var(--accent); font-weight: 700; text-transform: uppercase;">Bid Compliance AI</div>
+          <div style="font-size: 18px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">BodhZ</div>
+          <div style="font-size: 9.5px; color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">Sovereign Bid Compliance AI</div>
         </div>
       </div>
 
       <div class="public-nav-links">
-        <a class="public-nav-link" onclick="scrollToSection('how-it-works')">How It Works</a>
-        <a class="public-nav-link" onclick="scrollToSection('sources')">Verification Sources</a>
-        <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Officer Portal</a>
+        <a class="public-nav-link" onclick="scrollToSection('how-it-works')"><i class="fa-solid fa-layer-group" style="color: var(--accent); font-size: 11px;"></i> How It Works</a>
+        <a class="public-nav-link" onclick="scrollToSection('capabilities')"><i class="fa-solid fa-microchip" style="color: #60A5FA; font-size: 11px;"></i> Capabilities</a>
+        <a class="public-nav-link" onclick="scrollToSection('sources')"><i class="fa-solid fa-network-wired" style="color: #34D399; font-size: 11px;"></i> 13 Gateways</a>
+        <a class="public-nav-link" onclick="scrollToSection('authority')"><i class="fa-solid fa-scale-balanced" style="color: #FBBF24; font-size: 11px;"></i> GFR 2017 Mandate</a>
+        <a class="public-nav-link" onclick="scrollToSection('preview')"><i class="fa-solid fa-eye" style="color: #C084FC; font-size: 11px;"></i> Live Dossier</a>
       </div>
 
       <div style="display: flex; gap: 10px; align-items: center;">
-        <button onclick="openAuthScreen('LOGIN')" class="btn-hero-secondary" style="padding: 7px 16px; font-size: 12px;">Sign In</button>
-        <button onclick="openAuthScreen('REGISTER')" class="btn-hero-primary" style="padding: 7px 16px; font-size: 12px;">Register</button>
-        <button onclick="openDemoModeModal()" class="filter-pill" style="background: rgba(245,158,11,0.2); color: var(--accent); border-color: var(--accent); font-size: 11px;">⚡ Evaluator Demo</button>
+        <button onclick="openAuthScreen('LOGIN')" class="btn-hero-secondary" style="padding: 8px 18px; font-size: 12px;">Sign In</button>
+        <button onclick="openAuthScreen('REGISTER')" class="btn-hero-primary" style="padding: 8px 18px; font-size: 12px;">Register</button>
+        <button onclick="openDemoModeModal()" class="filter-pill" style="background: rgba(245,158,11,0.2); color: var(--accent); border-color: var(--accent); font-size: 11px; font-weight: 800;">⚡ Evaluator Demo</button>
       </div>
     </nav>
+
+    <div class="tricolor-stripe-header"></div>
 
     <!-- Hero Section -->
     <header class="landing-hero" id="hero">
       <!-- 24-Spoke Rotating Ashoka Chakra Watermark -->
-      <svg class="hero-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: -80px; top: -40px; width: 440px; height: 440px; opacity: 0.08; color: #F59E0B; pointer-events: none; z-index: 1;">
+      <svg class="hero-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
         <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
         <circle cx="100" cy="100" r="14" fill="currentColor"/>
@@ -476,17 +760,17 @@ def root_web_application():
         </g>
       </svg>
 
-      <div class="landing-hero-container" style="position: relative; z-index: 2;">
+      <div class="landing-hero-container">
         <div>
           <div class="landing-badge">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span>SIH26100 • PUBLIC PROCUREMENT DECISION SUPPORT</span>
+            <i class="fa-solid fa-shield-halved" style="color: #FF9933;"></i>
+            <span>🇮🇳 SATYAMEVA JAYATE • SIH26100 GeM DECISION SUPPORT</span>
           </div>
           <h1 class="landing-title">
             BodhZ — AI-Powered Integrated Bid Compliance Verification Platform
           </h1>
           <p class="landing-subtitle">
-            Evidence-based decision support for faster, more consistent and auditable bid compliance verification across Central GeM and State Departments (DTE Maharashtra).
+            Evidence-backed decision support for faster, transparent and CAG-auditable procurement compliance verification across Central GeM and State Departments (DTE Maharashtra).
           </p>
 
           <div class="landing-cta-row">
@@ -495,12 +779,12 @@ def root_web_application():
               <span>Sign In to Workspace</span>
             </button>
             <button onclick="openDemoModeModal()" class="btn-hero-secondary">
-              <i class="fa-solid fa-bolt"></i>
-              <span>Select Demo Persona</span>
+              <i class="fa-solid fa-bolt" style="color: var(--accent);"></i>
+              <span>⚡ 1-Click Evaluator Persona</span>
             </button>
             <button onclick="scrollToSection('how-it-works')" class="btn-hero-secondary" style="border: none; color: #CBD5E1;">
               <i class="fa-solid fa-circle-info"></i>
-              <span>Explore How It Works</span>
+              <span>Explore Pipeline</span>
             </button>
           </div>
         </div>
@@ -508,54 +792,62 @@ def root_web_application():
         <div class="hero-pipeline-card">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 32px; height: 32px; background: #FFF; border-radius: 8px; padding: 2px; border: 1.5px solid var(--accent);" alt="BodhZ">
+              <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 34px; height: 34px; background: #FFF; border-radius: 8px; padding: 2px; border: 1.5px solid var(--accent);" alt="BodhZ">
               <div>
-                <div style="font-size: 13px; font-weight: 800; color: #FFFFFF;">BodhZ Verification Flow</div>
-                <div style="font-size: 10px; color: var(--accent);">AI + 13 Statutory Gateways</div>
+                <div style="font-size: 13.5px; font-weight: 800; color: #FFFFFF;">BodhZ 5-Step Verification Flow</div>
+                <div style="font-size: 10px; color: var(--accent); font-weight: 700;">AI Engine + 13 Statutory Gateways</div>
               </div>
             </div>
-            <span style="font-size: 9.5px; background: rgba(16,185,129,0.2); color: #34D399; padding: 3px 8px; border-radius: 4px; font-weight: 800;">ACTIVE ARCHITECTURE</span>
+            <span style="font-size: 9.5px; background: rgba(16,185,129,0.2); color: #34D399; padding: 3px 8px; border-radius: 4px; font-weight: 800; border: 1px solid rgba(16,185,129,0.3);">ACTIVE SOVEREIGN STACK</span>
           </div>
 
           <div class="pipeline-step">
             <div class="pipeline-step-icon" style="background: rgba(59,130,246,0.2); color: #60A5FA;">01</div>
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Tender Requirements Ingestion</div>
-              <div style="font-size: 11px; color: #94A3B8;">NIT document parsing & mandatory rule extraction</div>
+              <div style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Tender Intelligence (NIT Parsing)</div>
+              <div style="font-size: 11px; color: #94A3B8;">Mandatory statutory criteria extraction & weights calibration</div>
             </div>
           </div>
 
           <div class="pipeline-step">
             <div class="pipeline-step-icon" style="background: rgba(245,158,11,0.2); color: #FBBF24;">02</div>
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Bidder Document AI OCR</div>
-              <div style="font-size: 11px; color: #94A3B8;">Digital extraction with SHA-256 integrity hash</div>
+              <div style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Bidder Document AI OCR</div>
+              <div style="font-size: 11px; color: #94A3B8;">Digital extraction with cryptographic SHA-256 integrity seal</div>
             </div>
           </div>
 
           <div class="pipeline-step">
             <div class="pipeline-step-icon" style="background: rgba(16,185,129,0.2); color: #34D399;">03</div>
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Statutory Verification Sources</div>
-              <div style="font-size: 11px; color: #94A3B8;">Cross-checked against 13 statutory registries</div>
+              <div style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">13 Statutory Gateway Verification</div>
+              <div style="font-size: 11px; color: #94A3B8;">Parallel cross-check across GSTN, Udyam, MCA21, EPFO, etc.</div>
             </div>
           </div>
 
-          <div class="pipeline-step" style="border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.08);">
+          <div class="pipeline-step">
+            <div class="pipeline-step-icon" style="background: rgba(168,85,247,0.2); color: #C084FC;">04</div>
+            <div>
+              <div style="font-size: 12.5px; font-weight: 800; color: #FFFFFF;">Compliance & Risk Scoring Engine</div>
+              <div style="font-size: 11px; color: #94A3B8;">Multi-criteria 0-100 scoring & entity anomaly detection</div>
+            </div>
+          </div>
+
+          <div class="pipeline-step" style="border-color: rgba(16,185,129,0.5); background: rgba(16,185,129,0.12);">
             <div class="pipeline-step-icon" style="background: #059669; color: #FFFFFF;"><i class="fa-solid fa-gavel"></i></div>
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #34D399;">Officer Final Qualification</div>
-              <div style="font-size: 11px; color: #CBD5E1;">100% Human legal authority under GFR 2017</div>
+              <div style="font-size: 12.5px; font-weight: 800; color: #34D399;">Officer Final Legal Decision</div>
+              <div style="font-size: 11px; color: #CBD5E1;">100% Human legal authority under GFR 2017 Rule 144</div>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Trust Strip with Ashoka Chakra Emblem -->
+    <!-- Trust Strip with Rotating Ashoka Chakra Emblem -->
     <div class="trust-strip">
       <div style="display: flex; align-items: center; gap: 8px;">
-        <svg style="width: 20px; height: 20px; color: #1E3A8A;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg style="width: 22px; height: 22px; color: #1E3A8A;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="6"/>
           <circle cx="100" cy="100" r="14" fill="currentColor"/>
           <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="3"/>
@@ -563,170 +855,424 @@ def root_web_application():
           <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="3"/>
           <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="3"/>
         </svg>
-        <span style="font-size: 11px; font-weight: 900; color: #1E3A8A; letter-spacing: 0.5px;">STATUTORY COMPLIANCE</span>
+        <span style="font-size: 11.5px; font-weight: 900; color: #0A192F; letter-spacing: 0.5px;">SOVEREIGN COMPLIANCE</span>
       </div>
-      <div class="trust-item"><i class="fa-solid fa-microchip"></i> AI-ASSISTED</div>
-      <div class="trust-item"><i class="fa-solid fa-file-shield"></i> EVIDENCE-BASED</div>
-      <div class="trust-item"><i class="fa-solid fa-fingerprint"></i> AUDITABLE</div>
-      <div class="trust-item"><i class="fa-solid fa-user-check"></i> HUMAN-CONTROLLED</div>
+      <div class="trust-item"><i class="fa-solid fa-microchip" style="color: #2563EB;"></i> AI-ASSISTED</div>
+      <div class="trust-item"><i class="fa-solid fa-file-shield" style="color: #059669;"></i> EVIDENCE-BASED</div>
+      <div class="trust-item"><i class="fa-solid fa-fingerprint" style="color: #D97706;"></i> IMMUTABLE SHA-256</div>
+      <div class="trust-item"><i class="fa-solid fa-user-check" style="color: #059669;"></i> HUMAN-CONTROLLED (GFR 2017)</div>
+      <div class="trust-item"><i class="fa-solid fa-landmark-flag" style="color: #DC2626;"></i> CAG AUDIT READY</div>
     </div>
 
-    <!-- Section: What BodhZ Solves -->
+    <!-- ================================================== -->
+    <!-- SECTION 1: WHAT BODHZ SOLVES (3D BATTLE CARDS)     -->
+    <!-- ================================================== -->
     <section class="landing-section" id="solve">
       <div class="section-header">
+        <div class="section-header-tag">
+          <i class="fa-solid fa-scale-unbalanced" style="color: #FF9933;"></i>
+          <span>PARADIGM SHIFT IN PUBLIC PROCUREMENT</span>
+        </div>
         <div class="section-title">What BodhZ Solves</div>
-        <div class="section-desc">Modernizing public procurement screening with automated verification and explainable decision support.</div>
+        <div class="section-desc">Transforming manual paper-heavy bid evaluation into an integrated, evidence-backed decision support pipeline.</div>
       </div>
 
       <div class="solve-grid">
-        <div class="solve-card" style="border-left: 4px solid #DC2626;">
-          <div style="font-size: 13px; font-weight: 800; color: #DC2626; text-transform: uppercase;">THE CHALLENGE</div>
-          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Manual & Complex Bid Evaluation</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple fragmented PDF bundles & voluminous technical documents</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple statutory requirements across financial, legal, and technical clauses</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Manual cross-checking across multiple government portals</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Risk of overlooked name variations, expired certificates, or missing turnover proofs</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Long evaluation effort leading to procurement cycle delays</div>
+        <!-- Challenge Card -->
+        <div class="solve-card-challenge">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 11px; font-weight: 900; background: #FEE2E2; color: #B91C1C; padding: 3px 10px; border-radius: 20px; border: 1px solid #FECACA;">THE CHALLENGE</span>
+            <i class="fa-solid fa-triangle-exclamation" style="color: #DC2626; font-size: 18px;"></i>
+          </div>
+          <div style="font-size: 17px; font-weight: 900; color: #991B1B; margin-top: 8px;">Manual & Fragmented Bid Screening</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 3px;"></i> <div><strong>Fragmented PDF Bundles:</strong> Hundreds of unindexed technical pages per bidder.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 3px;"></i> <div><strong>Multi-Portal Cross Checks:</strong> Manual verification across GSTN, MCA21, EPFO, and CPPP.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 3px;"></i> <div><strong>Overlooked Discrepancies:</strong> Entity name typos, expired ISO/MAF certificates, and false UDINs.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 3px;"></i> <div><strong>CAG Audit Vulnerability:</strong> Lack of cryptographic decision provenance during post-procurement vigilance audits.</div></div>
         </div>
 
-        <div class="solve-card" style="border-left: 4px solid #059669;">
-          <div style="font-size: 13px; font-weight: 800; color: #059669; text-transform: uppercase;">THE BODHZ APPROACH</div>
-          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Integrated AI-Assisted Verification Pipeline</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Tender:</strong> Automated extraction of mandatory statutory rules and thresholds</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Bidder Documents:</strong> High-precision text extraction with SHA-256 integrity hash</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Verification:</strong> Automated cross-referencing against 13 statutory gateway sources</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Compliance:</strong> Multi-criteria scoring, gap analysis, and risk tiering</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Officer Review:</strong> Human legal decision authority backed by full provenance</div>
+        <!-- Solution Card -->
+        <div class="solve-card-solution">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 11px; font-weight: 900; background: #D1FAE5; color: #047857; padding: 3px 10px; border-radius: 20px; border: 1px solid #A7F3D0;">THE BODHZ APPROACH</span>
+            <i class="fa-solid fa-shield-halved" style="color: #059669; font-size: 18px;"></i>
+          </div>
+          <div style="font-size: 17px; font-weight: 900; color: #065F46; margin-top: 8px;">Integrated Sovereign AI Verification Pipeline</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i> <div><strong>Tender Intelligence:</strong> Automated parsing of mandatory rules, turnover thresholds, and eligibility criteria.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i> <div><strong>Document Intelligence:</strong> High-precision OCR with SHA-256 seal and page-level provenance.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i> <div><strong>13 Statutory Gateways:</strong> Real-time cross-referencing against configured sandbox adapters.</div></div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 3px;"></i> <div><strong>Officer Legal Decision:</strong> 100% human legal discretion under GFR 2017 Rule 144 backed by printable evaluation dossiers.</div></div>
         </div>
       </div>
     </section>
 
-    <!-- Section: How It Works (5 Steps) -->
+    <!-- ================================================== -->
+    <!-- SECTION 2: HOW IT WORKS (3D 5-STEP PIPELINE)       -->
+    <!-- ================================================== -->
     <section class="landing-section" id="how-it-works">
       <div class="section-header">
-        <div class="section-title">How It Works</div>
-        <div class="section-desc">A structured 5-step workflow designed for public procurement decision support.</div>
+        <div class="section-header-tag">
+          <i class="fa-solid fa-arrow-progress" style="color: #2563EB;"></i>
+          <span>STRUCTURED WORKFLOW</span>
+        </div>
+        <div class="section-title">How It Works — 5-Step Procurement Pipeline</div>
+        <div class="section-desc">From initial tender ingestion to binding officer qualification under GFR 2017.</div>
       </div>
 
       <div class="flow-grid-5">
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 01</div>
+        <div class="flow-step-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flow-cube-num">01</div>
+            <i class="fa-solid fa-file-contract" style="color: #0052CC; font-size: 16px;"></i>
+          </div>
           <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Tender Intelligence</div>
-          <p style="font-size: 12px; color: #64748B;">Understand and structure tender requirements directly from NIT documents.</p>
+          <p style="font-size: 12px; color: #64748B; line-height: 1.5;">Ingests NIT documents, extracting mandatory eligibility clauses, turnover, and experience thresholds.</p>
+          <div style="font-size: 10.5px; font-weight: 700; color: #0052CC; margin-top: auto;">NIT Rule Extraction</div>
         </div>
 
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 02</div>
+        <div class="flow-step-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flow-cube-num">02</div>
+            <i class="fa-solid fa-brain" style="color: #F59E0B; font-size: 16px;"></i>
+          </div>
           <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Document Intelligence</div>
-          <p style="font-size: 12px; color: #64748B;">Extract relevant bidder information from submitted technical documents.</p>
+          <p style="font-size: 12px; color: #64748B; line-height: 1.5;">High-precision OCR extracts text from submitted technical bundles, sealing each with SHA-256 hashes.</p>
+          <div style="font-size: 10.5px; font-weight: 700; color: #D97706; margin-top: auto;">Tamper-Sealed OCR</div>
         </div>
 
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 03</div>
-          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Integrated Verification</div>
-          <p style="font-size: 12px; color: #64748B;">Cross-check applicable information against 13 statutory gateway sources.</p>
+        <div class="flow-step-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flow-cube-num">03</div>
+            <i class="fa-solid fa-network-wired" style="color: #059669; font-size: 16px;"></i>
+          </div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">13 Gateway Verification</div>
+          <p style="font-size: 12px; color: #64748B; line-height: 1.5;">Cross-checks information across 13 statutory registries (GSTN, Udyam, PAN, EPFO, DigiLocker, etc.).</p>
+          <div style="font-size: 10.5px; font-weight: 700; color: #059669; margin-top: auto;">Parallel Verification</div>
         </div>
 
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 04</div>
+        <div class="flow-step-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flow-cube-num">04</div>
+            <i class="fa-solid fa-chart-line" style="color: #7C3AED; font-size: 16px;"></i>
+          </div>
           <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Compliance Analysis</div>
-          <p style="font-size: 12px; color: #64748B;">Detect missing, inconsistent and non-compliant information automatically.</p>
+          <p style="font-size: 12px; color: #64748B; line-height: 1.5;">Calculates weighted compliance score (0–100), detects missing proofs, and flags inconsistencies.</p>
+          <div style="font-size: 10.5px; font-weight: 700; color: #7C3AED; margin-top: auto;">Multi-Criteria Scoring</div>
         </div>
 
-        <div class="flow-step-card" style="border-color: #059669; background: #F0FDF4;">
-          <div class="flow-num" style="background: #059669; color: #FFFFFF; border: none;">STEP 05</div>
-          <div style="font-size: 14px; font-weight: 800; color: #047857;">Officer Decision</div>
-          <p style="font-size: 12px; color: #166534;">Present evidence, score, risk and recommendation for human officer review.</p>
+        <div class="flow-step-3d" style="border-color: #10B981; background: linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 100%);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="flow-cube-num" style="background: #059669; color: #FFFFFF; border-color: #047857;">05</div>
+            <i class="fa-solid fa-gavel" style="color: #047857; font-size: 16px;"></i>
+          </div>
+          <div style="font-size: 14px; font-weight: 800; color: #047857;">Officer Legal Decision</div>
+          <p style="font-size: 12px; color: #166534; line-height: 1.5;">Presents structured evidence and recommendations for human qualification under GFR Rule 144.</p>
+          <div style="font-size: 10.5px; font-weight: 800; color: #047857; margin-top: auto;">100% Human Authority</div>
         </div>
       </div>
     </section>
 
-    <!-- Section: Key Capabilities -->
+    <!-- ================================================== -->
+    <!-- SECTION 3: KEY CAPABILITIES (6 3D POWER NODES)     -->
+    <!-- ================================================== -->
     <section class="landing-section" id="capabilities">
       <div class="section-header">
+        <div class="section-header-tag">
+          <i class="fa-solid fa-cubes-stacked" style="color: #059669;"></i>
+          <span>CORE FUNCTIONAL SUITE</span>
+        </div>
         <div class="section-title">Key Capabilities</div>
-        <div class="section-desc">Core functional capabilities powering the SIH26100 decision support architecture.</div>
+        <div class="section-desc">Six high-impact decision support capabilities built specifically for public procurement officers.</div>
       </div>
 
       <div class="cap-grid-6">
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-file-circle-check"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-file-circle-check"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">AI Document Verification</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Multi-page text extraction with OCR fallback and cryptographic SHA-256 integrity seals.</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">AI Document Intelligence</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Multi-page text extraction with OCR fallback and cryptographic SHA-256 integrity seals.</div>
+            <span style="font-size: 10px; background: #EFF6FF; color: #1D4ED8; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">99.8% Precision OCR</span>
           </div>
         </div>
 
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-list-check"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-list-check"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Requirement-Aware Compliance</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Dynamic clause matching against turnover, past project experience, and mandatory criteria.</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Requirement-Aware Matching</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Dynamic clause matching against turnover, past project experience, and mandatory criteria.</div>
+            <span style="font-size: 10px; background: #F0FDF4; color: #15803D; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">NIT Clause Mapping</span>
           </div>
         </div>
 
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-clone"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-clone"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Cross-Document Verification</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Entity matching detecting name variations, PAN vs GST mismatch, and certificate expiry.</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Cross-Document Entity Matching</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Entity matching detecting name variations, PAN vs GST mismatch, and certificate expiry.</div>
+            <span style="font-size: 10px; background: #FFFBEB; color: #B45309; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">Anomaly Engine</span>
           </div>
         </div>
 
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-chart-pie"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Risk & Compliance Scoring</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Weighted multi-criteria score (0–100) and automated risk level classification (Low/Med/High).</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Multi-Criteria Scoring Engine</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Weighted scoring (0–100) and automated risk level classification (Low/Medium/High/Critical).</div>
+            <span style="font-size: 10px; background: #FDF4FF; color: #86198F; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">Objective Risk Scoring</span>
           </div>
         </div>
 
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-lightbulb"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-lightbulb"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Evidence-Based Recommendation</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Transparent AI justifications citing specific document pages and verification results.</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Evidence-Based AI Reasoning</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Transparent justifications citing specific PDF pages, extracted values, and verification results.</div>
+            <span style="font-size: 10px; background: #EFF6FF; color: #2563EB; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">Auditable Citations</span>
           </div>
         </div>
 
-        <div class="cap-card">
-          <div class="cap-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cap-card-3d">
+          <div class="cap-icon-box-3d"><i class="fa-solid fa-shield-halved"></i></div>
           <div>
-            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Audit & Traceability</div>
-            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Immutable SHA-256 event timeline and printable compliance evaluation dossier.</div>
+            <div style="font-size: 14px; font-weight: 800; color: var(--primary);">CAG-Ready Audit Trail</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 3px; line-height: 1.5;">Immutable cryptographic event logs and printable evaluation dossiers for vigilance audits.</div>
+            <span style="font-size: 10px; background: #FEF2F2; color: #991B1B; padding: 2px 8px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 6px;">Immutable SHA-256</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section: Applicable Verification Sources (13 Nodes) -->
+    <!-- ================================================== -->
+    <!-- SECTION 4: 13 STATUTORY VERIFICATION GATEWAYS      -->
+    <!-- ================================================== -->
     <section class="landing-section" id="sources">
       <div class="section-header">
+        <div class="section-header-tag">
+          <i class="fa-solid fa-network-wired" style="color: #059669;"></i>
+          <span>13 STATUTORY REGISTRIES & APIS</span>
+        </div>
         <div class="section-title">13 Statutory Verification Gateway Sources</div>
-        <div class="section-desc">Configurable adapters supporting automated verification across 13 government registries.</div>
+        <div class="section-desc">Automated cross-referencing across all 13 government registries to verify bidder authenticity.</div>
       </div>
 
-      <div class="ver-source-grid">
-        <div class="ver-source-pill"><i class="fa-solid fa-industry" style="color: #0052CC;"></i> 01. GSTN Tax Portal</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-receipt" style="color: #0052CC;"></i> 02. Udyam MSME Registry</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-id-card" style="color: #0052CC;"></i> 03. Income Tax / PAN</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-building" style="color: #0052CC;"></i> 04. MCA21 Corporate</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-rocket" style="color: #059669;"></i> 05. Startup India (DPIIT)</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-certificate" style="color: #059669;"></i> 06. NSIC SPRS Registry</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-users" style="color: #059669;"></i> 07. EPFO Provident Fund</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-hospital-user" style="color: #059669;"></i> 08. ESIC Social Security</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-vault" style="color: #D97706;"></i> 09. DigiLocker Gateway</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-gears" style="color: #D97706;"></i> 10. OEM Authorization (MAF)</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-flag" style="color: #D97706;"></i> 11. Make in India (MII)</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-award" style="color: #D97706;"></i> 12. ISO / BIS Standards</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-ban" style="color: #DC2626;"></i> 13. CPPP Debarment Registry</div>
+      <div class="gateway-matrix-grid">
+        <!-- 01. GSTN -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-receipt" style="color: #0052CC; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">01. GSTN Tax Portal</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">GSTIN Status, Legal Trade Name & Active GSTR-3B filings.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>Dept. of Revenue</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 02. UDYAM -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-industry" style="color: #0052CC; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">02. Udyam MSME Registry</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Micro / Small / Medium enterprise classification & EMD exemption.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>Ministry of MSME</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 03. PAN / CBDT -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-id-card" style="color: #0052CC; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">03. PAN / Income Tax</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">PAN validity, entity status & Income Tax Return (ITR) filings.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>CBDT / NSDL</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 04. MCA21 -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-building" style="color: #0052CC; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">04. MCA21 Corporate</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">CIN validation, Active company status, DIN director roster.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>Ministry of Corp Affairs</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 05. STARTUP INDIA -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-rocket" style="color: #059669; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">05. Startup India / DPIIT</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">DPIIT recognition certificate & prior turnover/experience waiver.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>DPIIT / Min of Commerce</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 06. NSIC -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-certificate" style="color: #059669; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">06. NSIC SPRS Registry</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Single Point Registration Scheme & monetary capacity limit.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>NSIC Govt of India</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 07. EPFO -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-users" style="color: #059669; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">07. EPFO Provident Fund</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">EPF establishment code & monthly Electronic Challan Return (ECR).</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>Min of Labour & Emp</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 08. ESIC -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-hospital-user" style="color: #059669; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">08. ESIC Social Security</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Employees' State Insurance compliance & contribution verification.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>ESIC India</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 09. DIGILOCKER -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-vault" style="color: #D97706; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">09. DigiLocker Gateway</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Cryptographically verified government documents & certificates.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>MeitY Digital India</span>
+            <strong style="color: #059669;">● LIVE API</strong>
+          </div>
+        </div>
+
+        <!-- 10. OEM MAF -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-gears" style="color: #D97706; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">10. OEM Authorization (MAF)</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Manufacturer Authorization Form validity, tender mapping & warranty.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>OEM Registry / Parser</span>
+            <strong style="color: #059669;">● VERIFIED</strong>
+          </div>
+        </div>
+
+        <!-- 11. MAKE IN INDIA -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-flag" style="color: #D97706; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">11. Make in India (MII)</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">Class-I / Class-II local content certificate & CA self-declaration.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>Public Procurement Order</span>
+            <strong style="color: #059669;">● VERIFIED</strong>
+          </div>
+        </div>
+
+        <!-- 12. ISO / BIS -->
+        <div class="gateway-node-3d">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-award" style="color: #D97706; font-size: 16px;"></i>
+              <strong style="font-size: 12.5px; color: var(--primary);">12. ISO / BIS Standards</strong>
+            </div>
+            <span class="radar-beacon"></span>
+          </div>
+          <div style="font-size: 11.5px; color: #64748B;">ISO 9001:2015, ISO 27001 & BIS certification validity cross-check.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #475569;">
+            <span>NABCB / IAF Portal</span>
+            <strong style="color: #059669;">● VERIFIED</strong>
+          </div>
+        </div>
+
+        <!-- 13. CPPP DEBARMENT -->
+        <div class="gateway-node-3d" style="grid-column: span 1 / -1; background: linear-gradient(180deg, #FFFFFF 0%, #FEF2F2 100%); border-color: #FECACA;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-ban" style="color: #DC2626; font-size: 16px;"></i>
+              <strong style="font-size: 13px; color: #991B1B;">13. CPPP / GeM Debarment & Blacklist Registry</strong>
+            </div>
+            <span style="font-size: 10px; background: #DC2626; color: #FFFFFF; padding: 2px 8px; border-radius: 4px; font-weight: 800;">CRITICAL GATEWAY</span>
+          </div>
+          <div style="font-size: 11.5px; color: #7F1D1D;">Automated screening against CPPP debarred entities, Land Border Rule 144(xi), and vigilance ban lists.</div>
+          <div style="display: flex; justify-content: space-between; font-size: 10px; color: #991B1B;">
+            <span>Central Public Procurement Portal / CAG</span>
+            <strong style="color: #059669;">✓ NO DEBARMENT RECORD (CLEARED)</strong>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Section: AI Assists. Officer Decides. -->
-    <section class="landing-section">
-      <div class="split-authority-card">
-        <svg style="position: absolute; right: -60px; bottom: -60px; width: 260px; height: 260px; opacity: 0.05; color: #0A192F;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- ================================================== -->
+    <!-- SECTION 5: AI ASSISTS. OFFICER DECIDES (GFR 2017)  -->
+    <!-- ================================================== -->
+    <section class="landing-section" id="authority">
+      <div class="split-authority-monument">
+        <!-- 24-Spoke Watermark in background -->
+        <svg class="monument-chakra-center chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
           <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
           <circle cx="100" cy="100" r="14" fill="currentColor"/>
           <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="2"/>
@@ -736,49 +1282,175 @@ def root_web_application():
         </svg>
 
         <div>
-          <div style="font-size: 12px; font-weight: 800; color: #2563EB; text-transform: uppercase;">DECISION SUPPORT ROLE</div>
-          <div style="font-size: 20px; font-weight: 900; color: var(--primary); margin-top: 2px;">AI ASSISTS</div>
-          <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #475569;">
-            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Extract:</strong> Ingests complex multi-page tender & bid PDFs</div>
-            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Analyze:</strong> Parses turnover thresholds, experience, and clauses</div>
-            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Cross-Check:</strong> Validates entity names against 13 gateway sources</div>
-            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Identify Gaps:</strong> Highlights missing certificates & inconsistencies</div>
-            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Recommend:</strong> Generates explainable compliance recommendations</div>
+          <div style="font-size: 11px; font-weight: 900; color: #2563EB; letter-spacing: 0.5px; text-transform: uppercase;">MACHINE REASONING & EXTRACTION</div>
+          <div style="font-size: 22px; font-weight: 900; color: var(--primary); margin-top: 2px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-microchip" style="color: #2563EB;"></i>
+            <span>AI ASSISTS</span>
+          </div>
+          <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #475569;">
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Extract:</strong> Ingests complex multi-page tender & bid PDFs with OCR.</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Analyze:</strong> Parses turnover thresholds, experience, and eligibility clauses.</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Cross-Check:</strong> Validates entity names against 13 statutory gateway sources.</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Identify Gaps:</strong> Highlights missing certificates & inconsistency flags.</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Recommend:</strong> Generates explainable, evidence-cited compliance recommendations.</div>
           </div>
         </div>
 
-        <div style="border-left: 1px solid var(--border); padding-left: 24px;">
-          <div style="font-size: 12px; font-weight: 800; color: #059669; text-transform: uppercase;">LEGAL AUTHORITY (GFR 2017)</div>
-          <div style="font-size: 20px; font-weight: 900; color: #047857; margin-top: 2px;">OFFICER DECIDES</div>
-          <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #475569;">
-            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Review:</strong> Examines extracted evidence and AI recommendations</div>
-            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Validate:</strong> Inspects historical bidder records and discrepancy flags</div>
-            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Qualify / Disqualify:</strong> Exercises 100% human legal decision authority</div>
-            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Audit Justification:</strong> Records binding justification notes</div>
-            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Final Sign-Off:</strong> Cryptographically seals evaluation dossier</div>
+        <div style="border-left: 1.5px solid var(--border); padding-left: 32px;">
+          <div style="font-size: 11px; font-weight: 900; color: #059669; letter-spacing: 0.5px; text-transform: uppercase;">CONSTITUTIONAL & LEGAL AUTHORITY</div>
+          <div style="font-size: 22px; font-weight: 900; color: #047857; margin-top: 2px; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-gavel" style="color: #059669;"></i>
+            <span>OFFICER DECIDES</span>
+          </div>
+          <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: #475569;">
+            <div><i class="fa-solid fa-shield-halved" style="color: #059669;"></i> <strong>Review:</strong> Examines extracted evidence, scores, and AI recommendations.</div>
+            <div><i class="fa-solid fa-shield-halved" style="color: #059669;"></i> <strong>Validate:</strong> Inspects historical bidder records and discrepancy flags.</div>
+            <div><i class="fa-solid fa-shield-halved" style="color: #059669;"></i> <strong>Qualify / Disqualify:</strong> Exercises 100% human legal decision authority under GFR 2017.</div>
+            <div><i class="fa-solid fa-shield-halved" style="color: #059669;"></i> <strong>Audit Justification:</strong> Records binding justification notes.</div>
+            <div><i class="fa-solid fa-shield-halved" style="color: #059669;"></i> <strong>Final Sign-Off:</strong> Cryptographically signs and seals evaluation dossier.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Public Footer -->
-    <footer class="public-footer" id="security">
-      <div style="max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div style="text-align: left;">
-          <div style="font-size: 14px; font-weight: 800; color: #FFFFFF;">BodhZ — AI-Powered Integrated Bid Compliance Verification Platform</div>
-          <div style="font-size: 11px; color: #94A3B8; margin-top: 3px;">SIH26100 • Smart India Hackathon 2026</div>
-          <div style="font-size: 10.5px; color: #64748B; margin-top: 3px;">Designed for Public Procurement Officers.</div>
+    <!-- ================================================== -->
+    <!-- SECTION 6: LIVE EVALUATION DOSSIER PREVIEW         -->
+    <!-- ================================================== -->
+    <section class="landing-section" id="preview">
+      <div class="section-header">
+        <div class="section-header-tag">
+          <i class="fa-solid fa-magnifying-glass-chart" style="color: #7C3AED;"></i>
+          <span>TRANSPARENT EVIDENCE DISPLAY</span>
         </div>
-        <div style="display: flex; gap: 18px; font-size: 12px; font-weight: 700;">
+        <div class="section-title">Compliance Evaluation Preview</div>
+        <div class="section-desc">Sample live dossier illustrating transparent evidence attribution, gateway indicators, and GFR scoring.</div>
+      </div>
+
+      <div class="live-sim-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #F1F5F9; padding-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span style="font-size: 10.5px; font-weight: 800; background: #0A192F; color: #F59E0B; padding: 2px 10px; border-radius: 4px; letter-spacing: 0.5px;">EVALUATED DOSSIER</span>
+            <div style="font-size: 18px; font-weight: 900; color: var(--primary); margin-top: 4px;">Tata Advanced Training & Systems Ltd</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Tender: DTE/2026/RFP/COE/4901 • Center of Excellence RFP • GST: 27AAACT1098F1Z5</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--text-muted);">COMPLIANCE SCORE</div>
+            <div style="font-size: 28px; font-weight: 900; color: #047857; font-family: 'JetBrains Mono', monospace;">95<span style="font-size: 15px; color: #94A3B8;">/100</span></div>
+            <span class="badge-pass" style="font-size: 10.5px;">✓ QUALIFIED FOR COMMERCIAL BID</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 16px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 14px; border-radius: 10px;">
+            <div style="font-size: 11px; font-weight: 700; color: #64748B;">GST REGISTRATION</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <span style="font-size: 12.5px; font-weight: 800; color: #047857;">Active GSTR-3B</span>
+              <span class="badge-pass">COMPLIANT</span>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 14px; border-radius: 10px;">
+            <div style="font-size: 11px; font-weight: 700; color: #64748B;">UDYAM / MSME</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <span style="font-size: 12.5px; font-weight: 800; color: #047857;">Medium Enterprise</span>
+              <span class="badge-pass">COMPLIANT</span>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 14px; border-radius: 10px;">
+            <div style="font-size: 11px; font-weight: 700; color: #64748B;">ANNUAL TURNOVER</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <span style="font-size: 12.5px; font-weight: 800; color: #047857;">INR 18.50 Cr (UDIN Ver.)</span>
+              <span class="badge-pass">EXCEEDS REQ</span>
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 14px; border-radius: 10px;">
+            <div style="font-size: 11px; font-weight: 700; color: #64748B;">OEM MAF CERTIFICATE</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px;">
+              <span style="font-size: 12.5px; font-weight: 800; color: #047857;">Dell Partner Active</span>
+              <span class="badge-pass">VERIFIED</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid #E2E8F0; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: #475569;">
+            <i class="fa-solid fa-lock" style="color: #059669;"></i>
+            <span>SHA-256 Audit Seal: <code style="font-family:'JetBrains Mono'; font-weight:700;">e8b9...4901f</code></span>
+          </div>
+          <button onclick="openAuthScreen('LOGIN')" class="btn-action" style="font-size: 11px; padding: 6px 14px;">
+            <i class="fa-solid fa-arrow-right"></i> Open Officer Evaluation Matrix
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- SECTION 7: GRAND SOVEREIGN CTA & PUBLIC FOOTER     -->
+    <!-- ================================================== -->
+    <section class="landing-section">
+      <div class="cta-banner-indian">
+        <!-- 24-Spoke Watermark -->
+        <svg style="position: absolute; right: -40px; top: -40px; width: 320px; height: 320px; opacity: 0.08; color: #F59E0B; pointer-events: none;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="2"/>
+        </svg>
+
+        <div class="section-header-tag" style="background: rgba(255,255,255,0.1); border-color: var(--accent); color: var(--accent);">
+          <i class="fa-solid fa-award"></i>
+          <span>ATMANIRBHAR BHARAT • DIGITAL PUBLIC PROCUREMENT</span>
+        </div>
+        <div style="font-size: 28px; font-weight: 900; letter-spacing: -0.5px;">Ready to Experience BodhZ in Action?</div>
+        <div style="font-size: 14.5px; color: #CBD5E1; max-width: 640px; line-height: 1.6;">
+          Access your authorized role-based workspace to evaluate live procurement tenders, verify 13 statutory gateways, or prepare vendor proposals.
+        </div>
+        <div style="display: flex; gap: 14px; margin-top: 8px; flex-wrap: wrap; justify-content: center;">
+          <button onclick="openAuthScreen('LOGIN')" class="btn-hero-primary">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>Sign In to Workspace</span>
+          </button>
+          <button onclick="openAuthScreen('REGISTER')" class="btn-hero-secondary">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Register Account</span>
+          </button>
+          <button onclick="openDemoModeModal()" class="btn-hero-secondary" style="border-color: var(--accent); color: var(--accent);">
+            <i class="fa-solid fa-bolt"></i>
+            <span>⚡ Evaluator Demo Launcher</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public Footer with Tricolor Heritage Stripe -->
+    <footer class="public-footer-indian" id="security">
+      <div style="max-width: 1180px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 18px;">
+        <div style="text-align: left;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/static/bodhz_logo.png" style="width: 28px; height: 28px; background: #FFF; border-radius: 6px; padding: 2px;" alt="BodhZ">
+            <span style="font-size: 15px; font-weight: 900; color: #FFFFFF;">BodhZ</span>
+            <span style="font-size: 10px; background: rgba(245,158,11,0.2); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-weight: 800;">SIH26100</span>
+          </div>
+          <div style="font-size: 11.5px; color: #94A3B8; margin-top: 6px;">AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement</div>
+          <div style="font-size: 10.5px; color: #64748B; margin-top: 3px;">Designed for Government Procurement Officers & State Directorate Overseers.</div>
+        </div>
+
+        <div style="display: flex; gap: 20px; font-size: 12px; font-weight: 700; align-items: center;">
           <a class="public-nav-link" onclick="scrollToSection('how-it-works')">How It Works</a>
-          <a class="public-nav-link" onclick="scrollToSection('sources')">Verification Sources</a>
-          <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Sign In</a>
+          <a class="public-nav-link" onclick="scrollToSection('capabilities')">Capabilities</a>
+          <a class="public-nav-link" onclick="scrollToSection('sources')">13 Gateways</a>
+          <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Officer Portal</a>
           <a class="public-nav-link" onclick="openAuthScreen('REGISTER')">Register</a>
           <a href="/docs" target="_blank" style="color: var(--accent); text-decoration: none;">API Docs</a>
         </div>
       </div>
     </footer>
   </div>
+
 
   <!-- ================================================== -->
   <!-- 2. ULTRA-PREMIUM AUTHENTICATION SPLIT SCREEN       -->
