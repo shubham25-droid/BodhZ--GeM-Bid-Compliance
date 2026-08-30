@@ -681,9 +681,65 @@ def root_web_application():
     .chat-msg-bot { align-self: flex-start; max-width: 95%; background: #FFFFFF; border: 1px solid #E2E8F0; color: #0F172A; padding: 12px 14px; border-radius: 2px 12px 12px 12px; line-height: 1.6; }
     .chat-input-row { display: flex; padding: 10px; gap: 8px; background: #FFFFFF; border-top: 1px solid #E2E8F0; }
 
-    @media (max-width: 900px) {
-      .landing-hero-container { grid-template-columns: 1fr; gap: 28px; }
-      .auth-card { grid-template-columns: 1fr; }
+    /* ================================================== */
+    /* ULTRA-COMPREHENSIVE MOBILE RESPONSIVE MEDIA QUERIES*/
+    /* ================================================== */
+    @media (max-width: 1024px) {
+      .landing-hero-container { grid-template-columns: 1fr; gap: 32px; }
+      .landing-title { font-size: 32px; }
+      .landing-section { margin: 44px auto; padding: 0 20px; }
+      .split-authority-monument { grid-template-columns: 1fr; gap: 26px; }
+      .split-authority-monument > div:last-child { border-left: none !important; border-top: 1.5px solid var(--border); padding-left: 0 !important; padding-top: 24px; }
+    }
+
+    @media (max-width: 768px) {
+      .public-nav { padding: 12px 18px; flex-direction: column; gap: 12px; }
+      .public-nav-links { flex-wrap: wrap; justify-content: center; gap: 14px; font-size: 12px; }
+      .landing-hero { padding: 42px 18px 36px 18px; }
+      .landing-title { font-size: 26px; }
+      .landing-subtitle { font-size: 14px; }
+      .hero-chakra-watermark { width: 340px; height: 340px; top: -50px; right: -50px; }
+      
+      .trust-strip { padding: 14px 16px; gap: 16px; justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .trust-item { font-size: 11px; white-space: nowrap; }
+
+      .solve-grid { grid-template-columns: 1fr; gap: 16px; }
+      .flow-grid-5 { grid-template-columns: 1fr; }
+      .cap-grid-6 { grid-template-columns: 1fr; }
+      .gateway-matrix-grid { grid-template-columns: 1fr; }
+      
+      .auth-card { grid-template-columns: 1fr; border-radius: 16px; min-height: auto; }
+      .auth-left-brand { padding: 28px 20px; }
+      .auth-right-form-pane { padding: 28px 20px; }
+
+      .cta-banner-indian { padding: 32px 18px; }
+      .public-footer-indian { padding: 24px 18px; text-align: center; }
+      .public-footer-indian > div { justify-content: center !important; text-align: center !important; flex-direction: column; gap: 14px; }
+
+      /* Workspace Mobile Layout */
+      .gov-header { padding: 10px 14px; flex-direction: column; gap: 10px; align-items: flex-start; }
+      .top-bar { padding: 6px 14px; flex-direction: column; gap: 4px; align-items: flex-start; }
+      .main-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; max-height: 240px; border-right: none; border-bottom: 1px solid #1E293B; }
+      .sidebar-menu { flex-direction: row; overflow-x: auto; padding: 6px; -webkit-overflow-scrolling: touch; }
+      .sidebar-btn { white-space: nowrap; font-size: 11px; padding: 6px 10px; }
+      .viewport { padding: 14px; }
+      
+      /* Clean Tables on Mobile - Smooth Horizontal Scroll */
+      .clean-table { display: block; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+      
+      /* Chatbot Modal on Mobile */
+      .chat-modal-clean { width: calc(100vw - 24px); right: 12px; bottom: 74px; height: 75vh; }
+      .chatbot-fab-clean { bottom: 16px; right: 16px; padding: 7px 14px; font-size: 11.5px; }
+    }
+
+    @media (max-width: 480px) {
+      .landing-title { font-size: 22px; }
+      .landing-subtitle { font-size: 13px; }
+      .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; font-size: 12.5px; padding: 10px 16px; }
+      .landing-cta-row { flex-direction: column; width: 100%; }
+      .hero-pipeline-card { padding: 16px; }
+      .card-3d-fancy, .solve-card-challenge, .solve-card-solution, .split-authority-monument, .live-sim-card { padding: 18px 14px; }
     }
   </style>
 </head>
