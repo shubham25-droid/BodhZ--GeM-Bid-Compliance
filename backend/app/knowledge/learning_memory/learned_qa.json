@@ -340,5 +340,71 @@
     "question": "Clear my memory",
     "answer": "🧹 **Memory Cleared!** All personalized facts and preferences for Shubham have been removed from my memory.",
     "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:08.798863+00:00",
+    "question": "How many tenders are currently active?",
+    "answer": "Officer Shubham, you have 3 active procurement tender(s) registered in your BodhZ workspace database:\n\n\n1. Tender Number: GEM/2026/B/IIMR/6641\n   • Title: Supply, Installation, Commissioning & On-Site Warranty of Agricultural Machinery (Seed Drill & Multi-Millet Thresher)\n   • Category: Agricultural Machinery & Processing Equipment\n   • Configured Rules: 7 Mandatory Statutory Checks (GST, PAN, Udyam MSME, OEM MAF)\n   • Submitted Bids: 1\n   • Uploaded Date: 30 Aug 2026 01:51 UTC\n   • Workflow Status: ACTIVE\n\n2. Tender Number: NFL/CO/IT/VAPT/2026/08\n   • Title: Comprehensive Cyber Security Audit & VAPT of Web Applications and Data Center Infrastructure\n   • Category: Cyber Security & IT Security Audit\n   • Configured Rules: 9 Mandatory Statutory Checks (GST, PAN, Udyam MSME, OEM MAF)\n   • Submitted Bids: 0\n   • Uploaded Date: 30 Aug 2026 01:51 UTC\n   • Workflow Status: ACTIVE\n\n3. Tender Number: DTE/2026/RFP/COE/4901\n   • Title: Establishment, Operationalization & Maintenance of Center of Excellence (COE) and Technical Training Centers\n   • Category: Technical Education & Skill Infrastructure\n   • Configured Rules: 10 Mandatory Statutory Checks (GST, PAN, Udyam MSME, OEM MAF)\n   • Submitted Bids: 3\n   • Uploaded Date: 30 Aug 2026 01:51 UTC\n   • Workflow Status: ACTIVE\n\n\nSummary & Next Actions:\nAll registered tenders are active and linked with automated 13-node gateway verification checks. You can select any tender to inspect bidder compliance sheets, view OCR extractions, or open technical bids.",
+    "source": "DB_TOOL_TENDERS"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:11.910923+00:00",
+    "question": "Which bidders are high risk?",
+    "answer": "You have 1 total bidder submission(s) across your active tenders:\n\nBidder #1:\n- Legal Name: Tata Advanced Training & Systems Ltd\n- Compliance Score: 74/100\n- Risk Tier: CRITICAL RISK\n- Status: QUALIFIED\n\nCurrently Selected Bidder: Tata Advanced Training & Systems Ltd",
+    "source": "UNIVERSAL_QA_ENGINE"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:14.604451+00:00",
+    "question": "Explain GFR 2017 Rule 144 compliance",
+    "answer": "GFR 2017 Rule 144 - Fundamental Principles of Public Procurement\n\nGFR 2017 Rule 144 lays down the Fundamental Principles of Public Procurement for all Ministries, Departments, and CPSEs:\n\n1. Efficiency, Economy, and Transparency: Procurements must be made in a transparent, competitive, and cost-effective manner.\n2. Fair & Equal Treatment: All eligible suppliers must receive equal opportunity without restrictive or customized tender specifications.\n3. Clear Technical Specifications: Descriptions of goods/services must be generic, functional, and performance-based without mentioning brand names or trademarks.\n4. Adequate Lead Time: Minimum reasonable bidding time must be allowed to ensure genuine market competition.\n5. Public Availability: Tender notices must be published on Central Public Procurement Portal (CPPP) and Government e-Marketplace (GeM).",
+    "source": "UNIVERSAL_QA_ENGINE"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:18.129341+00:00",
+    "question": "Remember that my annual turnover is INR 22 Crores",
+    "answer": "🧠 **Memory Updated!**\n\nI have remembered this fact for your profile:\n• **Annual Turnover**: `INR 22 Crores`\n\nI will remember this across our conversations. You can ask me anytime or tell me to update/forget it!",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:18.429998+00:00",
+    "question": "Yaad rakhna meri company name Bharat Defense Labs hai",
+    "answer": "🧠 **Memory Updated!**\n\nI have remembered this fact for your profile:\n• **Custom Note**: `meri company name Bharat Defense Labs`\n\nI will remember this across our conversations. You can ask me anytime or tell me to update/forget it!",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:18.709119+00:00",
+    "question": "What do you remember about me?",
+    "answer": "🧠 **Here is everything I remember about you (Shubham):**\n\n1. **Annual Turnover**: `INR 22 Crores`\n2. **Custom Note**: `meri company name Bharat Defense Labs`\n\n💡 *You can tell me to remember new details, update any item, or say 'Clear my memory' anytime.*",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:18.988040+00:00",
+    "question": "Mera turnover kitna hai?",
+    "answer": "🧠 **According to my memory:**\nYour **Annual Turnover** is `INR 22 Crores`.",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:21.874389+00:00",
+    "question": "Explain GFR 2017 Rule 144 for procurement compliance",
+    "answer": "GFR 2017 Rule 144 - Fundamental Principles of Public Procurement\n\nGFR 2017 Rule 144 lays down the Fundamental Principles of Public Procurement for all Ministries, Departments, and CPSEs:\n\n1. Efficiency, Economy, and Transparency: Procurements must be made in a transparent, competitive, and cost-effective manner.\n2. Fair & Equal Treatment: All eligible suppliers must receive equal opportunity without restrictive or customized tender specifications.\n3. Clear Technical Specifications: Descriptions of goods/services must be generic, functional, and performance-based without mentioning brand names or trademarks.\n4. Adequate Lead Time: Minimum reasonable bidding time must be allowed to ensure genuine market competition.\n5. Public Availability: Tender notices must be published on Central Public Procurement Portal (CPPP) and Government e-Marketplace (GeM).",
+    "source": "UNIVERSAL_QA_ENGINE"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:22.156104+00:00",
+    "question": "Maine pehle kya pucha tha?",
+    "answer": "🧠 **Conversation History Memory:**\n\n• **Your Previous Question Was:**\n> \"Explain GFR 2017 Rule 144 for procurement compliance\"\n\n• **Earlier Questions in This Session (4):**\n  1. \"Mera turnover kitna hai?\"\n  2. \"What do you remember about me?\"\n  3. \"Yaad rakhna meri company name Bharat Defense Labs hai\"\n  4. \"Remember that my annual turnover is INR 22 Crores\"",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:22.437240+00:00",
+    "question": "Summarize our conversation so far",
+    "answer": "📜 **Executive Conversation Summary (12 total messages):**\n\n• **Active Participant**: Shubham (Senior Procurement Officer)\n• **Topics Discussed (6 user queries):**\n  1. Remember that my annual turnover is INR 22 Crores\n  2. Yaad rakhna meri company name Bharat Defense Labs hai\n  3. What do you remember about me?\n  4. Mera turnover kitna hai?\n  5. Explain GFR 2017 Rule 144 for procurement compliance\n  6. Maine pehle kya pucha tha?\n\n• **Evaluation Focus**: Statutory compliance verification, 13-node gateway checks, document intelligence, and GFR 2017 rules.",
+    "source": "ADAPTIVE_MEMORY"
+  },
+  {
+    "timestamp": "2026-08-30T11:01:22.714166+00:00",
+    "question": "Clear my memory",
+    "answer": "🧹 **Memory Cleared!** All personalized facts and preferences for Shubham have been removed from my memory.",
+    "source": "ADAPTIVE_MEMORY"
   }
 ]
