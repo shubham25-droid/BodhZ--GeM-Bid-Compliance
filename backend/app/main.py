@@ -319,21 +319,8 @@ def root_web_application():
     .flow-step-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); transition: transform 0.2s; }
     .flow-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 800; color: var(--accent); background: #FFFBEB; border: 1px solid #FDE68A; padding: 2px 6px; border-radius: 4px; width: fit-content; }
 
-    .cap-grid-6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
-    .cap-card { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; display: flex; align-items: flex-start; gap: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .cap-icon-box { width: 36px; height: 36px; background: #F1F5F9; color: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
-
     .ver-source-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
     .ver-source-pill { background: #FFFFFF; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
-
-    .split-authority-card { background: #FFFFFF; border: 1.5px solid var(--primary); border-radius: 14px; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; box-shadow: 0 4px 14px rgba(10,25,47,0.04); position: relative; overflow: hidden; }
-    .demo-preview-widget { background: #FFFFFF; border: 1.5px solid #CBD5E1; border-radius: 12px; padding: 20px; box-shadow: 0 8px 24px rgba(10,25,47,0.06); }
-
-    .role-grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .role-card-mini { background: #FFFFFF; border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-
-    .cta-banner { background: linear-gradient(135deg, #0A192F 0%, #030F22 100%); color: #FFFFFF; border-radius: 14px; padding: 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 12px 30px rgba(10,25,47,0.15); position: relative; overflow: hidden; }
-    .public-footer { background-color: var(--primary); color: #94A3B8; font-size: 11.5px; padding: 24px 36px; border-top: 3.5px solid var(--accent-orange); margin-top: 40px; }
 
     /* AUTHENTICATION STYLES */
     .auth-page-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; padding: 32px 20px; background: radial-gradient(circle at 10% 20%, #0A192F 0%, #030814 100%); min-height: 100vh; position: relative; overflow: hidden; }
@@ -363,7 +350,7 @@ def root_web_application():
     .sidebar-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); opacity: 0.9; width: 18px; }
 
     .viewport { flex: 1; padding: 22px; background-color: var(--bg); overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
-    .card-panel { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 14px; transition: all 0.2s ease; }
+    .card-panel { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 14px; transition: all 0.2s ease; position: relative; }
     .card-title { font-size: 13px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.02em; border-bottom: 2px solid #F1F5F9; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
 
     .clean-table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -371,11 +358,11 @@ def root_web_application():
     .clean-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
     .clean-table tr:hover { background-color: #F8FAFC; }
 
-    .btn-action { background-color: var(--primary); color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; text-decoration: none; }
+    .btn-action { background-color: var(--primary); color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
     .btn-action:hover { background-color: #1E293B; transform: translateY(-1px); }
-    .btn-success { background-color: #059669; color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; text-decoration: none; }
+    .btn-success { background-color: #059669; color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
     .btn-success:hover { background-color: #047857; transform: translateY(-1px); }
-    .btn-warning { background-color: #D97706; color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s; text-decoration: none; }
+    .btn-warning { background-color: #D97706; color: #FFFFFF; font-size: 11.5px; font-weight: 800; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; text-decoration: none; }
     .btn-warning:hover { background-color: #B45309; transform: translateY(-1px); }
 
     .badge-pass { background-color: #ECFDF5; color: #047857; font-size: 10.5px; font-weight: 800; padding: 3px 8px; border-radius: 4px; border: 1px solid #A7F3D0; }
@@ -384,20 +371,18 @@ def root_web_application():
 
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-label { font-size: 11.5px; font-weight: 700; color: #334155; }
-    .form-input { width: 100%; font-size: 12.5px; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: inherit; background-color: #FFFFFF; color: var(--text); }
+    .form-input { width: 100%; font-size: 12px; padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; font-family: inherit; background-color: #FFFFFF; color: var(--text); }
     .form-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(10,25,47,0.08); }
 
     .dropzone-box { border: 2px dashed #CBD5E1; background: #F8FAFC; border-radius: 8px; padding: 18px; text-align: center; cursor: pointer; transition: all 0.2s; }
     .dropzone-box:hover { border-color: var(--primary); background: #F1F5F9; }
 
-    .hist-card { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid #F59E0B; border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
-    .preset-pill { background: #E2E8F0; color: #0A192F; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1px solid #CBD5E1; transition: all 0.2s; }
-    .preset-pill:hover { background: var(--primary); color: #FFFFFF; }
+    .filter-pill { background: #F1F5F9; color: #475569; border: 1px solid #CBD5E1; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .filter-pill.active { background: var(--primary); color: #FFFFFF; border-color: var(--primary); }
 
     .tender-catalog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 10px; }
     .tender-card-item { background: #FFFFFF; border: 1.5px solid #E2E8F0; border-top: 4px solid var(--primary); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: all 0.25s ease; }
     .tender-card-item:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(10,25,47,0.08); border-color: #94A3B8; }
-    .tender-card-item.selected { border: 2px solid var(--accent); border-top: 4px solid var(--accent); background: linear-gradient(180deg, #FFFBEB 0%, #FFFFFF 100%); box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
 
     .badge-open-bid { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; padding: 3px 8px; border-radius: 20px; font-size: 10.5px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; }
     .badge-open-bid::before { content: ""; width: 6px; height: 6px; background: #10B981; border-radius: 50%; display: inline-block; box-shadow: 0 0 6px #10B981; }
@@ -414,16 +399,10 @@ def root_web_application():
     .chat-msg-user { align-self: flex-end; max-width: 82%; background: #0A192F; color: #FFFFFF; padding: 8px 12px; border-radius: 12px 12px 2px 12px; font-size: 12px; }
     .chat-msg-bot { align-self: flex-start; max-width: 95%; background: #FFFFFF; border: 1px solid #E2E8F0; color: #0F172A; padding: 12px 14px; border-radius: 2px 12px 12px 12px; line-height: 1.6; }
     .chat-input-row { display: flex; padding: 10px; gap: 8px; background: #FFFFFF; border-top: 1px solid #E2E8F0; }
-    .chat-chip { background: #E2E8F0; color: #0A192F; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-    .chat-chip:hover { background: #CBD5E1; }
 
     @media (max-width: 900px) {
       .landing-hero-container { grid-template-columns: 1fr; gap: 28px; }
       .auth-card { grid-template-columns: 1fr; }
-      .auth-left-brand { padding: 28px; }
-      .auth-right-form-pane { padding: 28px; }
-      .split-authority-card { grid-template-columns: 1fr; }
-      .solve-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -448,54 +427,19 @@ def root_web_application():
 
       <div class="public-nav-links">
         <a class="public-nav-link" onclick="scrollToSection('how-it-works')">How It Works</a>
-        <a class="public-nav-link" onclick="scrollToSection('capabilities')">Capabilities</a>
         <a class="public-nav-link" onclick="scrollToSection('sources')">Verification Sources</a>
-        <a class="public-nav-link" onclick="scrollToSection('preview')">Demo Preview</a>
-        <a class="public-nav-link" onclick="scrollToSection('security')">Security</a>
+        <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Officer Portal</a>
       </div>
 
       <div style="display: flex; gap: 10px; align-items: center;">
         <button onclick="openAuthScreen('LOGIN')" class="btn-hero-secondary" style="padding: 7px 16px; font-size: 12px;">Sign In</button>
         <button onclick="openAuthScreen('REGISTER')" class="btn-hero-primary" style="padding: 7px 16px; font-size: 12px;">Register</button>
-        <button onclick="openDemoModeModal()" class="preset-pill" style="background: rgba(245,158,11,0.2); color: var(--accent); border-color: var(--accent); font-size: 11px;">⚡ Evaluator Demo</button>
+        <button onclick="openDemoModeModal()" class="filter-pill" style="background: rgba(245,158,11,0.2); color: var(--accent); border-color: var(--accent); font-size: 11px;">⚡ Evaluator Demo</button>
       </div>
     </nav>
 
-    <!-- Hero Section (Two Columns with 3D Logo & Ashoka Chakra Motif) -->
+    <!-- Hero Section -->
     <header class="landing-hero" id="hero">
-      <svg class="hero-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
-        <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
-        <circle cx="100" cy="100" r="14" fill="currentColor"/>
-        <circle cx="100" cy="100" r="8" fill="#0A192F"/>
-        <g stroke="currentColor" stroke-width="1.8">
-          <line x1="100" y1="100" x2="100" y2="18"/>
-          <line x1="100" y1="100" x2="121.2" y2="20.8"/>
-          <line x1="100" y1="100" x2="141" y2="29"/>
-          <line x1="100" y1="100" x2="158" y2="42"/>
-          <line x1="100" y1="100" x2="171" y2="59"/>
-          <line x1="100" y1="100" x2="179.2" y2="78.8"/>
-          <line x1="100" y1="100" x2="182" y2="100"/>
-          <line x1="100" y1="100" x2="179.2" y2="121.2"/>
-          <line x1="100" y1="100" x2="171" y2="141"/>
-          <line x1="100" y1="100" x2="158" y2="158"/>
-          <line x1="100" y1="100" x2="141" y2="171"/>
-          <line x1="100" y1="100" x2="121.2" y2="179.2"/>
-          <line x1="100" y1="100" x2="100" y2="182"/>
-          <line x1="100" y1="100" x2="78.8" y2="179.2"/>
-          <line x1="100" y1="100" x2="59" y2="171"/>
-          <line x1="100" y1="100" x2="42" y2="158"/>
-          <line x1="100" y1="100" x2="29" y2="141"/>
-          <line x1="100" y1="100" x2="20.8" y2="121.2"/>
-          <line x1="100" y1="100" x2="18" y2="100"/>
-          <line x1="100" y1="100" x2="20.8" y2="78.8"/>
-          <line x1="100" y1="100" x2="29" y2="59"/>
-          <line x1="100" y1="100" x2="42" y2="42"/>
-          <line x1="100" y1="100" x2="59" y2="29"/>
-          <line x1="100" y1="100" x2="78.8" y2="20.8"/>
-        </g>
-      </svg>
-
       <div class="landing-hero-container">
         <div>
           <div class="landing-badge">
@@ -503,10 +447,10 @@ def root_web_application():
             <span>SIH26100 • PUBLIC PROCUREMENT DECISION SUPPORT</span>
           </div>
           <h1 class="landing-title">
-            BodhZ — AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement
+            BodhZ — AI-Powered Integrated Bid Compliance Verification Platform
           </h1>
           <p class="landing-subtitle">
-            Evidence-based decision support for faster, more consistent and auditable bid compliance verification across Central GeM and State Departments.
+            Evidence-based decision support for faster, more consistent and auditable bid compliance verification across Central GeM and State Departments (DTE Maharashtra).
           </p>
 
           <div class="landing-cta-row">
@@ -514,12 +458,9 @@ def root_web_application():
               <i class="fa-solid fa-arrow-right-to-bracket"></i>
               <span>Sign In to Workspace</span>
             </button>
-            <button onclick="openAuthScreen('REGISTER')" class="btn-hero-secondary">
-              <span>Register</span>
-            </button>
-            <button onclick="scrollToSection('how-it-works')" class="btn-hero-secondary" style="border: none; color: #CBD5E1;">
-              <i class="fa-solid fa-circle-info"></i>
-              <span>Explore How It Works</span>
+            <button onclick="openDemoModeModal()" class="btn-hero-secondary">
+              <i class="fa-solid fa-bolt"></i>
+              <span>Select Demo Persona</span>
             </button>
           </div>
         </div>
@@ -556,15 +497,7 @@ def root_web_application():
             <div class="pipeline-step-icon" style="background: rgba(16,185,129,0.2); color: #34D399;">03</div>
             <div>
               <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Statutory Verification Sources</div>
-              <div style="font-size: 11px; color: #94A3B8;">Cross-checked against configured registries</div>
-            </div>
-          </div>
-
-          <div class="pipeline-step">
-            <div class="pipeline-step-icon" style="background: rgba(239,68,68,0.2); color: #F87171;">04</div>
-            <div>
-              <div style="font-size: 12px; font-weight: 800; color: #FFFFFF;">Compliance & Risk Scoring</div>
-              <div style="font-size: 11px; color: #94A3B8;">Transparent 0–100 score & gap detection</div>
+              <div style="font-size: 11px; color: #94A3B8;">Cross-checked against 13 statutory registries</div>
             </div>
           </div>
 
@@ -579,133 +512,13 @@ def root_web_application():
       </div>
     </header>
 
-    <!-- Critical Trust Message Strip -->
+    <!-- Trust Strip -->
     <div class="trust-strip">
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <svg style="width: 20px; height: 20px; color: #1E3A8A;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="6"/>
-          <circle cx="100" cy="100" r="14" fill="currentColor"/>
-          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="3"/>
-          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="3"/>
-          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="3"/>
-          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="3"/>
-        </svg>
-        <span style="font-size: 11px; font-weight: 900; color: #1E3A8A; letter-spacing: 0.5px;">STATUTORY COMPLIANCE</span>
-      </div>
       <div class="trust-item"><i class="fa-solid fa-microchip"></i> AI-ASSISTED</div>
       <div class="trust-item"><i class="fa-solid fa-file-shield"></i> EVIDENCE-BASED</div>
       <div class="trust-item"><i class="fa-solid fa-fingerprint"></i> AUDITABLE</div>
       <div class="trust-item"><i class="fa-solid fa-user-check"></i> HUMAN-CONTROLLED</div>
     </div>
-
-    <!-- Section: What BodhZ Solves -->
-    <section class="landing-section">
-      <div class="section-header">
-        <div class="section-title">What BodhZ Solves</div>
-        <div class="section-desc">Modernizing public procurement screening with automated verification and explainable decision support.</div>
-      </div>
-
-      <div class="solve-grid">
-        <div class="solve-card" style="border-left: 4px solid #DC2626;">
-          <div style="font-size: 13px; font-weight: 800; color: #DC2626; text-transform: uppercase;">THE CHALLENGE</div>
-          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Manual & Complex Bid Evaluation</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple fragmented PDF bundles & voluminous technical documents</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple statutory requirements across financial, legal, and technical clauses</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Manual cross-checking across multiple government portals</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Overlooked name variations or expired ISO/turnover proofs</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Long evaluation effort leading to procurement cycle delays</div>
-        </div>
-
-        <div class="solve-card" style="border-left: 4px solid #059669;">
-          <div style="font-size: 13px; font-weight: 800; color: #059669; text-transform: uppercase;">THE BODHZ APPROACH</div>
-          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Integrated AI-Assisted Verification Pipeline</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Tender:</strong> Automated extraction of mandatory statutory rules and thresholds</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Bidder Documents:</strong> High-precision text extraction with SHA-256 integrity hash</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Verification:</strong> Automated cross-referencing against configured sources</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Compliance:</strong> Multi-criteria scoring, gap analysis, and risk tiering</div>
-          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Officer Review:</strong> Human legal decision authority backed by full provenance</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: How It Works -->
-    <section class="landing-section" id="how-it-works">
-      <div class="section-header">
-        <div class="section-title">How It Works</div>
-        <div class="section-desc">A structured 5-step workflow designed for public procurement decision support.</div>
-      </div>
-
-      <div class="flow-grid-5">
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 01</div>
-          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Tender Intelligence</div>
-          <p style="font-size: 12px; color: #64748B;">Understand and structure tender requirements directly from NIT documents.</p>
-        </div>
-
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 02</div>
-          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Document Intelligence</div>
-          <p style="font-size: 12px; color: #64748B;">Extract relevant bidder information from submitted technical documents.</p>
-        </div>
-
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 03</div>
-          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Integrated Verification</div>
-          <p style="font-size: 12px; color: #64748B;">Cross-check applicable information against configured verification sources.</p>
-        </div>
-
-        <div class="flow-step-card">
-          <div class="flow-num">STEP 04</div>
-          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Compliance Analysis</div>
-          <p style="font-size: 12px; color: #64748B;">Detect missing, inconsistent and non-compliant information automatically.</p>
-        </div>
-
-        <div class="flow-step-card" style="border-color: #059669; background: #F0FDF4;">
-          <div class="flow-num" style="background: #059669; color: #FFFFFF; border: none;">STEP 05</div>
-          <div style="font-size: 14px; font-weight: 800; color: #047857;">Officer Decision</div>
-          <p style="font-size: 12px; color: #166534;">Present evidence, score, risk and recommendation for human officer review.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section: Applicable Verification Sources -->
-    <section class="landing-section" id="sources">
-      <div class="section-header">
-        <div class="section-title">Applicable Verification Sources</div>
-        <div class="section-desc">Configurable adapters supporting verification across relevant statutory registries.</div>
-      </div>
-
-      <div class="ver-source-grid">
-        <div class="ver-source-pill"><i class="fa-solid fa-industry" style="color: #0052CC;"></i> Udyam / MSME</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-receipt" style="color: #0052CC;"></i> GSTN Registration</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-id-card" style="color: #0052CC;"></i> PAN / Income Tax</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-building" style="color: #0052CC;"></i> MCA21 Corporate</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-rocket" style="color: #059669;"></i> Startup India / DPIIT</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-certificate" style="color: #059669;"></i> NSIC Registration</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-users" style="color: #059669;"></i> EPFO / ESIC</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-vault" style="color: #D97706;"></i> DigiLocker Gateway</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-gears" style="color: #D97706;"></i> OEM Authorization</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-flag" style="color: #D97706;"></i> Make in India (MII)</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-award" style="color: #D97706;"></i> BIS / ISO 9001</div>
-        <div class="ver-source-pill"><i class="fa-solid fa-ban" style="color: #DC2626;"></i> CPPP Debarment Check</div>
-      </div>
-    </section>
-
-    <!-- Public Footer -->
-    <footer class="public-footer" id="security">
-      <div style="max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div style="text-align: left;">
-          <div style="font-size: 14px; font-weight: 800; color: #FFFFFF;">BodhZ — AI-Powered Integrated Bid Compliance Verification Platform</div>
-          <div style="font-size: 11px; color: #94A3B8; margin-top: 3px;">SIH26100 • Smart India Hackathon 2026</div>
-          <div style="font-size: 10.5px; color: #64748B; margin-top: 3px;">SIH 2026 prototype. Not an official Government of India or GeM portal.</div>
-        </div>
-        <div style="display: flex; gap: 18px; font-size: 12px; font-weight: 700;">
-          <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Sign In</a>
-          <a class="public-nav-link" onclick="openAuthScreen('REGISTER')">Register</a>
-          <a href="/docs" target="_blank" style="color: var(--accent); text-decoration: none;">API Docs</a>
-        </div>
-      </div>
-    </footer>
   </div>
 
   <!-- ================================================== -->
@@ -714,25 +527,6 @@ def root_web_application():
   <div id="view-auth" class="auth-page-wrapper" style="display: none;">
     <div class="auth-card">
       <div class="auth-left-brand">
-        <svg class="auth-left-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
-          <circle cx="100" cy="100" r="14" fill="currentColor"/>
-          <g stroke="currentColor" stroke-width="1.8">
-            <line x1="100" y1="100" x2="100" y2="18"/>
-            <line x1="100" y1="100" x2="141" y2="29"/>
-            <line x1="100" y1="100" x2="171" y2="59"/>
-            <line x1="100" y1="100" x2="182" y2="100"/>
-            <line x1="100" y1="100" x2="171" y2="141"/>
-            <line x1="100" y1="100" x2="141" y2="171"/>
-            <line x1="100" y1="100" x2="100" y2="182"/>
-            <line x1="100" y1="100" x2="59" y2="171"/>
-            <line x1="100" y1="100" x2="29" y2="141"/>
-            <line x1="100" y1="100" x2="18" y2="100"/>
-            <line x1="100" y1="100" x2="29" y2="59"/>
-            <line x1="100" y1="100" x2="59" y2="29"/>
-          </g>
-        </svg>
-
         <div>
           <div style="display: flex; align-items: center; gap: 14px;">
             <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 50px; height: 50px; background: #FFF; border-radius: 12px; padding: 3px; border: 2px solid var(--accent);" alt="BodhZ">
@@ -747,12 +541,6 @@ def root_web_application():
         </div>
 
         <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; padding: 18px; text-align: center; backdrop-filter: blur(8px); margin: 20px 0;">
-          <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 10px;">
-            <span style="background: rgba(16,185,129,0.2); color: #34D399; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● GSTN</span>
-            <span style="background: rgba(59,130,246,0.2); color: #60A5FA; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● UDYAM</span>
-            <span style="background: rgba(245,158,11,0.2); color: #FBBF24; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● MCA21</span>
-            <span style="background: rgba(168,85,247,0.2); color: #C084FC; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 4px;">● DIGILOCKER</span>
-          </div>
           <div style="font-size: 13.5px; font-weight: 800; color: #FFFFFF;">Role-Aware Authenticated Session</div>
           <div style="font-size: 11.5px; color: #94A3B8; margin-top: 4px;">Procurement Officer • Bid Uploader • DTE Department</div>
         </div>
@@ -816,75 +604,6 @@ def root_web_application():
               <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
-
-          <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 14px;">
-            New official or bidder? <span onclick="switchAuthMode('REGISTER')" style="color: var(--primary); font-weight: 800; cursor: pointer; text-decoration: underline;">Create Account</span>
-          </div>
-        </div>
-
-        <div id="authPaneRegister" style="display: none; flex-direction: column;">
-          <div style="margin-bottom: 14px;">
-            <div style="font-size: 20px; font-weight: 900; color: var(--primary);">Create Official Account</div>
-            <div style="font-size: 12px; color: var(--text-muted);">Register for institutional or bidder procurement workspace access.</div>
-          </div>
-
-          <div id="registerAlertBox" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; font-size: 11.5px; font-weight: 600; padding: 8px 12px; border-radius: 6px; margin-bottom: 10px;">
-            <i class="fa-solid fa-circle-exclamation"></i> <span id="registerAlertText">Registration error.</span>
-          </div>
-
-          <form onsubmit="handleAuthRegister(event)">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-              <div class="form-group">
-                <label class="form-label">Full Legal Name</label>
-                <input type="text" id="regFullName" class="auth-field" placeholder="Dr. Ramesh Gupta" style="padding-left: 12px;" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Official Work Email</label>
-                <input type="email" id="regEmail" class="auth-field" placeholder="ramesh@nic.in" style="padding-left: 12px;" required>
-              </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 8px; margin-bottom: 8px;">
-              <div class="form-group">
-                <label class="form-label">Organization / Department</label>
-                <input type="text" id="regOrg" class="auth-field" placeholder="e.g. DTE Maharashtra" style="padding-left: 12px;" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Role Category</label>
-                <select id="regRole" class="auth-field" style="padding-left: 10px;">
-                  <option value="PROCUREMENT_OFFICER">Procurement Officer</option>
-                  <option value="DTE_OFFICER">DTE State Officer</option>
-                  <option value="BID_UPLOADER">Bid Uploader / Vendor</option>
-                  <option value="AUDITOR">Auditor</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" style="margin-bottom: 8px;">
-              <label class="form-label">Username</label>
-              <input type="text" id="regUsername" class="auth-field" placeholder="choose unique username" style="padding-left: 12px;" required>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
-              <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" id="regPassword" class="auth-field" placeholder="Min. 8 characters" style="padding-left: 12px;" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Confirm Password</label>
-                <input type="password" id="regConfirmPassword" class="auth-field" placeholder="Re-enter password" style="padding-left: 12px;" required>
-              </div>
-            </div>
-
-            <button type="submit" id="btnRegisterSubmit" class="btn-auth-primary" style="background: linear-gradient(135deg, #047857 0%, #065F46 100%);">
-              <span>CREATE ACCOUNT</span>
-              <i class="fa-solid fa-check"></i>
-            </button>
-          </form>
-
-          <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 10px;">
-            Already registered? <span onclick="switchAuthMode('LOGIN')" style="color: var(--primary); font-weight: 800; cursor: pointer; text-decoration: underline;">Sign In</span>
-          </div>
         </div>
       </div>
     </div>
@@ -896,38 +615,25 @@ def root_web_application():
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #F1F5F9; padding-bottom: 10px;">
         <div style="font-size: 16px; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px;">
           <i class="fa-solid fa-bolt" style="color: var(--accent);"></i>
-          <span>SIH Evaluator Role-Based Persona Selector</span>
+          <span>SIH Evaluator Persona Selector</span>
         </div>
         <button onclick="closeDemoModeModal()" style="background: none; border: none; font-size: 16px; cursor: pointer; color: #64748B;">✕</button>
       </div>
 
-      <p style="font-size: 12px; color: #475569;">
-        Select one of the 3 official SIH26100 demonstration personas:
-      </p>
-
       <div style="display: flex; flex-direction: column; gap: 10px;">
         <div onclick="launchDemoPersona('shubham')" style="background: #F8FAFC; border: 1.5px solid #CBD5E1; padding: 12px 14px; border-radius: 8px; cursor: pointer;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 13px; font-weight: 800; color: var(--primary);">1. Senior Procurement Officer (Central GeM)</div>
-            <span class="badge-pass" style="font-size: 10px;">PROCUREMENT_OFFICER</span>
-          </div>
+          <div style="font-size: 13px; font-weight: 800; color: var(--primary);">1. Senior Procurement Officer (Central GeM)</div>
           <div style="font-size: 11.5px; color: #64748B; margin-top: 3px;">Officer Shubham • Full 10-Section Decision Support Suite</div>
         </div>
 
         <div onclick="launchDemoPersona('officer_dte')" style="background: #F8FAFC; border: 1.5px solid #CBD5E1; padding: 12px 14px; border-radius: 8px; cursor: pointer;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 13px; font-weight: 800; color: #B45309;">2. State Directorate Officer (DTE Maharashtra)</div>
-            <span class="badge-review" style="font-size: 10px;">DTE_OFFICER</span>
-          </div>
+          <div style="font-size: 13px; font-weight: 800; color: #B45309;">2. State Directorate Officer (DTE Maharashtra)</div>
           <div style="font-size: 11.5px; color: #64748B; margin-top: 3px;">Dr. Rajesh Kumar • Department Oversight & COE Tenders</div>
         </div>
 
         <div onclick="launchDemoPersona('bidder_tata')" style="background: #F8FAFC; border: 1.5px solid #CBD5E1; padding: 12px 14px; border-radius: 8px; cursor: pointer;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 13px; font-weight: 800; color: #047857;">3. Bid Uploader / Vendor Representative</div>
-            <span class="badge-pass" style="font-size: 10px; background: #ECFDF5; color: #047857;">BID_UPLOADER</span>
-          </div>
-          <div style="font-size: 11.5px; color: #64748B; margin-top: 3px;">Rajiv Mehta • Tata Advanced Training • Bid Submission Portal</div>
+          <div style="font-size: 13px; font-weight: 800; color: #047857;">3. Bid Uploader / Vendor Representative</div>
+          <div style="font-size: 11.5px; color: #64748B; margin-top: 3px;">Rajiv Mehta • Tata Advanced Training • Bid Portal</div>
         </div>
       </div>
     </div>
@@ -986,7 +692,7 @@ def root_web_application():
       <div style="display: flex; gap: 16px; align-items: center;">
         <span style="color: #34D399; font-weight: 700;">● 13 Gateway Nodes Connected</span>
         <span>|</span>
-        <a href="/docs" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700;">API Documentation</a>
+        <a href="/docs" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 700;">API Docs</a>
       </div>
     </div>
 
@@ -1062,11 +768,6 @@ def root_web_application():
               </div>
             </div>
             <div style="font-size: 14px; font-weight: 800; color: var(--primary);" id="dashTenderTitle">Establishment of Center of Excellence (COE) and Technical Training Centers</div>
-            
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-              <div style="font-size: 12px; font-weight: 800; color: #475569; text-transform: uppercase;">Evaluated Bidders Under Active Tender</div>
-              <button onclick="switchView('bidders')" class="btn-success" style="font-size: 11px; padding: 5px 12px;">+ Ingest Another Bidder Submission</button>
-            </div>
 
             <table class="clean-table" style="margin-top: 6px;">
               <thead>
@@ -1081,33 +782,11 @@ def root_web_application():
           <div class="card-panel">
             <div class="card-title">
               <span><i class="fa-solid fa-file-pdf" style="color: #E65100;"></i> Ingest Tender Notice PDF & Auto-Extract Statutory Criteria</span>
-              <span style="font-size: 11px; background: #ECFDF5; color: #047857; padding: 3px 8px; border-radius: 4px; font-weight: 800;">GFR 2017 & GeM ALIGNED</span>
-            </div>
-            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
-              <span style="font-size: 11px; font-weight: 700; color: #475569;">Quick Load Real Government RFP Presets:</span>
-              <span class="preset-pill" onclick="loadRealTenderPreset('DTE')">🏛️ DTE Maharashtra (COE RFP)</span>
-              <span class="preset-pill" onclick="loadRealTenderPreset('NFL')">🏢 National Fertilizers Ltd (VAPT NIT)</span>
-              <span class="preset-pill" onclick="loadRealTenderPreset('ICAR')">🌾 ICAR-IIMR (Agro Machinery)</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
-              <div class="form-group"><label class="form-label">Tender Reference Number:</label><input type="text" id="newTenderIdInput" class="form-input" value="DTE/2026/RFP/COE/4901"></div>
-              <div class="form-group"><label class="form-label">Tender Title:</label><input type="text" id="newTenderTitleInput" class="form-input" value="Establishment of Center of Excellence (COE) and Technical Training Centers"></div>
-              <div class="form-group"><label class="form-label">Category:</label><input type="text" id="newTenderCategoryInput" class="form-input" value="Technical Education & Skill Infrastructure"></div>
             </div>
             <div class="dropzone-box" onclick="document.getElementById('tenderFileInput').click()">
               <i class="fa-solid fa-cloud-arrow-up" style="font-size: 28px; color: var(--primary); margin-bottom: 6px;"></i>
               <div style="font-size: 13px; font-weight: 800; color: var(--primary);">Click to Select Tender Document File (.pdf, .txt, .docx)</div>
-              <div id="selectedTenderFileText" style="font-size: 11px; color: var(--text-muted);">Auto-extracts mandatory eligibility rules on upload</div>
               <input type="file" id="tenderFileInput" style="display: none;" onchange="handleTenderPDFUpload(this)">
-            </div>
-            <div id="tenderExtractedRequirementsPanel" style="display: none; background: #F8FAFC; border: 1px solid #CBD5E1; padding: 16px; border-radius: 8px;">
-              <table class="clean-table" style="background: #FFFFFF;">
-                <thead><tr><th>Statutory Module</th><th>Requirement Description</th><th>Mandatory?</th><th>Weight (%)</th></tr></thead>
-                <tbody id="tenderRequirementsEditBody"></tbody>
-              </table>
-              <div style="margin-top: 14px; display: flex; justify-content: flex-end; gap: 10px;">
-                <button onclick="confirmExtractedRequirements()" class="btn-success"><i class="fa-solid fa-check-double"></i> CONFIRM REQUIREMENTS & PUBLISH TO BIDDERS →</button>
-              </div>
             </div>
           </div>
           <div class="card-panel">
@@ -1121,18 +800,10 @@ def root_web_application():
 
         <div id="view-bidders" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
-            <div class="card-title">
-              <span><i class="fa-solid fa-file-arrow-up"></i> Upload Bidder Submission Bundle & Run AI Verification</span>
-              <span class="badge-pass">13 GATEWAY SCAN</span>
-            </div>
+            <div class="card-title"><span><i class="fa-solid fa-file-arrow-up"></i> Upload Bidder Submission Bundle & Run AI Verification</span></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
               <div class="form-group"><label class="form-label">Bidder Legal Name:</label><input type="text" id="bidderNameInput" class="form-input" placeholder="e.g. Tata Advanced Training & Systems Ltd"></div>
               <div class="form-group"><label class="form-label">GSTIN / PAN / Udyam:</label><input type="text" id="bidderGstinInput" class="form-input" placeholder="e.g. 27AAACT1098F1Z5"></div>
-            </div>
-            <div class="dropzone-box" onclick="document.getElementById('bidderFileInput').click()">
-              <i class="fa-solid fa-file-zipper" style="font-size: 28px; color: var(--primary); margin-bottom: 6px;"></i>
-              <div style="font-size: 13px; font-weight: 800; color: var(--primary);">Select Bid Proposal & Document Bundle (.pdf, .zip, .docx)</div>
-              <input type="file" id="bidderFileInput" style="display: none;" onchange="handleBidderFileSelect(this)">
             </div>
             <button onclick="submitBidderAndEvaluate()" class="btn-success" style="align-self: flex-end;"><i class="fa-solid fa-bolt"></i> RUN COMPLIANCE EVALUATION →</button>
           </div>
@@ -1184,44 +855,43 @@ def root_web_application():
         </div>
 
         <div id="view-audittrail" style="display: none; flex-direction: column; gap: 18px;">
-          <div class="card-panel"><div class="card-title">Cryptographic SHA-256 Audit Trail</div><table class="clean-table"><thead><tr><th>Timestamp</th><th>Actor</th><th>Event Type</th><th>Details</th><th>SHA-256 Hash</th></tr></thead><tbody id="auditTrailTableBody"></tbody></table></div>
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-shield-halved"></i> Cryptographic SHA-256 Audit Trail</span>
+              <button onclick="exportAuditTrailJSON()" class="btn-action" style="font-size: 11px; padding: 4px 10px;"><i class="fa-solid fa-download"></i> Export JSON</button>
+            </div>
+            <div style="display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+              <input type="text" id="officerAuditSearchInput" placeholder="🔍 Search events..." class="form-input" style="width: 260px; padding: 5px 10px;" oninput="filterOfficerAuditEvents()">
+            </div>
+            <table class="clean-table"><thead><tr><th>Timestamp</th><th>Actor</th><th>Event Type</th><th>Details</th><th>SHA-256 Hash</th></tr></thead><tbody id="auditTrailTableBody"></tbody></table>
+          </div>
         </div>
 
         <!-- ============================================================== -->
-        <!-- WORKSPACE 2: ENHANCED BID UPLOADER & TENDERS CATALOG PORTAL    -->
+        <!-- WORKSPACE 2: BID UPLOADER & TENDERS CATALOG PORTAL             -->
         <!-- ============================================================== -->
         <div id="view-bidder-portal" style="display: none; flex-direction: column; gap: 20px;">
           <div class="card-panel" style="border-left: 5px solid #059669;">
             <div class="card-title"><span><i class="fa-solid fa-briefcase" style="color: #059669;"></i> Bidder & Vendor Self-Service Workspace</span><span class="badge-open-bid">VENDOR AUTHORIZED</span></div>
-            <p style="font-size: 13px; color: #475569;">Welcome, <strong id="bidderPortalOrgName" style="color: var(--primary);">Tata Advanced Training & Systems Ltd</strong>. Browse active procurement tenders and submit bid document bundles.</p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 8px;">
-              <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 14px; border-radius: 10px;"><div style="font-size: 11px; font-weight: 700; color: #64748B;">PUBLISHED TENDERS</div><div style="font-size: 24px; font-weight: 900; color: var(--primary);" id="bidderTotalPublishedTenders">3</div></div>
-              <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 14px; border-radius: 10px;"><div style="font-size: 11px; font-weight: 700; color: #047857;">MY SUBMISSIONS</div><div style="font-size: 24px; font-weight: 900; color: #047857;" id="bidderTotalSubmissions">1</div></div>
-              <div style="background: #FFFFFF; border: 1px solid #E2E8F0; padding: 14px; border-radius: 10px;"><div style="font-size: 11px; font-weight: 700; color: #2563EB;">13 GATEWAYS</div><div style="font-size: 24px; font-weight: 900; color: #2563EB;">13 / 13 Active</div></div>
-            </div>
+            <p style="font-size: 13px; color: #475569;">Welcome, <strong id="bidderPortalOrgName" style="color: var(--primary);">Tata Advanced Training & Systems Ltd</strong>.</p>
           </div>
 
           <div class="card-panel" id="bidderCatalogSection">
-            <div class="card-title"><span><i class="fa-solid fa-folder-open" style="color: #0052CC;"></i> Published Open Tenders Catalog</span><input type="text" id="bidderTenderSearchInput" placeholder="🔍 Filter tenders..." class="form-input" style="width: 240px; padding: 4px 8px; font-size: 11px;" oninput="filterBidderTendersCatalog()"></div>
+            <div class="card-title"><span><i class="fa-solid fa-folder-open" style="color: #0052CC;"></i> Published Open Tenders Catalog</span></div>
             <div id="bidderTendersCatalogGrid" class="tender-catalog-grid"></div>
           </div>
 
           <div class="card-panel" id="bidderSubmissionFormSection">
-            <div class="card-title"><span><i class="fa-solid fa-cloud-arrow-up" style="color: #059669;"></i> Submit Bid Proposal Bundle</span><span id="bidderActiveSelectedTenderBadge" class="badge-pass">Select a tender above</span></div>
+            <div class="card-title"><span><i class="fa-solid fa-cloud-arrow-up" style="color: #059669;"></i> Submit Bid Proposal Bundle</span></div>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-              <div class="form-group"><label class="form-label">Target Procurement Tender:</label><select id="bidderOpenTendersDropdown" class="form-input" onchange="syncBidderSelectedTender(this.value)"><option value="">Loading Tenders...</option></select></div>
+              <div class="form-group"><label class="form-label">Target Procurement Tender:</label><select id="bidderOpenTendersDropdown" class="form-input"><option value="">Loading Tenders...</option></select></div>
               <div class="form-group"><label class="form-label">Bidder Legal Name:</label><input type="text" id="bidderPortalNameInput" class="form-input" value="Tata Advanced Training & Systems Ltd"></div>
-            </div>
-            <div class="dropzone-box" onclick="document.getElementById('bidderPortalFileInput').click()">
-              <i class="fa-solid fa-file-zipper" style="font-size: 32px; color: var(--success); margin-bottom: 6px;"></i>
-              <div style="font-size: 13px; font-weight: 800;">Select Bid Proposal Bundle (.pdf, .zip, .docx)</div>
-              <input type="file" id="bidderPortalFileInput" style="display: none;" onchange="handleBidderPortalFile(this)">
             </div>
             <button onclick="submitBidderPortalProposal()" id="btnSubmitBidderProposal" class="btn-success" style="align-self: flex-end;"><i class="fa-solid fa-paper-plane"></i> SUBMIT PROPOSAL →</button>
           </div>
 
           <div class="card-panel" id="bidderSubmissionsSection">
-            <div class="card-title">My Bid Submissions & Compliance Verification Records</div>
+            <div class="card-title">My Bid Submissions</div>
             <table class="clean-table"><thead><tr><th>Tender Number</th><th>Tender Title</th><th>Date</th><th>Score</th><th>Status</th><th>Gateways</th><th>Dossier</th></tr></thead><tbody id="bidderSubmissionsTableBody"></tbody></table>
           </div>
         </div>
@@ -1229,44 +899,44 @@ def root_web_application():
         <!-- ============================================================== -->
         <!-- WORKSPACE 3: DEDICATED DTE MAHARASHTRA DEPARTMENT WORKSPACE    -->
         <!-- ============================================================== -->
+        
         <!-- 3.1 DTE OVERVIEW & DASHBOARD -->
         <div id="view-dte-dashboard" style="display: none; flex-direction: column; gap: 18px;">
-          <!-- Top DTE Department Banner -->
           <div class="card-panel" style="background: linear-gradient(135deg, #FFFFFF 0%, #FFFBEB 100%); border-left: 5px solid var(--accent);">
             <div class="card-title">
-              <span><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> DTE Maharashtra Procurement Overview</span>
+              <span><i class="fa-solid fa-building-columns" style="color: var(--accent);"></i> Directorate of Technical Education (DTE Maharashtra) Overview</span>
               <span class="badge-review" style="font-size: 10.5px;"><i class="fa-solid fa-shield-check"></i> DEPARTMENT OVERSIGHT CLEARED</span>
             </div>
             <p style="font-size: 13px; color: #475569;">
-              Official Departmental Decision Support & Verification Dashboard for <strong>Directorate of Technical Education (DTE Maharashtra)</strong>. 
-              Monitoring statewide COE infrastructure proposals, statutory 13-gateway clearance, and pre-qualification compliance.
+              Official Departmental Decision Support Dashboard for <strong>Directorate of Technical Education (DTE Maharashtra)</strong>. 
+              Monitoring statewide COE infrastructure proposals and 13-gateway pre-qualification statutory compliance.
             </p>
 
             <!-- 6 Dedicated KPI Cards -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 10px;">
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #64748B;">ACTIVE TENDERS</div>
                 <div style="font-size: 22px; font-weight: 900; color: var(--primary);" id="dteStatActiveTenders">1</div>
               </div>
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #64748B;">TOTAL BIDS</div>
                 <div style="font-size: 22px; font-weight: 900; color: var(--primary);" id="dteStatTotalBids">3</div>
               </div>
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #B45309;">UNDER REVIEW</div>
                 <div style="font-size: 22px; font-weight: 900; color: #B45309;" id="dteStatBidsUnderReview">1</div>
               </div>
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #047857;">COMPLETED</div>
                 <div style="font-size: 22px; font-weight: 900; color: #047857;" id="dteStatCompletedEvaluations">2</div>
               </div>
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #B91C1C;">HIGH-RISK BIDS</div>
                 <div style="font-size: 22px; font-weight: 900; color: #B91C1C;" id="dteStatHighRiskBids">1</div>
               </div>
-              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+              <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 12px; border-radius: 8px;">
                 <div style="font-size: 10.5px; font-weight: 700; color: #2563EB;">PENDING ACTIONS</div>
-                <div style="font-size: 22px; font-weight: 900; color: #2563EB;" id="dteStatPendingActions">1</div>
+                <div style="font-size: 22px; font-weight: 900; color: #2563EB;" id="dteStatPendingActions">2</div>
               </div>
             </div>
           </div>
@@ -1288,7 +958,7 @@ def root_web_application():
           <!-- DTE Authorized Tenders Monitoring Table -->
           <div class="card-panel">
             <div class="card-title">
-              <span><i class="fa-solid fa-list-check"></i> Authorized DTE Tenders Monitoring</span>
+              <span><i class="fa-solid fa-list-check"></i> Authorized DTE Tenders Summary</span>
               <span class="badge-pass">DTE SCOPED</span>
             </div>
             <table class="clean-table">
@@ -1309,7 +979,41 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.2 DTE TENDER DETAIL & CLAUSES -->
+        <!-- 3.2 DTE TENDER MONITORING DEDICATED VIEW -->
+        <div id="view-dte-tenders" style="display: none; flex-direction: column; gap: 18px;">
+          <div class="card-panel">
+            <div class="card-title">
+              <span><i class="fa-solid fa-list-check" style="color: #0052CC;"></i> DTE Maharashtra Tenders Monitoring Center</span>
+              <span class="badge-pass">DEPARTMENT PORTFOLIO</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap;">
+              <input type="text" id="dteTenderSearchInput" placeholder="🔍 Search tender reference or title..." class="form-input" style="max-width: 320px;" oninput="filterDTETendersTable()">
+              <div style="display: flex; gap: 6px;">
+                <span class="filter-pill active" onclick="filterDTETenderCategory('ALL', this)">All (1)</span>
+                <span class="filter-pill" onclick="filterDTETenderCategory('ACTIVE', this)">Active / Open (1)</span>
+                <span class="filter-pill" onclick="filterDTETenderCategory('EVALUATED', this)">Evaluated (1)</span>
+              </div>
+            </div>
+
+            <table class="clean-table" style="margin-top: 8px;">
+              <thead>
+                <tr>
+                  <th>Tender Reference</th>
+                  <th>Tender Title</th>
+                  <th>Category</th>
+                  <th>Total Bids</th>
+                  <th>Evaluation Progress</th>
+                  <th>Risk Tier</th>
+                  <th>Lifecycle Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dteTendersMonitoringTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 3.3 DTE TENDER DETAIL & CLAUSES -->
         <div id="view-dte-tender-detail" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
@@ -1337,7 +1041,7 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.3 DTE BID MONITORING TABLE -->
+        <!-- 3.4 DTE BID MONITORING TABLE -->
         <div id="view-dte-bids" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
@@ -1362,7 +1066,7 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.4 DTE COMPLIANCE & EVIDENCE BREAKDOWN -->
+        <!-- 3.5 DTE COMPLIANCE & EVIDENCE BREAKDOWN -->
         <div id="view-dte-compliance" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
@@ -1401,7 +1105,7 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.5 DTE 13 GATEWAYS VIEW -->
+        <!-- 3.6 DTE 13 GATEWAYS VIEW -->
         <div id="view-dte-gateways" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
@@ -1423,12 +1127,12 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.6 DTE QUALIFIED / SHORTLISTED VIEW -->
+        <!-- 3.7 DTE QUALIFIED / SHORTLISTED VIEW -->
         <div id="view-dte-shortlisted" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
               <span><i class="fa-solid fa-trophy" style="color: var(--accent);"></i> Qualified / Shortlisted Bidders for Final Department Review</span>
-              <span class="badge-pass" id="dteShortlistCountBadge">1 Bidder Qualified</span>
+              <span class="badge-pass" id="dteShortlistCountBadge">2 Bidders Qualified</span>
             </div>
             <p style="font-size: 12px; color: #64748B;">
               Summary of all bidders meeting pre-qualification thresholds under DTE Maharashtra RFP. Final commercial award is decided following financial bid opening.
@@ -1451,30 +1155,54 @@ def root_web_application():
           </div>
         </div>
 
-        <!-- 3.7 DTE AUDIT TRAIL -->
+        <!-- 3.8 DTE ENHANCED AUDIT TRAIL -->
         <div id="view-dte-audit" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
-              <span><i class="fa-solid fa-shield-halved"></i> DTE Maharashtra Scoped Cryptographic Audit Trail</span>
-              <span class="badge-pass">IMMUTABLE LOGS</span>
+              <span><i class="fa-solid fa-shield-halved"></i> DTE Maharashtra Cryptographic Audit Trail (SHA-256)</span>
+              <div style="display: flex; gap: 8px;">
+                <button onclick="exportDTEAuditTrailJSON()" class="btn-action" style="font-size: 11px; padding: 4px 10px;"><i class="fa-solid fa-download"></i> Export JSON</button>
+              </div>
             </div>
-            <table class="clean-table">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <input type="text" id="dteAuditSearchInput" placeholder="🔍 Search audit events, actors, or hash..." class="form-input" style="max-width: 320px;" oninput="filterDTEAuditTable()">
+              <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <span class="filter-pill active" onclick="filterDTEAuditCategory('ALL', this)">All Events</span>
+                <span class="filter-pill" onclick="filterDTEAuditCategory('VERIFICATION', this)">Verifications</span>
+                <span class="filter-pill" onclick="filterDTEAuditCategory('CLARIFICATION', this)">Clarifications</span>
+                <span class="filter-pill" onclick="filterDTEAuditCategory('DECISION', this)">Decisions</span>
+              </div>
+            </div>
+
+            <table class="clean-table" style="margin-top: 8px;">
               <thead>
-                <tr><th>Timestamp</th><th>Actor</th><th>Event Type</th><th>Details</th><th>Cryptographic Hash</th></tr>
+                <tr><th>Timestamp (UTC)</th><th>Actor</th><th>Event Type</th><th>Details & Findings</th><th>Cryptographic Hash</th><th>Action</th></tr>
               </thead>
               <tbody id="dteAuditTrailTableBody"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- 3.8 DTE REPORT VIEW -->
+        <!-- 3.9 DTE ENHANCED REPORT VIEW -->
         <div id="view-dte-reports" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
               <span><i class="fa-solid fa-print"></i> Departmental Compliance Evaluation Report (DTE Maharashtra)</span>
-              <a id="btnDTEOpenReportTab" href="#" target="_blank" class="btn-action" style="font-size: 11px; padding: 4px 10px;">Open Print View</a>
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <label style="font-size: 11px; font-weight: 700; color: #475569;">Select Dossier View:</label>
+                <select id="dteReportSelectorDropdown" class="form-input" style="width: 280px; font-size: 11px;" onchange="changeDTEReportView(this.value)">
+                  <option value="TENDER_SUMMARY">📑 Tender Evaluation Dossier (Summary)</option>
+                  <option value="BID_TATA">🏢 Tata Advanced Training (Score: 95)</option>
+                  <option value="BID_EDUTECH">🏢 EduTech Infoway (Score: 75)</option>
+                  <option value="BID_APEX">🏢 Apex Cyber Skills (Score: 40)</option>
+                </select>
+                <a id="btnDTEOpenReportTab" href="/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html" target="_blank" class="btn-action" style="font-size: 11px; padding: 6px 12px;">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full View
+                </a>
+              </div>
             </div>
-            <iframe id="dteReportPreviewFrame" style="width: 100%; height: 600px; border: 1px solid #CBD5E1; border-radius: 8px;" src="about:blank"></iframe>
+            <iframe id="dteReportPreviewFrame" style="width: 100%; height: 640px; border: 1.5px solid #CBD5E1; border-radius: 8px; background: #FFFFFF;" src="/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html"></iframe>
           </div>
         </div>
 
@@ -1509,9 +1237,9 @@ def root_web_application():
           <div style="font-weight: 800; color: #0A192F; margin-bottom: 4px;">BodhZ AI Assistant</div>
           <span id="chatWelcomeMessage">BodhZ AI Assistant is active. You can ask about tender rules, bidder compliance, statutory verifications, or document evidence.</span>
           <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;">
-            <span class="chat-chip" onclick="sendChatSuggestion('How many tenders are currently active?')">📊 Active Tenders</span>
-            <span class="chat-chip" onclick="sendChatSuggestion('Which bidders are high risk?')">⚠️ High-Risk Bidders</span>
-            <span class="chat-chip" onclick="sendChatSuggestion('Explain GFR 2017 Rule 144 compliance')">📜 GFR Rule 144</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('How many tenders are currently active?')">📊 Active Tenders</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('Which bidders are high risk?')">⚠️ High-Risk Bidders</span>
+            <span class="filter-pill" onclick="sendChatSuggestion('Explain GFR 2017 Rule 144 compliance')">📜 GFR Rule 144</span>
           </div>
         </div>
       </div>
@@ -1529,8 +1257,10 @@ def root_web_application():
     let activeTender = null;
     let activeBidder = null;
     let tendersList = [];
+    let dteTendersList = [];
     let comparativeRows = [];
-    let pendingTenderUploadId = null;
+    let dteAuditEventsList = [];
+    let officerAuditEventsList = [];
     let serverCaptchaCode = "";
 
     window.onload = async function() {
@@ -1573,19 +1303,6 @@ def root_web_application():
       document.getElementById('view-public-landing').style.display = 'none';
       document.getElementById('view-auth').style.display = 'flex';
       document.getElementById('appWorkspace').style.display = 'none';
-      switchAuthMode(mode);
-    }
-
-    function switchAuthMode(mode) {
-      const paneLogin = document.getElementById('authPaneSignIn');
-      const paneRegister = document.getElementById('authPaneRegister');
-      if (mode === 'REGISTER') {
-        paneLogin.style.display = 'none';
-        paneRegister.style.display = 'flex';
-      } else {
-        paneRegister.style.display = 'none';
-        paneLogin.style.display = 'flex';
-      }
     }
 
     async function refreshServerCaptcha() {
@@ -1678,51 +1395,6 @@ def root_web_application():
       } finally {
         btn.disabled = false;
         btn.innerHTML = `<span>SIGN IN TO WORKSPACE</span> <i class="fa-solid fa-arrow-right"></i>`;
-      }
-    }
-
-    async function handleAuthRegister(event) {
-      event.preventDefault();
-      const full_name = document.getElementById('regFullName').value.trim();
-      const email = document.getElementById('regEmail').value.trim();
-      const organization = document.getElementById('regOrg').value.trim();
-      const role = document.getElementById('regRole').value;
-      const username = document.getElementById('regUsername').value.trim();
-      const password = document.getElementById('regPassword').value.trim();
-      const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
-      const alertBox = document.getElementById('registerAlertBox');
-      const alertText = document.getElementById('registerAlertText');
-
-      if (password.length < 8) {
-        alertText.innerText = "Password must be at least 8 characters long.";
-        alertBox.style.display = 'block';
-        return;
-      }
-      if (password !== confirmPassword) {
-        alertText.innerText = "Passwords do not match.";
-        alertBox.style.display = 'block';
-        return;
-      }
-
-      try {
-        const resp = await fetch('/api/v1/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, full_name, email, password, organization, role })
-        });
-        if (resp.ok) {
-          showToast("Account Created", "Registration successful. Please sign in.", "success");
-          switchAuthMode('LOGIN');
-          document.getElementById('authLoginUser').value = username;
-          document.getElementById('authLoginPass').value = password;
-        } else {
-          const err = await resp.json().catch(() => ({}));
-          alertText.innerText = err.detail || "Registration failed.";
-          alertBox.style.display = 'block';
-        }
-      } catch(e) {
-        alertText.innerText = "Registration connection error.";
-        alertBox.style.display = 'block';
       }
     }
 
@@ -1835,8 +1507,9 @@ def root_web_application():
       const allViews = [
         'view-dashboard', 'view-tenders', 'view-bidders', 'view-docintel', 'view-vercenter',
         'view-consistency', 'view-matrix', 'view-decision', 'view-reports', 'view-audittrail',
-        'view-bidder-portal', 'view-dte-dashboard', 'view-dte-tender-detail', 'view-dte-bids',
-        'view-dte-compliance', 'view-dte-gateways', 'view-dte-shortlisted', 'view-dte-audit', 'view-dte-reports'
+        'view-bidder-portal', 'view-dte-dashboard', 'view-dte-tenders', 'view-dte-tender-detail',
+        'view-dte-bids', 'view-dte-compliance', 'view-dte-gateways', 'view-dte-shortlisted',
+        'view-dte-audit', 'view-dte-reports'
       ];
       allViews.forEach(v => {
         const el = document.getElementById(v);
@@ -1854,13 +1527,15 @@ def root_web_application():
       if (actBtn) actBtn.classList.add('active');
 
       if (viewKey === 'dte-dashboard') loadDTEOverviewData();
+      if (viewKey === 'dte-tenders') loadDTETendersMonitoring();
       if (viewKey === 'dte-tender-detail') loadDTETenderDetail('DTE/2026/RFP/COE/4901');
       if (viewKey === 'dte-bids') loadDTEBidsMonitoring('DTE/2026/RFP/COE/4901');
       if (viewKey === 'dte-shortlisted') loadDTEShortlistedBids('DTE/2026/RFP/COE/4901');
       if (viewKey === 'dte-audit') loadDTEAuditTrail();
       if (viewKey === 'dte-reports') {
-        document.getElementById('dteReportPreviewFrame').src = '/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html';
-        document.getElementById('btnDTEOpenReportTab').href = '/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html';
+        const reportUrl = '/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html';
+        document.getElementById('dteReportPreviewFrame').src = reportUrl;
+        document.getElementById('btnDTEOpenReportTab').href = reportUrl;
       }
     }
 
@@ -1879,25 +1554,60 @@ def root_web_application():
           document.getElementById('dteStatHighRiskBids').innerText = data.kpi_cards.high_risk_bids;
           document.getElementById('dteStatPendingActions').innerText = data.kpi_cards.pending_actions;
 
-          // Render Authorized Tenders Table
-          const tbody = document.getElementById('dteTendersOverviewTableBody');
-          tbody.innerHTML = data.authorized_tenders.map(t => `
-            <tr>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${t.tender_number}</td>
-              <td style="font-weight:700;">${t.title}</td>
-              <td><strong>3</strong></td>
-              <td><span class="badge-pass">3 Processed</span></td>
-              <td>0</td>
-              <td><span class="badge-fail">1</span></td>
-              <td><span class="badge-pass">${t.lifecycle_status || 'ALL_BIDS_PROCESSED'}</span></td>
-              <td>
-                <button onclick="switchDTEView('dte-tender-detail')" class="btn-action" style="font-size:10.5px; padding:3px 8px;">🔍 Details</button>
-                <button onclick="switchDTEView('dte-bids')" class="btn-warning" style="font-size:10.5px; padding:3px 8px;">👥 Bids</button>
-              </td>
-            </tr>
-          `).join('');
+          dteTendersList = data.authorized_tenders;
+          renderDTETendersTable(dteTendersList, 'dteTendersOverviewTableBody');
         }
       } catch(e) {}
+    }
+
+    async function loadDTETendersMonitoring() {
+      try {
+        const resp = await fetch('/api/v1/dte/tenders');
+        if (resp.ok) {
+          dteTendersList = await resp.json();
+          renderDTETendersTable(dteTendersList, 'dteTendersMonitoringTableBody');
+        }
+      } catch(e) {}
+    }
+
+    function renderDTETendersTable(tList, tableBodyId) {
+      const tbody = document.getElementById(tableBodyId);
+      if (!tbody) return;
+      if (tList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:18px; color:#64748B;">No tenders found.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = tList.map(t => `
+        <tr>
+          <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${t.tender_number}</td>
+          <td style="font-weight:700;">${t.title}</td>
+          ${tableBodyId==='dteTendersMonitoringTableBody' ? `<td style="font-size:11px; color:#475569;">${t.category}</td>` : ''}
+          <td><strong>${t.total_bids || 3}</strong></td>
+          <td><span class="badge-pass">${t.total_bids || 3} Processed</span></td>
+          ${tableBodyId==='dteTendersOverviewTableBody' ? `<td>0</td>` : ''}
+          <td><span class="badge-fail">1</span></td>
+          <td><span class="badge-pass">${t.lifecycle_status || 'ALL_BIDS_PROCESSED'}</span></td>
+          <td>
+            <div style="display: flex; gap: 4px;">
+              <button onclick="switchDTEView('dte-tender-detail')" class="btn-action" style="font-size:10px; padding:3px 7px;">🔍 Clauses</button>
+              <button onclick="switchDTEView('dte-bids')" class="btn-warning" style="font-size:10px; padding:3px 7px;">👥 Bids</button>
+              <button onclick="switchDTEView('dte-reports')" class="btn-success" style="font-size:10px; padding:3px 7px;">🖨️ Dossier</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterDTETendersTable() {
+      const q = document.getElementById('dteTenderSearchInput').value.toLowerCase().trim();
+      const filtered = dteTendersList.filter(t => t.tender_number.toLowerCase().includes(q) || t.title.toLowerCase().includes(q));
+      renderDTETendersTable(filtered, 'dteTendersMonitoringTableBody');
+    }
+
+    function filterDTETenderCategory(cat, btn) {
+      document.querySelectorAll('#view-dte-tenders .filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      renderDTETendersTable(dteTendersList, 'dteTendersMonitoringTableBody');
     }
 
     async function loadDTETenderDetail(tenderId) {
@@ -1940,9 +1650,11 @@ def root_web_application():
               <td style="font-size:11px; color:#B45309;">${b.review_required.length>0 ? b.review_required.join(', ') : (b.missing_requirements.length>0 ? 'Missing: '+b.missing_requirements.join(', ') : 'None (Compliant)')}</td>
               <td><strong>${b.current_decision}</strong></td>
               <td>
-                <button onclick="inspectDTEComplianceEvidence('${b.bid_id}')" class="btn-action" style="font-size:10.5px; padding:3px 8px;">🔍 Evidence</button>
-                <button onclick="inspectDTEGateways('${b.bid_id}')" class="btn-success" style="font-size:10.5px; padding:3px 8px;">🌐 Gateways</button>
-                <button onclick="openDTEClarificationModal('${b.bid_id}', '${b.legal_name.replace(/'/g, "\\'")}')" class="btn-warning" style="font-size:10.5px; padding:3px 8px;">📝 Clarify</button>
+                <div style="display: flex; gap: 4px;">
+                  <button onclick="inspectDTEComplianceEvidence('${b.bid_id}')" class="btn-action" style="font-size:10px; padding:3px 6px;">🔍 Evidence</button>
+                  <button onclick="inspectDTEGateways('${b.bid_id}')" class="btn-success" style="font-size:10px; padding:3px 6px;">🌐 Gateways</button>
+                  <button onclick="openDTEClarificationModal('${b.bid_id}', '${b.legal_name.replace(/'/g, "\\'")}')" class="btn-warning" style="font-size:10px; padding:3px 6px;">📝 Clarify</button>
+                </div>
               </td>
             </tr>
           `).join('');
@@ -2020,6 +1732,22 @@ def root_web_application():
       } catch(e) {}
     }
 
+    function changeDTEReportView(val) {
+      let url = '/api/v1/reports/tenders/DTE/2026/RFP/COE/4901/html';
+      if (val === 'BID_TATA') {
+        const tataRow = comparativeRows.find(r => r.bidder_name.includes('Tata'));
+        if (tataRow) url = `/api/v1/reports/bids/${tataRow.bid_id}/html`;
+      } else if (val === 'BID_EDUTECH') {
+        const eduRow = comparativeRows.find(r => r.bidder_name.includes('EduTech'));
+        if (eduRow) url = `/api/v1/reports/bids/${eduRow.bid_id}/html`;
+      } else if (val === 'BID_APEX') {
+        const apexRow = comparativeRows.find(r => r.bidder_name.includes('Apex'));
+        if (apexRow) url = `/api/v1/reports/bids/${apexRow.bid_id}/html`;
+      }
+      document.getElementById('dteReportPreviewFrame').src = url;
+      document.getElementById('btnDTEOpenReportTab').href = url;
+    }
+
     function openDTEClarificationModal(bidId, bidderName) {
       document.getElementById('dteClarifyBidId').value = bidId;
       document.getElementById('dteClarifyBidderName').innerText = bidderName;
@@ -2068,23 +1796,74 @@ def root_web_application():
       try {
         const resp = await fetch('/api/v1/dte/audit');
         if (resp.ok) {
-          const events = await resp.json();
-          const tbody = document.getElementById('dteAuditTrailTableBody');
-          tbody.innerHTML = events.map(e => `
-            <tr>
-              <td style="font-family:'JetBrains Mono'; font-size:11px;">${e.timestamp}</td>
-              <td style="font-weight:700;">${e.actor}</td>
-              <td><span class="badge-pass">${e.event_type}</span></td>
-              <td style="font-size:11px;">${e.details}</td>
-              <td style="font-family:'JetBrains Mono'; font-size:10px; color:#64748B;">${e.sha256_hash.substring(0, 20)}...</td>
-            </tr>
-          `).join('');
+          dteAuditEventsList = await resp.json();
+          renderDTEAuditTable(dteAuditEventsList);
         }
       } catch(e) {}
     }
 
+    function renderDTEAuditTable(events) {
+      const tbody = document.getElementById('dteAuditTrailTableBody');
+      if (!tbody) return;
+      if (events.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:18px; color:#64748B;">No audit events found.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = events.map(e => `
+        <tr>
+          <td style="font-family:'JetBrains Mono'; font-size:11px; white-space:nowrap;">${e.timestamp}</td>
+          <td style="font-weight:700; color:var(--primary);">${e.actor}</td>
+          <td><span class="badge-pass" style="font-size:10px;">${e.event_type}</span></td>
+          <td style="font-size:11.5px; color:#334155;">${e.details}</td>
+          <td style="font-family:'JetBrains Mono'; font-size:10px; color:#64748B;">
+            <code>${e.sha256_hash.substring(0, 16)}...</code>
+          </td>
+          <td>
+            <button onclick="copyAuditHash('${e.sha256_hash}')" class="filter-pill" style="padding:2px 8px; font-size:10px;"><i class="fa-regular fa-copy"></i> Copy Hash</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function copyAuditHash(hash) {
+      navigator.clipboard.writeText(hash);
+      showToast("Hash Copied", "Cryptographic SHA-256 hash copied to clipboard.", "success");
+    }
+
+    function filterDTEAuditTable() {
+      const q = document.getElementById('dteAuditSearchInput').value.toLowerCase().trim();
+      const filtered = dteAuditEventsList.filter(e => 
+        e.details.toLowerCase().includes(q) || 
+        e.actor.toLowerCase().includes(q) || 
+        e.event_type.toLowerCase().includes(q) || 
+        e.sha256_hash.toLowerCase().includes(q)
+      );
+      renderDTEAuditTable(filtered);
+    }
+
+    function filterDTEAuditCategory(cat, btn) {
+      document.querySelectorAll('#view-dte-audit .filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      if (cat === 'ALL') {
+        renderDTEAuditTable(dteAuditEventsList);
+      } else {
+        const filtered = dteAuditEventsList.filter(e => e.event_type.includes(cat));
+        renderDTEAuditTable(filtered);
+      }
+    }
+
+    function exportDTEAuditTrailJSON() {
+      const blob = new Blob([JSON.stringify(dteAuditEventsList, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `dte_maharashtra_audit_trail_${Date.now()}.json`;
+      a.click();
+      showToast("Exported", "Audit trail downloaded as JSON file.", "success");
+    }
+
     // --------------------------------------------------
-    // OTHER HELPERS & CHATBOT
+    // OTHER WORKSPACE CONTROLLERS & CHATBOT
     // --------------------------------------------------
     function focusBidderSection(sectionId) {
       hideAllWorkspaceViews();
@@ -2114,6 +1893,7 @@ def root_web_application():
       if (actBtn) actBtn.classList.add('active');
 
       if (viewId === 'matrix') loadComparativeMatrix(false);
+      if (viewId === 'audittrail') loadAuditEvents();
     }
 
     async function loadTendersFromAPI() {
@@ -2215,12 +1995,50 @@ def root_web_application():
       } catch(e) {}
     }
 
+    async function loadAuditEvents() {
+      try {
+        const resp = await fetch('/api/v1/audit');
+        if (resp.ok) {
+          officerAuditEventsList = await resp.json();
+          renderOfficerAuditTable(officerAuditEventsList);
+        }
+      } catch(e) {}
+    }
+
+    function renderOfficerAuditTable(events) {
+      const tbody = document.getElementById('auditTrailTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = events.map(e => `
+        <tr>
+          <td style="font-family:'JetBrains Mono'; font-size:11px;">${e.timestamp}</td>
+          <td style="font-weight:700;">${e.actor}</td>
+          <td><span class="badge-pass">${e.event_type}</span></td>
+          <td style="font-size:11.5px;">${e.details}</td>
+          <td style="font-family:'JetBrains Mono'; font-size:10px; color:#64748B;"><code>${e.sha256_hash.substring(0, 16)}...</code></td>
+        </tr>
+      `).join('');
+    }
+
+    function filterOfficerAuditEvents() {
+      const q = document.getElementById('officerAuditSearchInput').value.toLowerCase().trim();
+      const filtered = officerAuditEventsList.filter(e => e.details.toLowerCase().includes(q) || e.actor.toLowerCase().includes(q) || e.event_type.toLowerCase().includes(q));
+      renderOfficerAuditTable(filtered);
+    }
+
+    function exportAuditTrailJSON() {
+      const blob = new Blob([JSON.stringify(officerAuditEventsList, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `bodhz_audit_trail_${Date.now()}.json`;
+      a.click();
+    }
+
     async function loadBidderPortalData() {
       try {
         const respTenders = await fetch('/api/v1/tenders');
         if (respTenders.ok) {
           tendersList = await respTenders.json();
-          document.getElementById('bidderTotalPublishedTenders').innerText = tendersList.length;
           const sel = document.getElementById('bidderOpenTendersDropdown');
           sel.innerHTML = tendersList.map(t => `<option value="${t.id}">${t.tender_number} — ${t.title.substring(0, 45)}...</option>`).join('');
           renderBidderTendersCatalogCards(tendersList);
@@ -2228,7 +2046,6 @@ def root_web_application():
         const respSubs = await fetch('/api/v1/bids/my-submissions');
         if (respSubs.ok) {
           const subData = await respSubs.json();
-          document.getElementById('bidderTotalSubmissions').innerText = subData.submissions_count;
           const tbody = document.getElementById('bidderSubmissionsTableBody');
           tbody.innerHTML = subData.submissions.map(s => `
             <tr>
@@ -2265,35 +2082,16 @@ def root_web_application():
       `).join('');
     }
 
-    function filterBidderTendersCatalog() {
-      const q = document.getElementById('bidderTenderSearchInput').value.toLowerCase().trim();
-      const filtered = tendersList.filter(t => t.tender_number.toLowerCase().includes(q) || t.title.toLowerCase().includes(q));
-      renderBidderTendersCatalogCards(filtered);
-    }
-
     function selectTenderForBidSubmission(tenderId) {
       const sel = document.getElementById('bidderOpenTendersDropdown');
       sel.value = tenderId;
-      syncBidderSelectedTender(tenderId);
       const formSec = document.getElementById('bidderSubmissionFormSection');
       if (formSec) formSec.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function syncBidderSelectedTender(tenderId) {
-      const t = tendersList.find(x => x.id === tenderId);
-      if (t) document.getElementById('bidderActiveSelectedTenderBadge').innerText = `Active: ${t.tender_number}`;
-    }
-
-    function handleBidderPortalFile(input) {
-      if (input.files && input.files[0]) {
-        document.getElementById('bidderPortalSelectedFileText').innerHTML = `<strong>Selected:</strong> ${input.files[0].name} (${(input.files[0].size/1024).toFixed(1)} KB)`;
-      }
     }
 
     async function submitBidderPortalProposal() {
       const tenderId = document.getElementById('bidderOpenTendersDropdown').value;
       const bName = document.getElementById('bidderPortalNameInput').value.trim() || 'Tata Advanced Training & Systems Ltd';
-      const fileInput = document.getElementById('bidderPortalFileInput');
       if (!tenderId) return alert("Select tender.");
 
       try {
@@ -2303,11 +2101,6 @@ def root_web_application():
           body: JSON.stringify({ tender_id: tenderId, bidder: { legal_name: bName, gstin: '27AAACT1098F1Z5', pan_number: 'AAACT1098F' } })
         });
         const bidData = await respBid.json();
-        if (fileInput.files && fileInput.files[0]) {
-          const docForm = new FormData();
-          docForm.append('file', fileInput.files[0]);
-          await fetch(`/api/v1/documents/upload?bid_id=${bidData.id}&doc_type=BID_SUBMISSION_BUNDLE`, { method: 'POST', body: docForm });
-        }
         await fetch(`/api/v1/bids/${bidData.id}/evaluate`, { method: 'POST' });
         showToast("Bid Submitted", "Proposal submitted & 13 gateways checked!", "success");
         await loadBidderPortalData();
