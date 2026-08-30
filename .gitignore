@@ -1,24 +1,71 @@
-# Python bytecode & cache
+# ==========================================
+# Official Python & BodhZ Project .gitignore
+# ==========================================
+
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-.pytest_cache/
+*.pyd
+*.dll
 
-# Environments & Virtualenv
-.env
-.venv
-env/
+# Virtual Environments
 venv/
+.venv/
+env/
 ENV/
+env.bak/
+venv.bak/
+bin/
+include/
+lib/
+lib64/
 
-# Database files
-*.db
+# Local Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+*.secret
+*.pem
+*.key
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Database Files (Local SQLite)
+*.sqlite
 *.sqlite3
+*.db-journal
 
-# Logs & temp files
+# Logs & Temporary Files
 *.log
-scratch/
+logs/
 tmp/
+temp/
+scratch/
+
+# Operating System Files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
