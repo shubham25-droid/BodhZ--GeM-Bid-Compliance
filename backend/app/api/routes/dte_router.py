@@ -174,8 +174,50 @@ def list_dte_tenders(
 
 
 # --------------------------------------------------
-# 3. DTE TENDER DETAIL (READ-ONLY MONITORING VIEW)
+# 3. DTE ACTIVE TENDER DETAIL & MONITORING VIEW
 # --------------------------------------------------
+@router.get("/active-tender/detail", summary="Get Active DTE Maharashtra Tender Details")
+def get_active_dte_tender_detail(
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Convenience endpoint returning full details for the primary DTE Maharashtra RFP."""
+    check_dte_access(current_user)
+    all_tenders = db.query(TenderModel).all()
+    dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+    if not dte_tenders:
+        raise HTTPException(status_code=404, detail="No authorized DTE tenders found.")
+    return get_dte_tender_detail(dte_tenders[0].id, current_user, db)
+
+
+@router.get("/active-tender/bids", summary="Get Bids for Active DTE Maharashtra Tender")
+def get_active_dte_tender_bids(
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Convenience endpoint returning bids for the primary DTE Maharashtra RFP."""
+    check_dte_access(current_user)
+    all_tenders = db.query(TenderModel).all()
+    dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+    if not dte_tenders:
+        raise HTTPException(status_code=404, detail="No authorized DTE tenders found.")
+    return list_dte_tender_bids(dte_tenders[0].id, current_user, db)
+
+
+@router.get("/active-tender/qualified-bids", summary="Get Qualified Bids for Active DTE Maharashtra Tender")
+def get_active_dte_tender_qualified_bids(
+    current_user: UserModel = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """Convenience endpoint returning shortlisted bids for the primary DTE Maharashtra RFP."""
+    check_dte_access(current_user)
+    all_tenders = db.query(TenderModel).all()
+    dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+    if not dte_tenders:
+        raise HTTPException(status_code=404, detail="No authorized DTE tenders found.")
+    return get_dte_qualified_bids(dte_tenders[0].id, current_user, db)
+
+
 @router.get("/tenders/{tender_id}", summary="Get Detailed Information for Authorized DTE Tender")
 def get_dte_tender_detail(
     tender_id: str,
@@ -189,9 +231,15 @@ def get_dte_tender_detail(
     """
     check_dte_access(current_user)
 
-    tender = db.query(TenderModel).filter(
-        (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
-    ).first()
+    if tender_id in ("active", "default", "primary"):
+        all_tenders = db.query(TenderModel).all()
+        dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+        tender = dte_tenders[0] if dte_tenders else None
+    else:
+        tender = db.query(TenderModel).filter(
+            (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
+        ).first()
+
     if not tender:
         raise HTTPException(status_code=404, detail="Tender not found.")
 
@@ -267,9 +315,14 @@ def list_dte_tender_bids(
     """
     check_dte_access(current_user)
 
-    tender = db.query(TenderModel).filter(
-        (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
-    ).first()
+    if tender_id in ("active", "default", "primary"):
+        all_tenders = db.query(TenderModel).all()
+        dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+        tender = dte_tenders[0] if dte_tenders else None
+    else:
+        tender = db.query(TenderModel).filter(
+            (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
+        ).first()
     if not tender:
         raise HTTPException(status_code=404, detail="Tender not found.")
 
@@ -491,11 +544,14 @@ def get_dte_qualified_bids(
     Returns only the bids that are Qualified / Shortlisted for final review under a DTE tender.
     Does NOT declare commercial winners or rank financially.
     """
-    check_dte_access(current_user)
-
-    tender = db.query(TenderModel).filter(
-        (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
-    ).first()
+    if tender_id in ("active", "default", "primary"):
+        all_tenders = db.query(TenderModel).all()
+        dte_tenders = [t for t in all_tenders if is_tender_authorized_for_dte(t, current_user)]
+        tender = dte_tenders[0] if dte_tenders else None
+    else:
+        tender = db.query(TenderModel).filter(
+            (TenderModel.id == tender_id) | (TenderModel.tender_number == tender_id)
+        ).first()
     if not tender:
         raise HTTPException(status_code=404, detail="Tender not found.")
 

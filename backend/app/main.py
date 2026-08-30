@@ -1017,24 +1017,50 @@ def root_web_application():
         <div id="view-dte-tender-detail" style="display: none; flex-direction: column; gap: 18px;">
           <div class="card-panel">
             <div class="card-title">
-              <span><i class="fa-solid fa-file-contract"></i> DTE Tender Clauses & Statutory Weight Calibration</span>
+              <span><i class="fa-solid fa-file-contract" style="color: #0052CC;"></i> DTE Tender Clauses & Statutory Weight Calibration</span>
               <span class="badge-review">READ-ONLY AUDIT VIEW</span>
             </div>
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 14px; border-radius: 8px; margin-bottom: 12px;">
               <div>
-                <div style="font-size: 11px; color: #64748B;">RFP REFERENCE:</div>
-                <div style="font-size: 16px; font-weight: 900; color: var(--primary);" id="dteDetailTenderNumber">DTE/2026/RFP/COE/4901</div>
-                <div style="font-size: 13px; font-weight: 700; color: #334155; margin-top: 4px;" id="dteDetailTenderTitle">Establishment of Center of Excellence (COE) and Technical Training Centers</div>
+                <div style="font-size: 11px; font-weight: 700; color: #64748B;">RFP REFERENCE:</div>
+                <div style="font-size: 16px; font-weight: 900; color: var(--primary); font-family: 'JetBrains Mono';" id="dteDetailTenderNumber">DTE/2026/RFP/COE/4901</div>
+                <div style="font-size: 13.5px; font-weight: 700; color: #1E293B; margin-top: 4px;" id="dteDetailTenderTitle">Establishment of Center of Excellence (COE) and Technical Training Centers</div>
               </div>
-              <div style="text-align: right;">
+              <div style="text-align: right; display: flex; flex-direction: column; justify-content: center; align-items: flex-end;">
                 <span class="badge-pass" id="dteDetailLifecycleStatus">ALL_BIDS_PROCESSED</span>
                 <div style="font-size: 11px; color: #64748B; margin-top: 6px;">Total Bids Ingested: <strong id="dteDetailTotalBidsCount">3</strong></div>
               </div>
             </div>
 
-            <table class="clean-table" style="margin-top: 10px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px;">
+              <div style="background: #EFF6FF; border: 1px solid #BFDBFE; padding: 10px 14px; border-radius: 6px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #1E40AF;">TOTAL CLAUSES</div>
+                <div style="font-size: 20px; font-weight: 900; color: #1D4ED8;">10 Modules</div>
+              </div>
+              <div style="background: #F0FDF4; border: 1px solid #BBF7D0; padding: 10px 14px; border-radius: 6px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #166534;">MANDATORY CRITERIA</div>
+                <div style="font-size: 20px; font-weight: 900; color: #15803D;">10 / 10 (100%)</div>
+              </div>
+              <div style="background: #FFFBEB; border: 1px solid #FDE68A; padding: 10px 14px; border-radius: 6px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #92400E;">CALIBRATED WEIGHT</div>
+                <div style="font-size: 20px; font-weight: 900; color: #D97706;">100% Total</div>
+              </div>
+              <div style="background: #F8FAFC; border: 1px solid #CBD5E1; padding: 10px 14px; border-radius: 6px;">
+                <div style="font-size: 10.5px; font-weight: 700; color: #475569;">STATUTORY AUDIT</div>
+                <div style="font-size: 20px; font-weight: 900; color: #0A192F;">GFR Rule 144</div>
+              </div>
+            </div>
+
+            <table class="clean-table">
               <thead>
-                <tr><th>Module Code</th><th>Statutory Requirement Title</th><th>Mandatory?</th><th>Weight (%)</th><th>Evaluation Rule Type</th></tr>
+                <tr>
+                  <th style="width: 140px;">Module Code</th>
+                  <th>Statutory Requirement Title</th>
+                  <th style="width: 120px;">Mandatory?</th>
+                  <th style="width: 160px;">Calibrated Weight</th>
+                  <th style="width: 180px;">Evaluation Rule Type</th>
+                </tr>
               </thead>
               <tbody id="dteDetailRequirementsTableBody"></tbody>
             </table>
@@ -1612,21 +1638,34 @@ def root_web_application():
 
     async function loadDTETenderDetail(tenderId) {
       try {
-        const resp = await fetch(`/api/v1/dte/tenders/${encodeURIComponent(tenderId)}`);
+        let endpoint = '/api/v1/dte/active-tender/detail';
+        if (tenderId && tenderId !== 'active' && !tenderId.includes('/')) {
+          endpoint = `/api/v1/dte/tenders/${encodeURIComponent(tenderId)}`;
+        }
+        const resp = await fetch(endpoint);
         if (resp.ok) {
           const t = await resp.json();
           document.getElementById('dteDetailTenderNumber').innerText = t.tender_number;
           document.getElementById('dteDetailTenderTitle').innerText = t.title;
-          document.getElementById('dteDetailLifecycleStatus').innerText = t.lifecycle_status;
-          document.getElementById('dteDetailTotalBidsCount').innerText = t.statistics.total_bids;
+          document.getElementById('dteDetailLifecycleStatus').innerText = t.lifecycle_status || 'ALL_BIDS_PROCESSED';
+          document.getElementById('dteDetailTotalBidsCount').innerText = t.statistics ? t.statistics.total_bids : 3;
 
           const tbody = document.getElementById('dteDetailRequirementsTableBody');
           tbody.innerHTML = t.requirements.map(r => `
             <tr>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary);">${r.module}</td>
-              <td style="font-weight:600;">${r.title}</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--primary); font-size:12px;">
+                <span style="background:#F1F5F9; border:1px solid #CBD5E1; padding:3px 8px; border-radius:4px;">${r.module}</span>
+              </td>
+              <td style="font-weight:600; font-size:12.5px; color:#1E293B;">${r.title}</td>
               <td>${r.mandatory ? '<span class="badge-pass">MANDATORY</span>' : '<span class="badge-review">OPTIONAL</span>'}</td>
-              <td><strong>${r.weight}%</strong></td>
+              <td>
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <strong style="font-size:13px; color:var(--primary); width:32px;">${r.weight}%</strong>
+                  <div style="flex:1; max-width:80px; height:6px; background:#E2E8F0; border-radius:3px; overflow:hidden;">
+                    <div style="width:${r.weight*5}%; height:100%; background:#1E3A8A; border-radius:3px;"></div>
+                  </div>
+                </div>
+              </td>
               <td style="font-size:11px; font-family:'JetBrains Mono'; color:#475569;">${r.rule_type}</td>
             </tr>
           `).join('');
@@ -1636,7 +1675,11 @@ def root_web_application():
 
     async function loadDTEBidsMonitoring(tenderId) {
       try {
-        const resp = await fetch(`/api/v1/dte/tenders/${encodeURIComponent(tenderId)}/bids`);
+        let endpoint = '/api/v1/dte/active-tender/bids';
+        if (tenderId && tenderId !== 'active' && !tenderId.includes('/')) {
+          endpoint = `/api/v1/dte/tenders/${encodeURIComponent(tenderId)}/bids`;
+        }
+        const resp = await fetch(endpoint);
         if (resp.ok) {
           const data = await resp.json();
           const tbody = document.getElementById('dteBidsMonitoringTableBody');
@@ -1711,7 +1754,11 @@ def root_web_application():
 
     async function loadDTEShortlistedBids(tenderId) {
       try {
-        const resp = await fetch(`/api/v1/dte/tenders/${encodeURIComponent(tenderId)}/qualified-bids`);
+        let endpoint = '/api/v1/dte/active-tender/qualified-bids';
+        if (tenderId && tenderId !== 'active' && !tenderId.includes('/')) {
+          endpoint = `/api/v1/dte/tenders/${encodeURIComponent(tenderId)}/qualified-bids`;
+        }
+        const resp = await fetch(endpoint);
         if (resp.ok) {
           const data = await resp.json();
           document.getElementById('dteShortlistCountBadge').innerText = `${data.shortlisted_count} Qualified / Shortlisted`;
