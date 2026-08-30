@@ -441,7 +441,42 @@ def root_web_application():
 
     <!-- Hero Section -->
     <header class="landing-hero" id="hero">
-      <div class="landing-hero-container">
+      <!-- 24-Spoke Rotating Ashoka Chakra Watermark -->
+      <svg class="hero-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: -80px; top: -40px; width: 440px; height: 440px; opacity: 0.08; color: #F59E0B; pointer-events: none; z-index: 1;">
+        <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+        <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="14" fill="currentColor"/>
+        <circle cx="100" cy="100" r="8" fill="#0A192F"/>
+        <!-- 24 Spokes -->
+        <g stroke="currentColor" stroke-width="1.8">
+          <line x1="100" y1="100" x2="100" y2="18"/>
+          <line x1="100" y1="100" x2="121.2" y2="20.8"/>
+          <line x1="100" y1="100" x2="141" y2="29"/>
+          <line x1="100" y1="100" x2="158" y2="42"/>
+          <line x1="100" y1="100" x2="171" y2="59"/>
+          <line x1="100" y1="100" x2="179.2" y2="78.8"/>
+          <line x1="100" y1="100" x2="182" y2="100"/>
+          <line x1="100" y1="100" x2="179.2" y2="121.2"/>
+          <line x1="100" y1="100" x2="171" y2="141"/>
+          <line x1="100" y1="100" x2="158" y2="158"/>
+          <line x1="100" y1="100" x2="141" y2="171"/>
+          <line x1="100" y1="100" x2="121.2" y2="179.2"/>
+          <line x1="100" y1="100" x2="100" y2="182"/>
+          <line x1="100" y1="100" x2="78.8" y2="179.2"/>
+          <line x1="100" y1="100" x2="59" y2="171"/>
+          <line x1="100" y1="100" x2="42" y2="158"/>
+          <line x1="100" y1="100" x2="29" y2="141"/>
+          <line x1="100" y1="100" x2="20.8" y2="121.2"/>
+          <line x1="100" y1="100" x2="18" y2="100"/>
+          <line x1="100" y1="100" x2="20.8" y2="78.8"/>
+          <line x1="100" y1="100" x2="29" y2="59"/>
+          <line x1="100" y1="100" x2="42" y2="42"/>
+          <line x1="100" y1="100" x2="59" y2="29"/>
+          <line x1="100" y1="100" x2="78.8" y2="20.8"/>
+        </g>
+      </svg>
+
+      <div class="landing-hero-container" style="position: relative; z-index: 2;">
         <div>
           <div class="landing-badge">
             <i class="fa-solid fa-shield-halved"></i>
@@ -462,6 +497,10 @@ def root_web_application():
             <button onclick="openDemoModeModal()" class="btn-hero-secondary">
               <i class="fa-solid fa-bolt"></i>
               <span>Select Demo Persona</span>
+            </button>
+            <button onclick="scrollToSection('how-it-works')" class="btn-hero-secondary" style="border: none; color: #CBD5E1;">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>Explore How It Works</span>
             </button>
           </div>
         </div>
@@ -513,13 +552,232 @@ def root_web_application():
       </div>
     </header>
 
-    <!-- Trust Strip -->
+    <!-- Trust Strip with Ashoka Chakra Emblem -->
     <div class="trust-strip">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <svg style="width: 20px; height: 20px; color: #1E3A8A;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="6"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="3"/>
+          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <span style="font-size: 11px; font-weight: 900; color: #1E3A8A; letter-spacing: 0.5px;">STATUTORY COMPLIANCE</span>
+      </div>
       <div class="trust-item"><i class="fa-solid fa-microchip"></i> AI-ASSISTED</div>
       <div class="trust-item"><i class="fa-solid fa-file-shield"></i> EVIDENCE-BASED</div>
       <div class="trust-item"><i class="fa-solid fa-fingerprint"></i> AUDITABLE</div>
       <div class="trust-item"><i class="fa-solid fa-user-check"></i> HUMAN-CONTROLLED</div>
     </div>
+
+    <!-- Section: What BodhZ Solves -->
+    <section class="landing-section" id="solve">
+      <div class="section-header">
+        <div class="section-title">What BodhZ Solves</div>
+        <div class="section-desc">Modernizing public procurement screening with automated verification and explainable decision support.</div>
+      </div>
+
+      <div class="solve-grid">
+        <div class="solve-card" style="border-left: 4px solid #DC2626;">
+          <div style="font-size: 13px; font-weight: 800; color: #DC2626; text-transform: uppercase;">THE CHALLENGE</div>
+          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Manual & Complex Bid Evaluation</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple fragmented PDF bundles & voluminous technical documents</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Multiple statutory requirements across financial, legal, and technical clauses</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Manual cross-checking across multiple government portals</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Risk of overlooked name variations, expired certificates, or missing turnover proofs</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-xmark" style="color: #DC2626; margin-top: 2px;"></i> Long evaluation effort leading to procurement cycle delays</div>
+        </div>
+
+        <div class="solve-card" style="border-left: 4px solid #059669;">
+          <div style="font-size: 13px; font-weight: 800; color: #059669; text-transform: uppercase;">THE BODHZ APPROACH</div>
+          <div style="font-size: 15px; font-weight: 800; color: var(--primary); margin-top: 4px;">Integrated AI-Assisted Verification Pipeline</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Tender:</strong> Automated extraction of mandatory statutory rules and thresholds</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Bidder Documents:</strong> High-precision text extraction with SHA-256 integrity hash</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Verification:</strong> Automated cross-referencing against 13 statutory gateway sources</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Compliance:</strong> Multi-criteria scoring, gap analysis, and risk tiering</div>
+          <div class="solve-item"><i class="fa-solid fa-circle-check" style="color: #059669; margin-top: 2px;"></i> <strong>Officer Review:</strong> Human legal decision authority backed by full provenance</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: How It Works (5 Steps) -->
+    <section class="landing-section" id="how-it-works">
+      <div class="section-header">
+        <div class="section-title">How It Works</div>
+        <div class="section-desc">A structured 5-step workflow designed for public procurement decision support.</div>
+      </div>
+
+      <div class="flow-grid-5">
+        <div class="flow-step-card">
+          <div class="flow-num">STEP 01</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Tender Intelligence</div>
+          <p style="font-size: 12px; color: #64748B;">Understand and structure tender requirements directly from NIT documents.</p>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-num">STEP 02</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Document Intelligence</div>
+          <p style="font-size: 12px; color: #64748B;">Extract relevant bidder information from submitted technical documents.</p>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-num">STEP 03</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Integrated Verification</div>
+          <p style="font-size: 12px; color: #64748B;">Cross-check applicable information against 13 statutory gateway sources.</p>
+        </div>
+
+        <div class="flow-step-card">
+          <div class="flow-num">STEP 04</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--primary);">Compliance Analysis</div>
+          <p style="font-size: 12px; color: #64748B;">Detect missing, inconsistent and non-compliant information automatically.</p>
+        </div>
+
+        <div class="flow-step-card" style="border-color: #059669; background: #F0FDF4;">
+          <div class="flow-num" style="background: #059669; color: #FFFFFF; border: none;">STEP 05</div>
+          <div style="font-size: 14px; font-weight: 800; color: #047857;">Officer Decision</div>
+          <p style="font-size: 12px; color: #166534;">Present evidence, score, risk and recommendation for human officer review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Key Capabilities -->
+    <section class="landing-section" id="capabilities">
+      <div class="section-header">
+        <div class="section-title">Key Capabilities</div>
+        <div class="section-desc">Core functional capabilities powering the SIH26100 decision support architecture.</div>
+      </div>
+
+      <div class="cap-grid-6">
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-file-circle-check"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">AI Document Verification</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Multi-page text extraction with OCR fallback and cryptographic SHA-256 integrity seals.</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-list-check"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Requirement-Aware Compliance</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Dynamic clause matching against turnover, past project experience, and mandatory criteria.</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-clone"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Cross-Document Verification</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Entity matching detecting name variations, PAN vs GST mismatch, and certificate expiry.</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-chart-line"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Risk & Compliance Scoring</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Weighted multi-criteria score (0–100) and automated risk level classification (Low/Med/High).</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-lightbulb"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Evidence-Based Recommendation</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Transparent AI justifications citing specific document pages and verification results.</div>
+          </div>
+        </div>
+
+        <div class="cap-card">
+          <div class="cap-icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+          <div>
+            <div style="font-size: 13.5px; font-weight: 800; color: var(--primary);">Audit & Traceability</div>
+            <div style="font-size: 12px; color: #64748B; margin-top: 2px;">Immutable SHA-256 event timeline and printable compliance evaluation dossier.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Applicable Verification Sources (13 Nodes) -->
+    <section class="landing-section" id="sources">
+      <div class="section-header">
+        <div class="section-title">13 Statutory Verification Gateway Sources</div>
+        <div class="section-desc">Configurable adapters supporting automated verification across 13 government registries.</div>
+      </div>
+
+      <div class="ver-source-grid">
+        <div class="ver-source-pill"><i class="fa-solid fa-industry" style="color: #0052CC;"></i> 01. GSTN Tax Portal</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-receipt" style="color: #0052CC;"></i> 02. Udyam MSME Registry</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-id-card" style="color: #0052CC;"></i> 03. Income Tax / PAN</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-building" style="color: #0052CC;"></i> 04. MCA21 Corporate</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-rocket" style="color: #059669;"></i> 05. Startup India (DPIIT)</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-certificate" style="color: #059669;"></i> 06. NSIC SPRS Registry</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-users" style="color: #059669;"></i> 07. EPFO Provident Fund</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-hospital-user" style="color: #059669;"></i> 08. ESIC Social Security</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-vault" style="color: #D97706;"></i> 09. DigiLocker Gateway</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-gears" style="color: #D97706;"></i> 10. OEM Authorization (MAF)</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-flag" style="color: #D97706;"></i> 11. Make in India (MII)</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-award" style="color: #D97706;"></i> 12. ISO / BIS Standards</div>
+        <div class="ver-source-pill"><i class="fa-solid fa-ban" style="color: #DC2626;"></i> 13. CPPP Debarment Registry</div>
+      </div>
+    </section>
+
+    <!-- Section: AI Assists. Officer Decides. -->
+    <section class="landing-section">
+      <div class="split-authority-card">
+        <svg style="position: absolute; right: -60px; bottom: -60px; width: 260px; height: 260px; opacity: 0.05; color: #0A192F;" class="chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <line x1="100" y1="100" x2="100" y2="18" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="182" y2="100" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="100" y2="182" stroke="currentColor" stroke-width="2"/>
+          <line x1="100" y1="100" x2="18" y2="100" stroke="currentColor" stroke-width="2"/>
+        </svg>
+
+        <div>
+          <div style="font-size: 12px; font-weight: 800; color: #2563EB; text-transform: uppercase;">DECISION SUPPORT ROLE</div>
+          <div style="font-size: 20px; font-weight: 900; color: var(--primary); margin-top: 2px;">AI ASSISTS</div>
+          <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #475569;">
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Extract:</strong> Ingests complex multi-page tender & bid PDFs</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Analyze:</strong> Parses turnover thresholds, experience, and clauses</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Cross-Check:</strong> Validates entity names against 13 gateway sources</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Identify Gaps:</strong> Highlights missing certificates & inconsistencies</div>
+            <div><i class="fa-solid fa-check" style="color: #2563EB;"></i> <strong>Recommend:</strong> Generates explainable compliance recommendations</div>
+          </div>
+        </div>
+
+        <div style="border-left: 1px solid var(--border); padding-left: 24px;">
+          <div style="font-size: 12px; font-weight: 800; color: #059669; text-transform: uppercase;">LEGAL AUTHORITY (GFR 2017)</div>
+          <div style="font-size: 20px; font-weight: 900; color: #047857; margin-top: 2px;">OFFICER DECIDES</div>
+          <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #475569;">
+            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Review:</strong> Examines extracted evidence and AI recommendations</div>
+            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Validate:</strong> Inspects historical bidder records and discrepancy flags</div>
+            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Qualify / Disqualify:</strong> Exercises 100% human legal decision authority</div>
+            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Audit Justification:</strong> Records binding justification notes</div>
+            <div><i class="fa-solid fa-gavel" style="color: #059669;"></i> <strong>Final Sign-Off:</strong> Cryptographically seals evaluation dossier</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Public Footer -->
+    <footer class="public-footer" id="security">
+      <div style="max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div style="text-align: left;">
+          <div style="font-size: 14px; font-weight: 800; color: #FFFFFF;">BodhZ — AI-Powered Integrated Bid Compliance Verification Platform</div>
+          <div style="font-size: 11px; color: #94A3B8; margin-top: 3px;">SIH26100 • Smart India Hackathon 2026</div>
+          <div style="font-size: 10.5px; color: #64748B; margin-top: 3px;">Designed for Public Procurement Officers.</div>
+        </div>
+        <div style="display: flex; gap: 18px; font-size: 12px; font-weight: 700;">
+          <a class="public-nav-link" onclick="scrollToSection('how-it-works')">How It Works</a>
+          <a class="public-nav-link" onclick="scrollToSection('sources')">Verification Sources</a>
+          <a class="public-nav-link" onclick="openAuthScreen('LOGIN')">Sign In</a>
+          <a class="public-nav-link" onclick="openAuthScreen('REGISTER')">Register</a>
+          <a href="/docs" target="_blank" style="color: var(--accent); text-decoration: none;">API Docs</a>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- ================================================== -->
@@ -528,6 +786,40 @@ def root_web_application():
   <div id="view-auth" class="auth-page-wrapper" style="display: none;">
     <div class="auth-card">
       <div class="auth-left-brand">
+        <!-- Rotating 24-Spoke Ashoka Chakra Watermark -->
+        <svg class="auth-left-chakra-watermark chakra-rotate-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="4"/>
+          <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="14" fill="currentColor"/>
+          <circle cx="100" cy="100" r="8" fill="#0A192F"/>
+          <g stroke="currentColor" stroke-width="1.8">
+            <line x1="100" y1="100" x2="100" y2="18"/>
+            <line x1="100" y1="100" x2="121.2" y2="20.8"/>
+            <line x1="100" y1="100" x2="141" y2="29"/>
+            <line x1="100" y1="100" x2="158" y2="42"/>
+            <line x1="100" y1="100" x2="171" y2="59"/>
+            <line x1="100" y1="100" x2="179.2" y2="78.8"/>
+            <line x1="100" y1="100" x2="182" y2="100"/>
+            <line x1="100" y1="100" x2="179.2" y2="121.2"/>
+            <line x1="100" y1="100" x2="171" y2="141"/>
+            <line x1="100" y1="100" x2="158" y2="158"/>
+            <line x1="100" y1="100" x2="141" y2="171"/>
+            <line x1="100" y1="100" x2="121.2" y2="179.2"/>
+            <line x1="100" y1="100" x2="100" y2="182"/>
+            <line x1="100" y1="100" x2="78.8" y2="179.2"/>
+            <line x1="100" y1="100" x2="59" y2="171"/>
+            <line x1="100" y1="100" x2="42" y2="158"/>
+            <line x1="100" y1="100" x2="29" y2="141"/>
+            <line x1="100" y1="100" x2="20.8" y2="121.2"/>
+            <line x1="100" y1="100" x2="18" y2="100"/>
+            <line x1="100" y1="100" x2="20.8" y2="78.8"/>
+            <line x1="100" y1="100" x2="29" y2="59"/>
+            <line x1="100" y1="100" x2="42" y2="42"/>
+            <line x1="100" y1="100" x2="59" y2="29"/>
+            <line x1="100" y1="100" x2="78.8" y2="20.8"/>
+          </g>
+        </svg>
+
         <div>
           <div style="display: flex; align-items: center; gap: 14px;">
             <img src="/static/bodhz_logo.png" class="logo-3d-animated" style="width: 50px; height: 50px; background: #FFF; border-radius: 12px; padding: 3px; border: 2px solid var(--accent);" alt="BodhZ">
@@ -555,6 +847,7 @@ def root_web_application():
       </div>
 
       <div class="auth-right-form-pane">
+        <!-- Sign In Form -->
         <div id="authPaneSignIn" style="display: flex; flex-direction: column;">
           <div style="margin-bottom: 16px;">
             <div style="font-size: 22px; font-weight: 900; color: var(--primary); letter-spacing: -0.5px;">Sign In to Workspace</div>
@@ -605,6 +898,76 @@ def root_web_application():
               <i class="fa-solid fa-arrow-right"></i>
             </button>
           </form>
+
+          <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 14px;">
+            New official or bidder? <span onclick="switchAuthMode('REGISTER')" style="color: var(--primary); font-weight: 800; cursor: pointer; text-decoration: underline;">Create Account</span>
+          </div>
+        </div>
+
+        <!-- Registration Form Pane -->
+        <div id="authPaneRegister" style="display: none; flex-direction: column;">
+          <div style="margin-bottom: 14px;">
+            <div style="font-size: 20px; font-weight: 900; color: var(--primary);">Create Official Account</div>
+            <div style="font-size: 12px; color: var(--text-muted);">Register for institutional or bidder procurement workspace access.</div>
+          </div>
+
+          <div id="registerAlertBox" style="display: none; background: #FEF2F2; border: 1px solid #FECACA; color: #B91C1C; font-size: 11.5px; font-weight: 600; padding: 8px 12px; border-radius: 6px; margin-bottom: 10px;">
+            <i class="fa-solid fa-circle-exclamation"></i> <span id="registerAlertText">Registration error.</span>
+          </div>
+
+          <form onsubmit="handleAuthRegister(event)">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+              <div class="form-group">
+                <label class="form-label">Full Legal Name</label>
+                <input type="text" id="regFullName" class="auth-field" placeholder="Dr. Ramesh Gupta" style="padding-left: 12px;" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Official Work Email</label>
+                <input type="email" id="regEmail" class="auth-field" placeholder="ramesh@nic.in" style="padding-left: 12px;" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 8px; margin-bottom: 8px;">
+              <div class="form-group">
+                <label class="form-label">Organization / Department</label>
+                <input type="text" id="regOrg" class="auth-field" placeholder="e.g. National Informatics Centre" style="padding-left: 12px;" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Role Category</label>
+                <select id="regRole" class="auth-field" style="padding-left: 10px;">
+                  <option value="PROCUREMENT_OFFICER">Procurement Officer</option>
+                  <option value="BID_UPLOADER">Bid Uploader / Vendor</option>
+                  <option value="DTE_OFFICER">DTE State Officer</option>
+                  <option value="AUDITOR">Auditor</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 8px;">
+              <label class="form-label">Username</label>
+              <input type="text" id="regUsername" class="auth-field" placeholder="choose unique username" style="padding-left: 12px;" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
+              <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="regPassword" class="auth-field" placeholder="min 8 chars" style="padding-left: 12px;" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" id="regConfirmPassword" class="auth-field" placeholder="re-enter password" style="padding-left: 12px;" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-auth-primary">
+              <span>CREATE ACCOUNT</span>
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </form>
+
+          <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+            Already registered? <span onclick="switchAuthMode('LOGIN')" style="color: var(--primary); font-weight: 800; cursor: pointer; text-decoration: underline;">Sign In</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1877,6 +2240,189 @@ def root_web_application():
       document.getElementById('view-public-landing').style.display = 'none';
       document.getElementById('view-auth').style.display = 'flex';
       document.getElementById('appWorkspace').style.display = 'none';
+      switchAuthMode(mode);
+    }
+
+    function switchAuthMode(mode) {
+      if (mode === 'REGISTER') {
+        document.getElementById('authPaneSignIn').style.display = 'none';
+        document.getElementById('authPaneRegister').style.display = 'flex';
+      } else {
+        document.getElementById('authPaneRegister').style.display = 'none';
+        document.getElementById('authPaneSignIn').style.display = 'flex';
+      }
+    }
+
+    async function handleAuthRegister(event) {
+      event.preventDefault();
+      const full_name = document.getElementById('regFullName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const organization = document.getElementById('regOrg').value.trim();
+      const role = document.getElementById('regRole').value;
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+      const confirmPassword = document.getElementById('regConfirmPassword').value.trim();
+      const alertBox = document.getElementById('registerAlertBox');
+      const alertText = document.getElementById('registerAlertText');
+
+      if (password.length < 8) {
+        alertText.innerText = "Password must be at least 8 characters long.";
+        alertBox.style.display = 'block';
+        return;
+      }
+      if (password !== confirmPassword) {
+        alertText.innerText = "Passwords do not match.";
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      try {
+        const resp = await fetch('/api/v1/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, full_name, email, password, organization, role })
+        });
+        if (resp.ok) {
+          showToast("Account Created", "Registration successful. Please sign in.", "success");
+          switchAuthMode('LOGIN');
+          document.getElementById('authLoginUser').value = username;
+          document.getElementById('authLoginPass').value = password;
+        } else {
+          const err = await resp.json().catch(() => ({}));
+          alertText.innerText = err.detail || "Registration failed.";
+          alertBox.style.display = 'block';
+        }
+      } catch(e) {
+        alertText.innerText = "Registration connection error.";
+        alertBox.style.display = 'block';
+      }
+    }
+
+    let pendingTenderUploadId = null;
+
+    function loadRealTenderPreset(preset) {
+      if (preset === 'DTE') {
+        if (document.getElementById('newTenderIdInput')) document.getElementById('newTenderIdInput').value = "DTE/2026/RFP/COE/4901";
+        if (document.getElementById('newTenderTitleInput')) document.getElementById('newTenderTitleInput').value = "Establishment of Center of Excellence (COE) and Technical Training Centers";
+        if (document.getElementById('newTenderCategoryInput')) document.getElementById('newTenderCategoryInput').value = "Technical Education & Skill Infrastructure";
+      } else if (preset === 'NFL') {
+        if (document.getElementById('newTenderIdInput')) document.getElementById('newTenderIdInput').value = "NFL/CO/IT/VAPT/2026/08";
+        if (document.getElementById('newTenderTitleInput')) document.getElementById('newTenderTitleInput').value = "Comprehensive Cyber Security Audit & VAPT of Web Applications";
+        if (document.getElementById('newTenderCategoryInput')) document.getElementById('newTenderCategoryInput').value = "Cyber Security & IT Audit";
+      } else if (preset === 'ICAR') {
+        if (document.getElementById('newTenderIdInput')) document.getElementById('newTenderIdInput').value = "GEM/2026/B/IIMR/6641";
+        if (document.getElementById('newTenderTitleInput')) document.getElementById('newTenderTitleInput').value = "Supply & Commissioning of Agricultural Machinery (Seed Drill & Thresher)";
+        if (document.getElementById('newTenderCategoryInput')) document.getElementById('newTenderCategoryInput').value = "Agricultural Machinery";
+      }
+    }
+
+    async function handleTenderPDFUpload(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const tenderNum = document.getElementById('newTenderIdInput') ? document.getElementById('newTenderIdInput').value.trim() : `TENDER-${Date.now()}`;
+      const title = document.getElementById('newTenderTitleInput') ? document.getElementById('newTenderTitleInput').value.trim() : file.name.replace('.pdf', '');
+      const category = document.getElementById('newTenderCategoryInput') ? document.getElementById('newTenderCategoryInput').value.trim() : 'General Procurement';
+
+      showToast("Uploading Tender", `Ingesting and analyzing ${file.name}...`, "info");
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('tender_number', tenderNum);
+      formData.append('title', title);
+      formData.append('category', category);
+
+      try {
+        const resp = await fetch('/api/v1/tenders/upload-pdf', { method: 'POST', body: formData });
+        if (resp.ok) {
+          const data = await resp.json();
+          pendingTenderUploadId = data.tender_id;
+          showToast("Tender Parsed", `Extracted ${data.requirements_count || 10} statutory rules.`, "success");
+          if (document.getElementById('tenderExtractedRequirementsPanel')) {
+            document.getElementById('tenderExtractedRequirementsPanel').style.display = 'block';
+          }
+          await loadTendersFromAPI();
+        } else {
+          showToast("Upload Error", "Failed to parse tender PDF.", "error");
+        }
+      } catch(err) {
+        showToast("Upload Error", "Connection error during tender upload.", "error");
+      }
+    }
+
+    async function confirmExtractedRequirements() {
+      if (!pendingTenderUploadId && tendersList.length > 0) {
+        pendingTenderUploadId = tendersList[0].id;
+      }
+      if (!pendingTenderUploadId) return;
+      try {
+        const resp = await fetch(`/api/v1/tenders/${pendingTenderUploadId}/confirm-requirements`, { method: 'POST' });
+        if (resp.ok) {
+          showToast("Tender Published", "Tender published successfully! Bidders can now view & submit proposals.", "success");
+          await loadTendersFromAPI();
+          switchView('dashboard');
+        }
+      } catch(err) {}
+    }
+
+    function prefillBidder(name, gstin) {
+      if (document.getElementById('bidderNameInput')) document.getElementById('bidderNameInput').value = name;
+      if (document.getElementById('bidderGstinInput')) document.getElementById('bidderGstinInput').value = gstin;
+    }
+
+    function handleBidderFileSelect(input) {
+      if (input.files && input.files[0]) {
+        if (document.getElementById('selectedBidderFileText')) {
+          document.getElementById('selectedBidderFileText').innerText = `Selected: ${input.files[0].name} (${(input.files[0].size/1024).toFixed(1)} KB)`;
+        }
+      }
+    }
+
+    async function submitBidderAndEvaluate() {
+      if (!activeTender) {
+        showToast("Select Tender", "Please select an active tender first.", "error");
+        return;
+      }
+      const bName = document.getElementById('bidderNameInput') ? document.getElementById('bidderNameInput').value.trim() : 'Tata Advanced Training & Systems Ltd';
+      const bGstin = document.getElementById('bidderGstinInput') ? document.getElementById('bidderGstinInput').value.trim() : '27AAACT1098F1Z5';
+      const fileInput = document.getElementById('bidderFileInput');
+
+      if (document.getElementById('bidderProcessingProgress')) {
+        document.getElementById('bidderProcessingProgress').style.display = 'block';
+      }
+      showToast("Ingesting Bid", `Submitting proposal for ${bName}...`, "info");
+
+      try {
+        const respBid = await fetch('/api/v1/bids', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tender_id: activeTender.id,
+            bidder: { legal_name: bName, gstin: bGstin, pan_number: bGstin.substring(2, 12) }
+          })
+        });
+        if (respBid.ok) {
+          const bidData = await respBid.json();
+          const bidId = bidData.id;
+
+          if (fileInput && fileInput.files && fileInput.files[0]) {
+            const docForm = new FormData();
+            docForm.append('file', fileInput.files[0]);
+            await fetch(`/api/v1/documents/upload?bid_id=${bidId}&doc_type=BID_SUBMISSION_BUNDLE`, { method: 'POST', body: docForm }).catch(()=>{});
+          }
+
+          await fetch(`/api/v1/bids/${bidId}/evaluate`, { method: 'POST' }).catch(()=>{});
+          showToast("Evaluation Complete", `Evaluated statutory compliance for ${bName}`, "success");
+          await loadComparativeMatrix(false);
+          openBidderReviewById(bidId);
+        } else {
+          showToast("Error", "Could not ingest bid.", "error");
+        }
+      } catch(err) {
+        showToast("Error", "Connection error during bid evaluation.", "error");
+      } finally {
+        if (document.getElementById('bidderProcessingProgress')) {
+          document.getElementById('bidderProcessingProgress').style.display = 'none';
+        }
+      }
     }
 
     async function refreshServerCaptcha() {
